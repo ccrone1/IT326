@@ -1,6 +1,9 @@
+import org.w3c.dom.events.Event;
+
 public class Bracket {
 
     private int numOfPlayers;
+    private String bracketId;
 
     // Constructor
     public Bracket(Event event) {

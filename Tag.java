@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 
+import org.w3c.dom.events.Event;
+
 public class Tag {
 
     private ArrayList<String> tags;
@@ -14,6 +16,11 @@ public class Tag {
 
     // Method to add tags to an Event
     public void addTags(Event event) {
+
+    }
+
+    // Method to remove tags from an Event
+    public void deleteTags(Event event) {
 
     }
 }
