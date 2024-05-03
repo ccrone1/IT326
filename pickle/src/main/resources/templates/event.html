@@ -28,6 +28,82 @@
         </ul>
       </nav>
     </header>
+
+    <!-- Search form -->
+    <form id="searchForm">
+      <!-- Initial filter input fields -->
+      <div id="filterContainer">
+        <div class="filter">
+          <label for="keyword">Keyword:</label>
+          <input type="text" name="keyword" /><br />
+        </div>
+      </div>
+
+      <!-- Add filter button -->
+      <button type="button" id="addFilter">Add Filter</button>
+      <button type="submit">Search</button>
+    </form>
+
+    <!-- Search results will be displayed here -->
+    <div id="searchResults"></div>
+
+    <script>
+      // Function to handle adding a new filter
+      document
+        .getElementById("addFilter")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent default button behavior
+
+          // Create a new filter input field
+          var filterContainer = document.getElementById("filterContainer");
+          var newFilter = document.createElement("div");
+          newFilter.classList.add("filter");
+          newFilter.innerHTML =
+            '<label>Filter:</label> <input type="text" name="filter"><br>';
+
+          // Append the new filter input field to the container
+          filterContainer.appendChild(newFilter);
+        });
+
+      // Function to handle form submission
+      document
+        .getElementById("searchForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent default form submission
+
+          // Get form input values
+          var filters = [];
+          document
+            .querySelectorAll(".filter input[name='filter']")
+            .forEach(function (input) {
+              filters.push(input.value);
+            });
+
+          // Create search parameters object
+          var searchParams = {
+            filters: filters,
+          };
+
+          // Send search request to the backend
+          fetch("/search", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(searchParams),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              // Display search results on the page
+              document.getElementById("searchResults").innerHTML =
+                JSON.stringify(data);
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+    </script>
+
     <section class="faqs">
       <h2>FAQs</h2>
       <div class="faq-item">

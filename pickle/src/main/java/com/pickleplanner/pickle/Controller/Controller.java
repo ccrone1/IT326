@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 import com.pickleplanner.pickle.Bracket.BracketHandler;
 import com.pickleplanner.pickle.Event.EventHandler;
-import com.pickleplanner.pickle.Handlers.WaitlistHandler;
-import com.pickleplanner.pickle.Invitation.InvitationHandler;
 import com.pickleplanner.pickle.Location.LocationHandler;
 import com.pickleplanner.pickle.Search_Filter.SearchHandler;
 import com.pickleplanner.pickle.Tag.TagHandler;
@@ -13,24 +11,18 @@ import com.pickleplanner.pickle.User.UserHandler;
 
 public class Controller {
     private UserHandler userHandler;
-    private InvitationHandler invitationHandler;
-    private WaitlistHandler waitlistHandler;
     private EventHandler eventHandler;
     private LocationHandler locationHandler;
     private SearchHandler searchHandler;
-    private FilterHandler filterHandler;
     private TagHandler tagHandler;
     private BracketHandler bracketHandler;
 
     public Controller() {
         // Initialize all handler classes
         userHandler = new UserHandler();
-        invitationHandler = new InvitationHandler();
-        waitlistHandler = new WaitlistHandler();
         eventHandler = new EventHandler();
         locationHandler = new LocationHandler();
         searchHandler = new SearchHandler();
-        filterHandler = new FilterHandler();
         tagHandler = new TagHandler();
         bracketHandler = new BracketHandler();
     }
