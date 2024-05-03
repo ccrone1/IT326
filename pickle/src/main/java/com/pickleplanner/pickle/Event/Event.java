@@ -6,11 +6,13 @@ import java.util.Date;
 
 import com.pickleplanner.pickle.Bracket.Bracket;
 
-import Location;
-import Search;
-import Tag;
-import User;
-import Waitlist;
+
+
+import com.pickleplanner.pickle.User.User;//imports ueer
+import com.pickleplanner.pickle.Tag.Tag;//import Tag
+import com.pickleplanner.pickle.Event.Waitlist;//import waitlist
+import com.pickleplanner.pickle.Location.Location;//import location
+import com.pickleplanner.pickle.Search_Filter.Search;//import Search
 
 public class Event {
     private String eventID;
@@ -45,7 +47,7 @@ public class Event {
     }
 
     // Method to get event details
-    public EventDetails getEventDetails(String eventID) {
+    public String getEventDetails(String eventID) {
 
         return new EventDetails();
     }
@@ -60,4 +62,5 @@ public class Event {
     public void editEvent(User owner, String eventID) {
 
     }
+   
 }
