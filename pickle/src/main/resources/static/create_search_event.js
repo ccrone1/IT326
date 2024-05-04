@@ -34,9 +34,33 @@ document.getElementById("createEvent").addEventListener("click", function () {
 
 // Close the modal when the user clicks on the close button
 document.getElementsByClassName("close")[0].addEventListener("click", function () {
+    closeModal();
+});
+
+// Function to close the modal and reset the form
+// Function to close the modal and reset the form and filter fields
+function closeModal() {
     var modal = document.getElementById("createEventModal");
     modal.style.display = "none";
-});
+    resetForm();
+    resetFilterFields();
+}
+
+// Function to reset the filter fields
+function resetFilterFields() {
+    var eventFiltersContainer = document.getElementById("eventFiltersContainer");
+    eventFiltersContainer.innerHTML = ''; // Clear all filter fields
+    // Add back the initial event filter input field
+    var newEventFilter = document.createElement("div");
+    newEventFilter.classList.add("eventFilter");
+    newEventFilter.innerHTML = '<label>Filter:</label> <input type="text" name="eventFilter"><br>';
+    eventFiltersContainer.appendChild(newEventFilter);
+}
+
+// Function to reset the form
+function resetForm() {
+    document.getElementById("eventForm").reset();
+}
 
 function generateRandomId() {
     return parseInt(Math.floor(Math.random() * 100000));
@@ -86,6 +110,8 @@ document.getElementById("eventForm").addEventListener("submit", function (event)
             console.error("Error:", error);
             // Handle error response if needed
         });
+
+    closeModal();
 });
 
 // Function to handle form submission
