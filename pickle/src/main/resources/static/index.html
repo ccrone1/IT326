@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PicklePlanner</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="slider.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <img src="./images/logo_no_text.png" alt="PicklePlanner Logo" />
+        <h1>PicklePlanner</h1>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="link">Home</a></li>
+          <li><a href="event.html" class="link">Event</a></li>
+          <li><a href="profile.html" class="link">Profile</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <section class="plan-teaser">
+      <div class="teaser-content">
+        <h2>Welcome to PicklePlanner</h2>
+        <p class="pickle">An easy way to pickle</p>
+        <a href="profile.html" class="btn">Make an Account Now!</a>
+      </div>
+    </section>
+
+    <section class="about-section">
+      <div class="about-content">
+        <h2>About PicklePlanner</h2>
+        <p>
+          Welcome to PicklePlanner, your ultimate destination for organizing and
+          joining pickleball events!
+        </p>
+        <p>
+          At PicklePlanner, we believe that pickleball is more than just a
+          sport—it's a community, a passion, and a way of life. Whether you're a
+          seasoned player or new to the game, our platform offers everything you
+          need to connect with fellow enthusiasts, discover exciting events, and
+          elevate your pickleball experience.
+        </p>
+        <p>With PicklePlanner, you can:</p>
+        <ul>
+          <li>
+            Find and join upcoming pickleball tournaments, events, and social
+            gatherings
+          </li>
+          <li>Create your own events and invite players to participate</li>
+          <li>
+            Connect with players in your area and expand your pickleball network
+          </li>
+        </ul>
+        <p>
+          Join our vibrant pickleball community today and let the games begin!
+        </p>
+      </div>
+      <div class="about-image">
+        <img
+          src="./images/pickleball_action.webp"
+          alt="Pickleball players in action"
+        />
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 PicklePlanner. All rights reserved.</p>
+    </footer>
+
+    <script>
+      // JavaScript for image slider
+      document.addEventListener("DOMContentLoaded", function () {
+        let currentSlide = 0;
+        const slides = document.querySelectorAll(".slide");
+
+        function showSlide() {
+          slides.forEach((slide) => {
+            slide.style.display = "none";
+          });
+          currentSlide++;
+          if (currentSlide >= slides.length) {
+            currentSlide = 0;
+          }
+          slides[currentSlide].style.display = "block";
+          setTimeout(showSlide, 3000); // Change slide every 3 seconds
+        }
+
+        showSlide();
+      });
+
+      // Add animation class when the page loads
+      document.addEventListener("DOMContentLoaded", function () {
+        document.querySelector(".teaser-content").classList.add("animate");
+      });
+    </script>
+  </body>
+</html>

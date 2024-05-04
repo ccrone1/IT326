@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PicklePlanner</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="slider.js" defer></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo-container">
+        <img src="./images/logo_no_text.png" alt="PicklePlanner Logo" />
+        <h1>PicklePlanner</h1>
+      </div>
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html" class="link">Home</a></li>
+          <li><a href="event.html" class="link">Event</a></li>
+          <li><a href="profile.html" class="link">Profile</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Search form -->
+    <form id="searchForm">
+      <!-- Initial filter input fields -->
+      <div id="filterContainer">
+        <div class="filter">
+          <label for="keyword">Keyword:</label>
+          <input type="text" name="keyword" /><br />
+        </div>
+      </div>
+
+      <!-- Add filter button -->
+      <button type="button" id="addFilter">Add Filter</button>
+      <button type="submit">Search</button>
+    </form>
+
+    <!-- Search results will be displayed here -->
+    <div id="searchResults"></div>
+
+    <script>
+      // Function to handle adding a new filter
+      document
+        .getElementById("addFilter")
+        .addEventListener("click", function (event) {
+          event.preventDefault(); // Prevent default button behavior
+
+          // Create a new filter input field
+          var filterContainer = document.getElementById("filterContainer");
+          var newFilter = document.createElement("div");
+          newFilter.classList.add("filter");
+          newFilter.innerHTML =
+            '<label>Filter:</label> <input type="text" name="filter"><br>';
+
+          // Append the new filter input field to the container
+          filterContainer.appendChild(newFilter);
+        });
+
+      // Function to handle form submission
+      document
+        .getElementById("searchForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent default form submission
+
+          // Get form input values
+          var filters = [];
+          document
+            .querySelectorAll(".filter input[name='filter']")
+            .forEach(function (input) {
+              filters.push(input.value);
+            });
+
+          // Create search parameters object
+          var searchParams = {
+            filters: filters,
+          };
+
+          // Send search request to the backend
+          fetch("/search", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(searchParams),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              // Display search results on the page
+              document.getElementById("searchResults").innerHTML =
+                JSON.stringify(data);
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        });
+    </script>
+
+    <section class="faqs">
+      <h2>FAQs</h2>
+      <div class="faq-item">
+        <h3>Q: Is there a registration fee for the event?</h3>
+        <p>
+          A: This depends on the event or tournament. Please check the tags or
+          contact the creator.
+        </p>
+      </div>
+      <div class="faq-item">
+        <h3>Q: Are spectators allowed?</h3>
+        <p>A: Yes, spectators are welcome to attend most events.</p>
+      </div>
+    </section>
+
+    <section class="contact">
+      <h2>Contact Information</h2>
+      <p>If you have any questions or need assistance, please contact us:</p>
+      <p>
+        Email:
+        <a href="mailto:pickleplannerinc@gmail.com"
+          >pickleplannerinc@gmail.com</a
+        >
+      </p>
+      <p>Phone: (708)-800-7939</p>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 PicklePlanner. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

@@ -1,5 +1,8 @@
 package com.pickleplanner.pickle.User;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class UserHandler {
     private final UserOperations userOperations;
 

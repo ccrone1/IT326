@@ -1,83 +1,50 @@
 package com.pickleplanner.pickle.Controller;
 
-import java.util.Scanner;
+import java.util.List;
+import java.util.Map;
 
-import com.pickleplanner.pickle.Bracket.BracketHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.pickleplanner.pickle.Event.Event;
 import com.pickleplanner.pickle.Event.EventHandler;
-import com.pickleplanner.pickle.Location.LocationHandler;
-import com.pickleplanner.pickle.Search_Filter.SearchHandler;
-import com.pickleplanner.pickle.Tag.TagHandler;
+import com.pickleplanner.pickle.Persistence.Storage;
 import com.pickleplanner.pickle.User.UserHandler;
 
+@RestController
 public class Controller {
+
+    @Autowired
     private UserHandler userHandler;
+
+    @Autowired
     private EventHandler eventHandler;
-    private LocationHandler locationHandler;
-    private SearchHandler searchHandler;
-    private TagHandler tagHandler;
-    private BracketHandler bracketHandler;
 
-    public Controller() {
-        // Initialize all handler classes
-        userHandler = new UserHandler();
-        eventHandler = new EventHandler();
-        locationHandler = new LocationHandler();
-        searchHandler = new SearchHandler();
-        tagHandler = new TagHandler();
-        bracketHandler = new BracketHandler();
+    @PostMapping("/inviteUser")
+    public String inviteUser(@RequestBody Map<String, Object> requestBody) {
+        // Send the request to the handler
+        return eventHandler.handleRequest("inviteUser", requestBody);
     }
 
-    // Method to start the application and handle user input
-    public void start() {
-        Scanner scanner = new Scanner(System.in);
-        boolean isRunning = true;
-
-        while (isRunning) {
-            // Display menu options
-            System.out.println("1. Create User");
-            System.out.println("2. Create Event");
-            // Add more menu options as needed
-
-            // Get user input
-            System.out.print("Enter option: ");
-            int option = scanner.nextInt();
-
-            // Process user input
-            switch (option) {
-                case 1:
-                    createUser();
-                    break;
-                case 2:
-                    createEvent();
-                    break;
-                // Add more cases to handle other menu options
-                default:
-                    System.out.println("Invalid option. Please try again.");
-            }
-
-            // Ask user if they want to continue
-            System.out.print("Do you want to continue? (yes/no): ");
-            String continueOption = scanner.next();
-
-            if (!continueOption.equalsIgnoreCase("yes")) {
-                isRunning = false;
-            }
-        }
-
-        scanner.close();
+    @PostMapping("/cancelInvite")
+    public String cancelInvite(@RequestBody Map<String, Object> requestBody) {
+        // Send the request to the handler
+        return eventHandler.handleRequest("cancelInvite", requestBody);
     }
 
-    // Method to create a user
-    private void createUser() {
-        // Call method in UserHandler to create a user
-        userHandler.createUser();
-    }
+    @Autowired
+    private Storage storage;
 
-    // Method to create an event
-    private void createEvent() {
-        // Call method in EventHandler to create an event
-        eventHandler.createEvent();
+    @GetMapping("/events")
+    public String events(Model model) {
+        List<Event> events = storage.listEvents();
+        System.out.println("Events retrieved from storage: " + events);
+        model.addAttribute("events", events);
+        return "events"; // This will return events.html template
     }
-
-    // Add more methods to handle other user actions as needed
 }
