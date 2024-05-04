@@ -6,10 +6,14 @@ import java.util.regex.Pattern;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.*;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -142,20 +146,53 @@ public class UserOperations {
                 user,
                 loc,
                 tags, bracket, participants, waitlist);
-        // Store in storage
-        Gson gson = new Gson();
-        // Convert object to JSON string
-        String json = gson.toJson(event);
 
-        // Write JSON string to a file
-        try (FileWriter writer = new FileWriter("event_output.json", true)) {
+        List<Event> existingEvents = new ArrayList<>();
+        try (FileReader reader = new FileReader("event_output.json")) {
+            // Define the type of the collection using TypeToken
+            Type listType = new TypeToken<List<Event>>() {
+            }.getType();
+
+            existingEvents = new Gson().fromJson(reader, listType);
+        } catch (IOException e) {
+            // File does not exist or cannot be read (ignore if it's the first run)
+        }
+        List<Event> existingEvents1;
+        if (existingEvents == null)
+            existingEvents1 = new ArrayList<Event>();
+        else
+            existingEvents1 = existingEvents;
+
+        // Append new Person objects to existing list
+        existingEvents1.add(event);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(existingEvents1);
+
+        // Write JSON to file (append mode)
+        try (FileWriter writer = new FileWriter("event_output.json", false)) {
             writer.write(json);
-            return "Successfully created JSON";
+            return "New JSON data appended to event_output.json";
         } catch (IOException e) {
             e.printStackTrace();
             return "Failed to create JSON";
         }
     }
+
+    // // Store in storage
+    // Gson gson = new Gson();
+    // // Convert object to JSON string
+    // String json = gson.toJson(event);
+
+    // // Write JSON string to a file
+    // try (FileWriter writer = new FileWriter("event_output.json", true)) {
+    // writer.write(json);
+    // return "Successfully created JSON";
+    // } catch (IOException e) {
+    // e.printStackTrace();
+    // return "Failed to create JSON";
+    // }
+    // }
 
     public void joinWaitlist(Waitlist list, User user) {
         list.getWaitList().add(user);

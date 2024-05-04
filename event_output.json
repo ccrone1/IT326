@@ -1,0 +1,89 @@
+[
+    {
+        "eventID": "79175",
+        "date": "2024-05-06",
+        "time": "17:15",
+        "availability": 20,
+        "owner": {
+            "username": "hogan17",
+            "password": "suhail53",
+            "email": "hog@hogmail.com"
+        },
+        "location": {
+            "location": "Ironwood Park"
+        },
+        "tags": [],
+        "bracket": {
+            "numOfPlayers": 0,
+            "bracketId": "80458"
+        },
+        "participants": [
+            {
+                "username": "hogan17",
+                "password": "suhail53",
+                "email": "hog@hogmail.com"
+            }
+        ],
+        "waitlist": {}
+    },
+    {
+        "eventID": "94458",
+        "date": "2024-05-14",
+        "time": "20:15",
+        "availability": 10,
+        "owner": {
+            "username": "hogan17",
+            "password": "suhail53",
+            "email": "hog@hogmail.com"
+        },
+        "location": {
+            "location": "Ironwood Park"
+        },
+        "tags": [
+            "Skill",
+            "Skill"
+        ],
+        "bracket": {
+            "numOfPlayers": 0,
+            "bracketId": "27224"
+        },
+        "participants": [
+            {
+                "username": "hogan17",
+                "password": "suhail53",
+                "email": "hog@hogmail.com"
+            }
+        ],
+        "waitlist": {}
+    },
+    {
+        "eventID": "86818",
+        "date": "2024-05-23",
+        "time": "08:20",
+        "availability": 10,
+        "owner": {
+            "username": "hogan17",
+            "password": "suhail53",
+            "email": "hog@hogmail.com"
+        },
+        "location": {
+            "location": "State Farm Park"
+        },
+        "tags": [
+            "Skill",
+            "6"
+        ],
+        "bracket": {
+            "numOfPlayers": 0,
+            "bracketId": "16944"
+        },
+        "participants": [
+            {
+                "username": "hogan17",
+                "password": "suhail53",
+                "email": "hog@hogmail.com"
+            }
+        ],
+        "waitlist": {}
+    }
+]
