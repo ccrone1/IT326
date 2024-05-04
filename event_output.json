@@ -1,9 +1,9 @@
 [
     {
-        "eventID": "79175",
-        "date": "2024-05-06",
-        "time": "17:15",
-        "availability": 20,
+        "eventID": "65699",
+        "date": "2024-05-07",
+        "time": "17:33",
+        "availability": 10,
         "owner": {
             "username": "hogan17",
             "password": "suhail53",
@@ -15,7 +15,7 @@
         "tags": [],
         "bracket": {
             "numOfPlayers": 0,
-            "bracketId": "80458"
+            "bracketId": "86547"
         },
         "participants": [
             {
@@ -27,40 +27,10 @@
         "waitlist": {}
     },
     {
-        "eventID": "94458",
-        "date": "2024-05-14",
-        "time": "20:15",
-        "availability": 10,
-        "owner": {
-            "username": "hogan17",
-            "password": "suhail53",
-            "email": "hog@hogmail.com"
-        },
-        "location": {
-            "location": "Ironwood Park"
-        },
-        "tags": [
-            "Skill",
-            "Skill"
-        ],
-        "bracket": {
-            "numOfPlayers": 0,
-            "bracketId": "27224"
-        },
-        "participants": [
-            {
-                "username": "hogan17",
-                "password": "suhail53",
-                "email": "hog@hogmail.com"
-            }
-        ],
-        "waitlist": {}
-    },
-    {
-        "eventID": "86818",
-        "date": "2024-05-23",
-        "time": "08:20",
-        "availability": 10,
+        "eventID": "85603",
+        "date": "2024-05-21",
+        "time": "21:33",
+        "availability": 8,
         "owner": {
             "username": "hogan17",
             "password": "suhail53",
@@ -70,12 +40,40 @@
             "location": "State Farm Park"
         },
         "tags": [
-            "Skill",
-            "6"
+            "Skill"
         ],
         "bracket": {
             "numOfPlayers": 0,
-            "bracketId": "16944"
+            "bracketId": "44347"
+        },
+        "participants": [
+            {
+                "username": "hogan17",
+                "password": "suhail53",
+                "email": "hog@hogmail.com"
+            }
+        ],
+        "waitlist": {}
+    },
+    {
+        "eventID": "32176",
+        "date": "2024-05-25",
+        "time": "09:33",
+        "availability": 4,
+        "owner": {
+            "username": "hogan17",
+            "password": "suhail53",
+            "email": "hog@hogmail.com"
+        },
+        "location": {
+            "location": "Home"
+        },
+        "tags": [
+            "level"
+        ],
+        "bracket": {
+            "numOfPlayers": 0,
+            "bracketId": "97043"
         },
         "participants": [
             {

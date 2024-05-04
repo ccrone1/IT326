@@ -147,27 +147,26 @@ public class UserOperations {
                 loc,
                 tags, bracket, participants, waitlist);
 
-        List<Event> existingEvents = new ArrayList<>();
+        // Reading existing events from the JSON file and storing them into an arraylist
+        List<Event> existingEvents = new ArrayList<Event>();
         try (FileReader reader = new FileReader("event_output.json")) {
-            // Define the type of the collection using TypeToken
             Type listType = new TypeToken<List<Event>>() {
             }.getType();
 
             existingEvents = new Gson().fromJson(reader, listType);
         } catch (IOException e) {
-            // File does not exist or cannot be read (ignore if it's the first run)
+            e.printStackTrace();
         }
-        List<Event> existingEvents1;
+        // If the the JSON file is empty the array will become null so we are
+        // re-intializing it so we can add an event to it
         if (existingEvents == null)
-            existingEvents1 = new ArrayList<Event>();
-        else
-            existingEvents1 = existingEvents;
+            existingEvents = new ArrayList<Event>();
 
-        // Append new Person objects to existing list
-        existingEvents1.add(event);
+        // Append new Event objects to existing list
+        existingEvents.add(event);
 
         Gson gson = new Gson();
-        String json = gson.toJson(existingEvents1);
+        String json = gson.toJson(existingEvents);
 
         // Write JSON to file (append mode)
         try (FileWriter writer = new FileWriter("event_output.json", false)) {
