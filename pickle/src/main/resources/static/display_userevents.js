@@ -1,34 +1,32 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.getElementById('userEventsButton').addEventListener('click', function () {
     const userEventsButton = document.getElementById('userEventsButton');
     const eventsContainer = document.getElementById('events');
-    var username = document.getElementById('username1').value;
+    var username = document.getElementById('username1').value.trim();
 
-    userEventsButton.addEventListener('click', function () {
-        fetch('/userEvents', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: username
-            })
+    fetch('/userEvents', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: username
         })
+    })
         .then(response => response.json())
         .then(data => {
             // Process data and display on your HTML page
             displayEvents(data);
-           // eventsContainer.style.display = 'block';
-            if (eventsContainer.style.display ==="block") {
+            // eventsContainer.style.display = 'block';
+            if (eventsContainer.style.display === "block") {
                 eventsContainer.style.display = "none";
             } else {
                 eventsContainer.style.display = "block";
-                eventsContainer.style.padding="20px";
-                eventsContainer.style.textAlign="center";
+                eventsContainer.style.padding = "20px";
+                eventsContainer.style.textAlign = "center";
             }
 
         })
         .catch(error => console.error('Error:', error));
-    });
 
     function displayEvents(events) {
         // Assuming you have a <div> with id="eventContainer" to display events
@@ -43,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <p>Owner: ${event.owner.fname} ${event.owner.lname}</p>
                 <p>Availability: ${event.availability}</p>
                 <p>Participants: ${event.participants.length}</p>
-                <hr>
+                
             `;
 
             const editEvent = document.createElement("button");
@@ -56,19 +54,22 @@ document.addEventListener('DOMContentLoaded', function () {
             // Append the button to a parent element (assuming eventsContainer is the parent)
 
 
+            eventElement.appendChild(editEvent);
+            eventElement.appendChild(deleteEvent);
+
+            eventContainer.appendChild(eventElement);
+
+            const divider = document.createElement('hr');
+            eventElement.appendChild(divider);
+
             editEvent.style.display = "inline-block";
             deleteEvent.style.display = "inline-block";
 
             editEvent.style.marginRight = "10px"; // Add some spacing between buttons if needed
             deleteEvent.style.marginRight = "10px";
-
-            eventElement.appendChild(editEvent);
-            eventElement.appendChild(deleteEvent);
-
-            eventContainer.appendChild(eventElement);
         });
 
         // Show the events container
-        eventsContainer.style.display = 'block';
+        //eventsContainer.style.display = 'block';
     }
 });
