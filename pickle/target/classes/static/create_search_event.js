@@ -1,3 +1,9 @@
+// Include jQuery
+document.write('<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>');
+
+// Include Bootstrap JS
+document.write('<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>');
+
 // Function to handle adding a new filter
 document.getElementById("addFilter").addEventListener("click", function (event) {
     event.preventDefault(); // Prevent default button behavior
@@ -37,7 +43,6 @@ document.getElementsByClassName("close")[0].addEventListener("click", function (
     closeModal();
 });
 
-// Function to close the modal and reset the form
 // Function to close the modal and reset the form and filter fields
 function closeModal() {
     var modal = document.getElementById("createEventModal");
@@ -120,7 +125,8 @@ document.getElementById("eventForm").addEventListener("submit", function (event)
 document.getElementById("searchForm").addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent default form submission
 
-    // Get form input values
+    // Get form input values for keyword and all filters
+    var keyword = document.querySelector("input[name='keyword']").value;
     var filters = [];
     document.querySelectorAll(".filter input[name='filter']").forEach(function (input) {
         filters.push(input.value);
@@ -128,7 +134,8 @@ document.getElementById("searchForm").addEventListener("submit", function (event
 
     // Create search parameters object
     var searchParams = {
-        filters: filters,
+        keyword: keyword,
+        filters: filters
     };
 
     // Send search request to the backend
@@ -147,4 +154,31 @@ document.getElementById("searchForm").addEventListener("submit", function (event
         .catch((error) => {
             console.error("Error:", error);
         });
+});
+
+function displayEvents(events) {
+    const eventContainer = document.getElementById('searchResults');
+    eventContainer.innerHTML = ''; // Clear existing content before displaying new events
+
+    events.forEach(event => {
+        const eventElement = document.createElement('div');
+        eventElement.innerHTML = `
+            <h2>${event.date} ${event.time}</h2>
+            <p>EventID: ${event.eventID}</p>
+            <p>Location: ${event.location.location}</p>
+            <p>Owner: ${event.owner.fname} ${event.owner.lname}</p>
+            <p>Availability: ${event.availability}</p>
+            <p>Participants: ${event.participants.length}</p>
+
+            
+        `;
+
+        });
+    }
+
+// JavaScript to open modal
+$(document).ready(function(){
+  $('#openModalBtn').click(function(){
+    $('#searchModal').modal('show');
+  });
 });
