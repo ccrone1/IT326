@@ -37,19 +37,12 @@ document.addEventListener('DOMContentLoaded', function () {
         button.setAttribute("type", "button");
         button.style.display = "inline-block";
         button.style.marginRight = "10px";
+       
+       button.addEventListener('click',joinCalled);
+       
+
     
-        // Add event listener to the button
-        button.addEventListener("click", function() {
-            // Prompt user for username and event ID
-            const username = prompt("Enter your username:");
-            if (username !== null) {
-                const eventIdInput = prompt("Enter the event ID:", eventId);
-                if (eventIdInput !== null) {
-                    // Perform further actions with username and event ID
-                   
-                }
-            }
-        });
+       
     
         return button;
     }
@@ -73,18 +66,27 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
 
             const joinlist = createButton("Join Waitlist",event.eventID)
+
+            joinlist.setAttribute("id","joinWaitlistButton")
+           // joinlist.addEventListener('click',joinCalled)
+            
             //joinlist.textContent = ; // Set the button text
            // joinlist.setAttribute("type", "button"); // Set button type
+           console.log("created button");
 
             const leaveList = createButton("Leave Waitlist",event.eventID)
+            leaveList.setAttribute("id","leaveWaitlistButton")
             //leaveList.textContent = ; // Set the button text
            // leaveList.setAttribute("type", "button"); // Set button type
 
             const joinEvent = createButton( "Join Event" ,event.eventID);
+            joinEvent.setAttribute("id","joinEventButton")
             //joinEvent.textContent = ; // Set the button text
            // joinEvent.setAttribute("type", "button"); // Set button type
 
+
             const leaveEvent = createButton("Leave Event", event.eventID);
+            leaveEvent.setAttribute("id","leaveEventButton")
            // leaveEvent.textContent = "Leave Event"; // Set the button text
             //leaveEvent.setAttribute("type", "button"); // Set button type
 

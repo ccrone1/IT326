@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
             alert("Please enter a valid email address.");
         }
     });
+    
 
     function sendInvitation(userEmail) {
         fetch('/inviteUser', {
