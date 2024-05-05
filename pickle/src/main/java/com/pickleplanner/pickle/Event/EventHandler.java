@@ -18,7 +18,13 @@ public class EventHandler {
     }
 
     public String handleRequest(String action, Map<String, Object> requestData) {
+        if (action == "editEvent") {
+            return eventOperations.editEvent(requestData);
+        }
 
+        else {
+            return "Invalid Request";
+        }
     }
 
     // Methods to handle event-related requests and interact with EventOperations

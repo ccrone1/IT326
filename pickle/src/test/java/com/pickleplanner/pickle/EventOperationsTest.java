@@ -14,7 +14,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.pickleplanner.pickle.Event.EventOperations;
-import com.pickleplanner.pickle.Persistence.Storage;
+import com.pickleplanner.pickle.Persistence.Database;
 import com.pickleplanner.pickle.User.UserOperations;
 
 import jakarta.mail.Session;
@@ -28,7 +28,7 @@ public class EventOperationsTest {
     private UserOperations userOperations;
 
     @MockBean
-    private Storage storage; // Mock the storage dependency
+    private Database storage; // Mock the storage dependency
 
     @Mock
     private JavaMailSender emailSender; // Mock the emailSender dependency

@@ -74,6 +74,7 @@ document.getElementById("eventForm").addEventListener("submit", function (event)
     var eventDate = document.getElementById("eventDate").value;
     var eventTime = document.getElementById("eventTime").value;
     var availability = document.getElementById("availability").value;
+    var userName = document.getElementById("username").value;
     var location = document.getElementById("location").value;
     // Get event filters
     var eventFilters = [];
@@ -87,6 +88,7 @@ document.getElementById("eventForm").addEventListener("submit", function (event)
         date: eventDate,
         time: eventTime,
         availability: availability,
+        userName: userName,
         location: location,
         tags: eventFilters // Include event filters in the data
     };

@@ -43,6 +43,19 @@ public class UserHandler {
             return userOperations.createEvent(requestData);
         }
 
+        else if (action == "deleteEvent") {
+            String username = (String) requestData.get("username");
+            if (username == null || username.isEmpty()) {
+                return "Failed to send invitation. User email is missing or invalid.";
+            }
+
+            return userOperations.deleteProfile(username);
+        }
+
+        else if (action == "createProfile") {
+            return userOperations.createProfile(requestData);
+        }
+
         else {
             return "Invalid Request";
         }

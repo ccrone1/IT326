@@ -1,23 +1,32 @@
 package com.pickleplanner.pickle.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
-import com.pickleplanner.pickle.Event.Event;
-import com.pickleplanner.pickle.Event.Waitlist;
-import com.pickleplanner.pickle.Invitation.Invitation;
-
-import Profile;
-
+@Component
 public class User {
     private String username;
+    private String fname;
+    private String lname;
     private String password;
     private String email;
+    private String skillLevel;
     private Profile profile;
+    private List<User> followingList;
 
-    public User(String username, String email, String password) {
+    public User() {
+    }
+
+    public User(String fname, String lname, String username, String email, String password, String skillLevel) {
+        this.fname = fname;
+        this.lname = lname;
         this.username = username;
         this.email = email;
         this.password = password;
+        this.skillLevel = skillLevel;
+        this.followingList = new ArrayList<User>();
     }
 
     public void setUsername(String username) {
@@ -44,36 +53,24 @@ public class User {
         return password;
     }
 
-    public void joinWaitlist(Event event) {
-        Waitlist.addToWaitlist(this, event);
+    public String getSkillLevel() {
+        return skillLevel;
     }
 
-    public void leaveWaitlist(Event event) {
-        Waitlist.removeFromWaitlist(this, event);
+    public Profile getProfile() {
+        return profile;
     }
 
-    public void createEvent() {
-        Event.createEvent();
+    public List<User> getFollowingList() {
+        return followingList;
     }
 
-    public void deleteEvent(User user, Event event) {
-        Event.deleteEvent(event);
+    public String getFname() {
+        return fname;
     }
 
-    public void createProfile(String firstName, String lastName, String email, String skillLevel) {
-        this.profile = new Profile(firstName, lastName, email, skillLevel);
-    }
-
-    public void deleteProfile() {
-        this.profile = null;
-    }
-
-    public void sendInvitation(User recipient, Event event) {
-        Invitation.sendInvitation(recipient, event);
-    }
-
-    public void cancelInvitation(User recipient, Event event) {
-        Invitation.cancelInvitation(recipient, event);
+    public String getLname() {
+        return lname;
     }
 
 }

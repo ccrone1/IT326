@@ -8,13 +8,13 @@ import org.springframework.stereotype.Component;
 import com.pickleplanner.pickle.Event.Event;
 
 @Component
-public class Storage {
+public class Database {
 
     private List<Event> events;
 
     // Constructor
     // Constructor
-    public Storage() {
+    public Database() {
         this.events = new ArrayList<>();
 
         // Add sample events for testing

@@ -7,6 +7,7 @@ ul,
 li {
   margin: 0;
   padding: 0;
+
 }
 
 
@@ -87,7 +88,8 @@ header h1 {
 }
 
 .link {
-  font-size: 17px;
+  font-size: 28px;
+
   /* Adjust font size to match h1 */
   color: #e68420;
   /* Adjust color to match header text */
@@ -122,6 +124,12 @@ header h1 {
 button {
   margin-top: 8px;
   color: #e68420;
+}
+
+button:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  border: solid 1px black;
 }
 
 .plan-teaser {
@@ -296,6 +304,12 @@ footer {
   /* Add space between search form and create event */
 }
 
+#eventContainer {
+  text-align: center;
+}
+
+#eventContainer div {}
+
 #interactions {
   display: flex;
   padding-left: 20%;
@@ -321,6 +335,38 @@ footer {
   margin: 24px 22px;
   cursor: pointer;
   border-radius: 13%;
+}
+
+#ButtonContainer {
+  display: flex;
+  justify-content: center;
+
+}
+
+#detailsButtonContainer {
+  text-align: center;
+  margin: 20px;
+  margin-left: 50px;
+}
+
+#generateEventDetailsButton {
+
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 24px 22px;
+  cursor: pointer;
+  border-radius: 13%;
+}
+
+#generateEventDetailsButton:hover {
+  animation: float 3.5s ease-in-out infinite;
+
 }
 
 #createEvent:hover {
@@ -447,7 +493,16 @@ label {
   background-color: #30931a;
 }
 
+
 .btn-register {
+  display: inline-block;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
   background-color: #e68420;
 }
 

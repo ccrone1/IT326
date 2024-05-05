@@ -1,5 +1,7 @@
 package com.pickleplanner.pickle.Controller;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -11,10 +13,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pickleplanner.pickle.Event.Event;
 import com.pickleplanner.pickle.Event.EventHandler;
-import com.pickleplanner.pickle.Persistence.Storage;
+import com.pickleplanner.pickle.Persistence.Database;
 import com.pickleplanner.pickle.User.UserHandler;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+
+import java.io.File;
+import java.util.ArrayList;
 
 @RestController
 public class Controller {
@@ -58,10 +68,31 @@ public class Controller {
         return "redirect:/events.html";
     }
 
+    @PostMapping("/events")
+    public List<Event> getEvents() {
+        List<Event> events = new ArrayList<>();
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            File file = new File("event_output.json");
+            events = objectMapper.readValue(file, new TypeReference<List<Event>>() {
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return events;
+    }
+
     @PostMapping("/createEvent")
     public String createEvent(@RequestBody Map<String, Object> requestBody) {
         // Send the request to handler
         return userHandler.handleRequest("createEvent", requestBody);
+    }
+
+    @PostMapping("/deleteProfile")
+    public String deleteProfilePage(@RequestBody Map<String, Object> requestBody) {
+        return userHandler.handleRequest("deleteEvent", requestBody);
     }
 
     @PostMapping("/editEvent")
@@ -73,17 +104,31 @@ public class Controller {
     @PostMapping("/deleteEvent")
     public String deleteEvent(@RequestBody Map<String, Object> requestBody) {
         // Send the request to handler
-        return eventHandler.handleRequest("deleteEvent", requestBody);
+        return userHandler.handleRequest("deleteEvent", requestBody);
+    }
+
+    @PostMapping("/createProfile")
+    public String createProfile(@RequestBody Map<String, Object> requestBody) {
+        // Send request to handler
+        return userHandler.handleRequest("createProfile", requestBody);
+    }
+
+    @PostMapping("/loginProfile")
+    public String loginProfile(@RequestBody Map<String, Object> requestBody) {
+        // Send request to handler
+        return userHandler.handleRequest("loginProfile", requestBody);
     }
 
     @Autowired
-    private Storage storage;
+    private Database storage;
 
-    @GetMapping("/events")
-    public String events(Model model) {
-        List<Event> events = storage.listEvents();
-        System.out.println("Events retrieved from storage: " + events);
-        model.addAttribute("events", events);
-        return "events"; // This will return events.html template
-    }
+    /*
+     * @GetMapping("/events")
+     * public String events(Model model) {
+     * List<Event> events = storage.listEvents();
+     * System.out.println("Events retrieved from storage: " + events);
+     * model.addAttribute("events", events);
+     * return "events"; // This will return events.html template
+     * }
+     */
 }

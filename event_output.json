@@ -1,13 +1,16 @@
 [
     {
-        "eventID": "65699",
-        "date": "2024-05-07",
-        "time": "17:33",
-        "availability": 10,
+        "eventID": "51513",
+        "date": "2024-05-15",
+        "time": "22:50",
+        "availability": 4,
         "owner": {
-            "username": "hogan17",
-            "password": "suhail53",
-            "email": "hog@hogmail.com"
+            "username": "bye",
+            "fname": "hello",
+            "lname": "hi",
+            "password": "ahhahahah",
+            "email": "here@ilstu.edu",
+            "skillLevel": "sucks"
         },
         "location": {
             "location": "Ironwood Park"
@@ -15,71 +18,16 @@
         "tags": [],
         "bracket": {
             "numOfPlayers": 0,
-            "bracketId": "86547"
+            "bracketId": "4950"
         },
         "participants": [
             {
-                "username": "hogan17",
-                "password": "suhail53",
-                "email": "hog@hogmail.com"
-            }
-        ],
-        "waitlist": {}
-    },
-    {
-        "eventID": "85603",
-        "date": "2024-05-21",
-        "time": "21:33",
-        "availability": 8,
-        "owner": {
-            "username": "hogan17",
-            "password": "suhail53",
-            "email": "hog@hogmail.com"
-        },
-        "location": {
-            "location": "State Farm Park"
-        },
-        "tags": [
-            "Skill"
-        ],
-        "bracket": {
-            "numOfPlayers": 0,
-            "bracketId": "44347"
-        },
-        "participants": [
-            {
-                "username": "hogan17",
-                "password": "suhail53",
-                "email": "hog@hogmail.com"
-            }
-        ],
-        "waitlist": {}
-    },
-    {
-        "eventID": "32176",
-        "date": "2024-05-25",
-        "time": "09:33",
-        "availability": 4,
-        "owner": {
-            "username": "hogan17",
-            "password": "suhail53",
-            "email": "hog@hogmail.com"
-        },
-        "location": {
-            "location": "Home"
-        },
-        "tags": [
-            "level"
-        ],
-        "bracket": {
-            "numOfPlayers": 0,
-            "bracketId": "97043"
-        },
-        "participants": [
-            {
-                "username": "hogan17",
-                "password": "suhail53",
-                "email": "hog@hogmail.com"
+                "username": "bye",
+                "fname": "hello",
+                "lname": "hi",
+                "password": "ahhahahah",
+                "email": "here@ilstu.edu",
+                "skillLevel": "sucks"
             }
         ],
         "waitlist": {}

@@ -19,6 +19,18 @@ public class Bracket {
 
     }
 
+    public int getNumOfPlayers() {
+        return numOfPlayers;
+    }
+
+    public String getBracketId() {
+        return bracketId;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
     // Method to edit the bracket
     public void editBracket() {
 

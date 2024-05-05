@@ -4,7 +4,12 @@ document.getElementById('inviteButton').addEventListener('click', function () {
         // Prompt user for confirmation
         if (confirm("Are you sure you want to invite " + userEmail + "?")) {
             // Call sendInvitation function on confirmation
-            sendInvitation(userEmail);
+            const button = document.getElementById('inviteButton');
+            if (button.innerHTML == 'Cancel Invitation') {
+            }
+            else {
+                sendInvitation(userEmail);
+            }
             // Update button for cancellation after confirmation
             updateButtonForCancellation(userEmail);
         } else {

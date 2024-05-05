@@ -8,6 +8,10 @@ public class Location {
 
     private String location;
 
+    public Location() {
+        // Default constructor
+    }
+
     // Constructor
     public Location(String location) {
         this.location = location;
@@ -18,6 +22,10 @@ public class Location {
         this.city = city;
         this.zip = zip;
         this.state = state;
+    }
+
+    public String getLocation() {
+        return location;
     }
 
     // Getter and setter methods
