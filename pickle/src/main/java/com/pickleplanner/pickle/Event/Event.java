@@ -67,6 +67,10 @@ public class Event {
         return this.availability;
     }
 
+    public void setAvailability(int num) {
+        this.availability = num;
+    }
+
     public User getOwner() {
         return this.owner;
     }

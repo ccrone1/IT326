@@ -302,13 +302,29 @@ footer {
   margin: 20px;
   margin-left: 50px;
   /* Add space between search form and create event */
+
 }
 
+.eventsButtonContainer{
+  text-align: center;
+  margin: 20px;
+  margin-left: 50px; 
+}
+
+#inputContainer{
+  display:block;
+  padding-left: 20px;
+}
 #eventContainer {
   text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
-#eventContainer div {}
+#eventContainer div {
+
+}
+
 
 #interactions {
   display: flex;
@@ -336,6 +352,20 @@ footer {
   cursor: pointer;
   border-radius: 13%;
 }
+.eventsButton{
+  background-color: #4CAF50;
+  /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 24px 22px;
+  cursor: pointer;
+  border-radius: 13%; 
+}
 
 #ButtonContainer {
   display: flex;
@@ -348,6 +378,7 @@ footer {
   margin: 20px;
   margin-left: 50px;
 }
+
 
 #generateEventDetailsButton {
 
@@ -365,12 +396,16 @@ footer {
 }
 
 #generateEventDetailsButton:hover {
-  animation: float 3.5s ease-in-out infinite;
+  animation: float 2.5s ease-in-out infinite;
 
+
+}
+#userEventsButton:hover{
+  animation: float 2.5s ease-in-out infinite; 
 }
 
 #createEvent:hover {
-  animation: float 3.5s ease-in-out infinite;
+  animation: float 2.5s ease-in-out infinite;
 
 }
 

@@ -2,6 +2,7 @@ package com.pickleplanner.pickle.Controller;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pickleplanner.pickle.Event.Event;
 import com.pickleplanner.pickle.Event.EventHandler;
 import com.pickleplanner.pickle.Persistence.Database;
+import com.pickleplanner.pickle.User.User;
 import com.pickleplanner.pickle.User.UserHandler;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -69,30 +71,49 @@ public class Controller {
     }
 
     @PostMapping("/events")
-    public List<Event> getEvents() {
-        List<Event> events = new ArrayList<>();
+    public List<Event> getEvents() throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
+        File file = new File("event_output.json");
 
-        try {
-            File file = new File("event_output.json");
-            events = objectMapper.readValue(file, new TypeReference<List<Event>>() {
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!file.exists()) {
+            // Handle the case where the file does not exist
+            return new ArrayList<>();
         }
 
+        List<Event> events = objectMapper.readValue(file, new TypeReference<List<Event>>() {
+        });
         return events;
+    }
+
+    @PostMapping("/userEvents")
+    public List<Event> getUserEvents(/* @RequestBody Map<String, Object> requestBody */) throws IOException {
+        // String username = requestBody.get("username").toString();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        File file = new File("event_output.json");
+
+        if (!file.exists()) {
+            // Handle the case where the file does not exist
+            return new ArrayList<>();
+        }
+
+        List<Event> allEvents = objectMapper.readValue(file, new TypeReference<List<Event>>() {
+        });
+
+        // List<Event> filteredEvents = new ArrayList<Event>();
+        // for (Event event : allEvents) {
+        // // Example: Only include events with availability greater than 0
+        // if (event.getOwner().getUsername().equals(username)) {
+        // filteredEvents.add(event);
+        // }
+        // }
+        return allEvents;
     }
 
     @PostMapping("/createEvent")
     public String createEvent(@RequestBody Map<String, Object> requestBody) {
         // Send the request to handler
         return userHandler.handleRequest("createEvent", requestBody);
-    }
-
-    @PostMapping("/deleteProfile")
-    public String deleteProfilePage(@RequestBody Map<String, Object> requestBody) {
-        return userHandler.handleRequest("deleteEvent", requestBody);
     }
 
     @PostMapping("/editEvent")
@@ -113,10 +134,40 @@ public class Controller {
         return userHandler.handleRequest("createProfile", requestBody);
     }
 
+    @PostMapping("/deleteProfile")
+    public String deleteProfile(@RequestBody Map<String, Object> requestBody) {
+        // Send request to handler
+        return userHandler.handleRequest("deleteProfile", requestBody);
+    }
+
     @PostMapping("/loginProfile")
     public String loginProfile(@RequestBody Map<String, Object> requestBody) {
         // Send request to handler
         return userHandler.handleRequest("loginProfile", requestBody);
+    }
+
+    @PostMapping("/find-users")
+    public User getUserByUsername(@RequestBody Map<String, Object> searchRequest) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        File file = new File("user_data.json");
+
+        if (!file.exists()) {
+            // Handle the case where the file does not exist
+            return null;
+        }
+
+        // Read user data from the JSON file
+        User[] users = objectMapper.readValue(file, User[].class);
+
+        String username = (String) searchRequest.get("username");
+
+        // Find user by username
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return user; // Return the matching user
+            }
+        }
+        return null; // No matching user found
     }
 
     @Autowired

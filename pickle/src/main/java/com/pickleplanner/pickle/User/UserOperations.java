@@ -255,18 +255,8 @@ public class UserOperations {
 
         if (targetEvent != null) {
 
-            /*
-             * User userToRemove = targetEvent.getWaitlist().getWaitList().stream()
-             * 
-             * .filter(u -> u.getUsername().equals(user.getUsername()))
-             * .findFirst()
-             * .orElse(null);
-             * 
-             * if (userToRemove != null) {
-             */
             targetEvent.getWaitlist().getWaitList().add(user);
 
-            // }
         }
         String updatedJson = new Gson().toJson(events);
         FileWriter writer;
@@ -335,15 +325,10 @@ public class UserOperations {
                 .orElse(null);
 
         if (targetEvent != null) {
-            User userToRemove = targetEvent.getParticipants().stream()
-                    .filter(u -> u.getUsername().equals(user.getUsername()))
-                    .findFirst()
-                    .orElse(null);
 
-            if (userToRemove != null) {
-                targetEvent.getParticipants().add(user);
+            targetEvent.getParticipants().add(user);
+            targetEvent.setAvailability(targetEvent.getAvailability() - 1);
 
-            }
         }
         String updatedJson = new Gson().toJson(events);
         FileWriter writer;
