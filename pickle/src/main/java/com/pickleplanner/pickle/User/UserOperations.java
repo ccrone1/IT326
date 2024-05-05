@@ -363,6 +363,7 @@ public class UserOperations {
 
             if (userToRemove != null) {
                 targetEvent.getParticipants().remove(user);
+                targetEvent.setAvailability(targetEvent.getAvailability()+1);
 
             }
         }

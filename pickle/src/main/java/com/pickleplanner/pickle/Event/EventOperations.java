@@ -46,6 +46,7 @@ public class EventOperations {
 
             if (userToRemove != null) {
                 targetEvent.getWaitlist().getWaitList().add(user);
+            
 
             }
         }
@@ -98,7 +99,7 @@ public class EventOperations {
             e1.printStackTrace();
         }
 
-        // list.getWaitList().remove(user);
+        
 
     }
 
