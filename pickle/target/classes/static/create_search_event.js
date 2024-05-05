@@ -146,21 +146,12 @@ document.getElementById("searchForm").addEventListener("submit", function (event
         },
         body: JSON.stringify(searchParams),
     })
-        .then((response) => response.json())
-        .then((data) => {
-            // Display search results on the page
-            document.getElementById("searchResults").innerHTML = JSON.stringify(data);
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-        });
-});
-
-function displayEvents(events) {
+    .then((response) => response.json())
+.then((data) => {
     const eventContainer = document.getElementById('searchResults');
     eventContainer.innerHTML = ''; // Clear existing content before displaying new events
 
-    events.forEach(event => {
+    data.forEach(event => {
         const eventElement = document.createElement('div');
         eventElement.innerHTML = `
             <h2>${event.date} ${event.time}</h2>
@@ -169,12 +160,43 @@ function displayEvents(events) {
             <p>Owner: ${event.owner.fname} ${event.owner.lname}</p>
             <p>Availability: ${event.availability}</p>
             <p>Participants: ${event.participants.length}</p>
-
-            
         `;
 
-        });
-    }
+        
+        eventContainer.appendChild(eventElement); // Append eventElement to eventContainer
+    });
+    closeSearchModal();
+
+})
+.catch((error) => {
+    console.error("Error:", error);
+});
+
+});
+
+function closeSearchModal() {
+    var modal = document.getElementById("searchModal");
+    modal.style.display = "none";
+    resetForm();
+    resetFilterFields();
+}
+
+// Function to reset the filter fields
+function resetFilterFields() {
+    var filterContainer = document.getElementById("filterContainer");
+    filterContainer.innerHTML = ''; // Clear all filter fields
+    // Add back the initial filter input field
+    var newFilter = document.createElement("div");
+    newFilter.classList.add("filter");
+    newFilter.innerHTML = '<label for="keyword">Keyword:</label> <input type="text" name="keyword"><br>';
+    filterContainer.appendChild(newFilter);
+}
+
+// Function to reset the form
+function resetForm() {
+    document.getElementById("searchForm").reset();
+}
+
 
 // JavaScript to open modal
 $(document).ready(function(){
