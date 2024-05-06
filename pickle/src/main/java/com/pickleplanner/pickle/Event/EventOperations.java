@@ -2,6 +2,12 @@
 package com.pickleplanner.pickle.Event;
 
 import com.pickleplanner.pickle.User.User;
+<<<<<<< HEAD
+=======
+import com.pickleplanner.pickle.Event.Event;
+import com.pickleplanner.pickle.Event.Waitlist;
+import com.pickleplanner.pickle.Location.Location;
+>>>>>>> Hogan2
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -132,7 +138,41 @@ public class EventOperations {
     }
 
     public String editEvent(Map<String, Object> requestData) {
-        return "";
+        String eventID = requestData.get("eventId").toString();
+        String date = requestData.get("date").toString();
+        String time = requestData.get("time").toString();
+        int availability = Integer.parseInt(requestData.get("availability").toString());
+        Location loc = new Location(requestData.get("location").toString());
+        List<Event> events = new ArrayList<Event>();
+        try (FileReader reader = new FileReader("event_output.json")) {
+            Type eventList = new TypeToken<List<Event>>() {
+            }.getType();
+
+            events = new Gson().fromJson(reader, eventList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Event targetEvent = events.stream()
+                .filter(u -> u.getEventID().equals(eventID))
+                .findFirst()
+                .orElse(null);
+
+        targetEvent.setDate(date);
+        targetEvent.setTime(time);
+        targetEvent.setAvailability(availability);
+        targetEvent.setLocation(loc);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(events);
+
+        // Write JSON to file (append mode)
+        try (FileWriter writer = new FileWriter("event_output.json", false)) {
+            writer.write(json);
+            return "New JSON data appended to event_output.json";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to create JSON";
+        }
     }
 
     public List<Event> generateOpenEvents(@RequestBody Map<String, Object> searchRequest) throws IOException {

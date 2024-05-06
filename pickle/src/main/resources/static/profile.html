@@ -1,45 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PicklePlanner</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="slider.js" defer></script>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Luckiest+Guy&display=swap"
-      rel="stylesheet"
-    />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PicklePlanner</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="slider.js" defer></script>
 
-  <body>
-    <header>
-      <div class="logo-container">
-        <img src="./images/logo_no_text.png" alt="PicklePlanner Logo" />
-        <h1>PicklePlanner</h1>
-      </div>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html" class="link">Home</a></li>
-          <li><a href="event.html" class="link">Event</a></li>
-          <li><a href="profile.html" class="link">Profile</a></li>
-        </ul>
-      </nav>
-    </header>
-    <div id="inputContainer">
-      <div class="search-container">
-        <input
-          type="text"
-          class="search-bar"
-          name="user-search"
-          placeholder="Search user..."
-        />
-        <button class="btn-find-users">Search Users</button>
-      </div>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Luckiest+Guy&display=swap"
+    rel="stylesheet" />
+</head>
 
+<<<<<<< HEAD
       <div id="inputContainer2">
         <div class="search-container">
           <input
@@ -53,6 +28,38 @@
 
       <div class="user-details">
       </div>
+=======
+<body>
+  <header>
+    <div class="logo-container">
+      <img src="./images/logo_no_text.png" alt="PicklePlanner Logo" />
+      <h1>PicklePlanner</h1>
+    </div>
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html" class="link">Home</a></li>
+        <li><a href="event.html" class="link">Event</a></li>
+        <li><a href="profile.html" class="link">Profile</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div id="inputContainer">
+    <div class="search-container">
+      <input type="text" class="search-bar" name="user-search" placeholder="Search user..." />
+      <button class="btn-find-users">Search Users</button>
+    </div>
+
+    <div class="addFollower-container">
+      <button id="addFollowerButton" class="addFollowerButton">Add Follower</button>
+    </div>
+    <div class="removeFollower-container">
+      <button id="removeFollowerButton" class="removeFollowerButton">Remove Follower</button>
+    </div>
+
+    <div class="user-details">
+      <!-- User details will be displayed here -->
+    </div>
+>>>>>>> Hogan2
 
     <div class="login-container">
       <h2>Log In or Register</h2>
@@ -80,6 +87,39 @@
       <p class="message">Don't have an account? <a href="#">Register now</a></p>
     </div>
 
+
+    <!-- Add to following modal -->
+    <div id="addFollowerModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add Follower</h2>
+        <form id="addFollowerForm">
+          <label for="user_username">Your Username:</label>
+          <input type="text" id="user_username" name="user_username" /><br />
+          <label for="follower_username">Person you want to follow username:</label>
+          <input type="text" id="follower_username" name="follower_username" /><br />
+          <button type="submit">Add Follower</button>
+      </div>
+      </form>
+    </div>
+
+
+    <!-- Remove from following modal -->
+    <div id="removeFollowerModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Remove Follower</h2>
+        <form id="removeFollowerForm">
+          <label for="user_username">Your Username:</label>
+          <input type="text" id="user_username2" name="user_username" /><br />
+          <label for="follower_username">Person you want to follow username:</label>
+          <input type="text" id="follower_username2" name="follower_username" /><br />
+          <button type="submit">Remove Follower</button>
+      </div>
+      </form>
+    </div>
+
+
     <footer>
       <p>&copy; 2024 PicklePlanner. All rights reserved.</p>
     </footer>
@@ -87,7 +127,14 @@
     <script src="create_profile.js"></script>
     <script src="search_user.js"></script>
     <script src="delete_profile.js"></script>
+<<<<<<< HEAD
     <script src="login.js"></script>
     <script src="editProfile.js"></script>
   </body>
 </html>
+=======
+    <script src="add_remove_follower.js"></script>
+</body>
+
+</html>
+>>>>>>> Hogan2

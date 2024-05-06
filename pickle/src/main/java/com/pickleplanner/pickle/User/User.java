@@ -54,7 +54,7 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public String getEmail() {
@@ -74,7 +74,7 @@ public class User {
     }
 
     public List<User> getFollowingList() {
-        return followingList;
+        return this.followingList;
     }
 
     public String getFname() {

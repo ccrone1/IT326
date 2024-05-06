@@ -79,10 +79,10 @@ public class Controller {
     }
 
     @PostMapping("/userEvents")
-    public List<Event> getUserEvents(/* @RequestBody Map<String, Object> requestBody */) throws IOException {
-        // String username = requestBody.get("username").toString();
-
+    public List<Event> getUserEvents(@RequestBody Map<String, Object> requestBody) throws IOException {
+        String username = (String) requestBody.get("username");
         ObjectMapper objectMapper = new ObjectMapper();
+        List<Event> filteredEvents = new ArrayList<Event>();
         File file = new File("event_output.json");
 
         if (!file.exists()) {
@@ -93,14 +93,13 @@ public class Controller {
         List<Event> allEvents = objectMapper.readValue(file, new TypeReference<List<Event>>() {
         });
 
-        // List<Event> filteredEvents = new ArrayList<Event>();
-        // for (Event event : allEvents) {
-        // // Example: Only include events with availability greater than 0
-        // if (event.getOwner().getUsername().equals(username)) {
-        // filteredEvents.add(event);
-        // }
-        // }
-        return allEvents;
+        for (Event event : allEvents) {
+            // Only including the events created by the owner
+            if (event.getOwner().getUsername().contains(username)) {
+                filteredEvents.add(event);
+            }
+        }
+        return filteredEvents;
     }
 
     @PostMapping("/createEvent")
@@ -232,4 +231,31 @@ public class Controller {
         return bracketText;
     }
 
+<<<<<<< HEAD
+=======
+    @PostMapping("/addFollower")
+    public String addFollower(@RequestBody Map<String, Object> requestBody) {
+        // Send the request to handler
+        return userHandler.handleRequest("addFollower", requestBody);
+    }
+
+    @PostMapping("/removeFollower")
+    public String removeFollower(@RequestBody Map<String, Object> requestBody) {
+        // Send the request to handler
+        return userHandler.handleRequest("removeFollower", requestBody);
+    }
+
+    @Autowired
+    private Database storage;
+
+    /*
+     * @GetMapping("/events")
+     * public String events(Model model) {
+     * List<Event> events = storage.listEvents();
+     * System.out.println("Events retrieved from storage: " + events);
+     * model.addAttribute("events", events);
+     * return "events"; // This will return events.html template
+     * }
+     */
+>>>>>>> Hogan2
 }

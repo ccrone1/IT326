@@ -14,12 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 },
                 body: JSON.stringify({ username: searchQuery })
             })
-            .then(response => response.json())
-            .then(user => {
-                // Process user data and display on your HTML page
-                displayUser(user);
-            })
-            .catch(error => console.error('Error:', error));
+                .then(response => response.json())
+                .then(user => {
+                    // Process user data and display on your HTML page
+                    displayUser(user);
+                })
+                .catch(error => console.error('Error:', error));
         } else {
             alert('Please enter a username.'); // Alert user if username is empty
         }

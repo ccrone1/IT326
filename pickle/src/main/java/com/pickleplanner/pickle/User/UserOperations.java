@@ -247,7 +247,114 @@ public class UserOperations {
         return null; // No matching user found
     }
 
-    public String joinWaitlist(String event, String user) {
+    public String deleteEvent(Map<String, Object> requestData) {
+        String eventId = requestData.get("eventId").toString();
+        List<Event> events = new ArrayList<Event>();
+        try (FileReader reader = new FileReader("event_output.json")) {
+            Type eventList = new TypeToken<List<Event>>() {
+            }.getType();
+
+            events = new Gson().fromJson(reader, eventList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Event targetEvent = events.stream()
+                .filter(u -> u.getEventID().equals(eventId))
+                .findFirst()
+                .orElse(null);
+        int eventIndex = events.indexOf(targetEvent);
+        events.remove(eventIndex);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(events);
+
+        // Write JSON to file (append mode)
+        try (FileWriter writer = new FileWriter("event_output.json", false)) {
+            writer.write(json);
+            return "New JSON data appended to event_output.json";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to create JSON";
+        }
+    }
+
+    public String addFollower(Map<String, Object> requestData) {
+        String user_username = requestData.get("user_username").toString();
+        String follower_username = requestData.get("follower_username").toString();
+        List<User> users = new ArrayList<User>();
+        try (FileReader reader = new FileReader("user_data.json")) {
+            Type eventList = new TypeToken<List<User>>() {
+            }.getType();
+
+            users = new Gson().fromJson(reader, eventList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        User targetUser = users.stream()
+                .filter(u -> u.getUsername().equals(user_username))
+                .findFirst()
+                .orElse(null);
+
+        User followerUser = users.stream()
+                .filter(u -> u.getUsername().equals(follower_username))
+                .findFirst()
+                .orElse(null);
+
+        targetUser.getFollowingList().add(followerUser);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
+
+        // Write JSON to file (append mode)
+        try (FileWriter writer = new FileWriter("user_data.json", false)) {
+            writer.write(json);
+            return "New JSON data appended to user_data.json";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to create JSON";
+        }
+    }
+
+    public String removeFollower(Map<String, Object> requestData) {
+        String user_username = requestData.get("user_username").toString();
+        String follower_username = requestData.get("follower_username").toString();
+        List<User> users = new ArrayList<User>();
+        try (FileReader reader = new FileReader("user_data.json")) {
+            Type eventList = new TypeToken<List<User>>() {
+            }.getType();
+
+            users = new Gson().fromJson(reader, eventList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        User targetUser = users.stream()
+                .filter(u -> u.getUsername().equals(user_username))
+                .findFirst()
+                .orElse(null);
+
+        User followerUser = users.stream()
+                .filter(u -> u.getUsername().equals(follower_username))
+                .findFirst()
+                .orElse(null);
+
+        int followerIndex = targetUser.getFollowingList().indexOf(followerUser);
+
+        targetUser.getFollowingList().remove(followerIndex);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
+
+        // Write JSON to file (append mode)
+        try (FileWriter writer = new FileWriter("user_data.json", false)) {
+            writer.write(json);
+            return "New JSON data appended to user_data.json";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to create JSON";
+        }
+    }
+
+    public String joinWaitlist(Event event, User user) {
 
         Type listType = new TypeToken<List<Event>>() {
         }.getType();

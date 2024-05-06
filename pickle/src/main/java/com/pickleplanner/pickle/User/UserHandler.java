@@ -61,12 +61,20 @@ public class UserHandler {
         }
 
         else if (action == "deleteEvent") {
+            return userOperations.deleteEvent(requestData);
+        }
+
+        else if (action == "deleteProfile") {
             String username = (String) requestData.get("username");
             if (username == null || username.isEmpty()) {
                 return "Failed to send invitation. User email is missing or invalid.";
             }
+<<<<<<< HEAD
 
             return userOperations.deleteProfile(requestData);
+=======
+            return userOperations.deleteProfile(username);
+>>>>>>> Hogan2
         }
 
         else if (action == "createProfile") {
@@ -123,6 +131,14 @@ public class UserHandler {
                 return "Invalid event ID";
             }
             return userOperations.kickFromEvent(username, eventId);
+        }
+
+        else if (action == "addFollower") {
+            return userOperations.addFollower(requestData);
+        }
+
+        else if (action == "removeFollower") {
+            return userOperations.removeFollower(requestData);
         }
 
         else {

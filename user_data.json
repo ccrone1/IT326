@@ -82,7 +82,16 @@
     "password": "1234",
     "email": "demo@demo.com",
     "skillLevel": "mid",
-    "followingList": []
+    "followingList": [
+      {
+        "username": "aathom7",
+        "fname": "Alex",
+        "lname": "Thomas",
+        "password": "12345",
+        "email": "test@test.com",
+        "skillLevel": "expert"
+      }
+    ]
   },
   {
     "username": "johny",

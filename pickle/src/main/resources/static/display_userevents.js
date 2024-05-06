@@ -1,74 +1,242 @@
-document.addEventListener('DOMContentLoaded', function () {
+// Code for the user events button
+document.getElementById('userEventsButton').addEventListener('click', function () {
     const userEventsButton = document.getElementById('userEventsButton');
     const eventsContainer = document.getElementById('events');
-    var username = document.getElementById('username1').value;
+    var username = document.getElementById('username1').value.trim();
 
-    userEventsButton.addEventListener('click', function () {
-        fetch('/userEvents', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                username: username
-            })
+    fetch('/userEvents', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            username: username
         })
+    })
         .then(response => response.json())
         .then(data => {
             // Process data and display on your HTML page
             displayEvents(data);
-           // eventsContainer.style.display = 'block';
-            if (eventsContainer.style.display ==="block") {
+            // eventsContainer.style.display = 'block';
+            if (eventsContainer.style.display === "block") {
                 eventsContainer.style.display = "none";
             } else {
                 eventsContainer.style.display = "block";
-                eventsContainer.style.padding="20px";
-                eventsContainer.style.textAlign="center";
+                eventsContainer.style.padding = "20px";
+                eventsContainer.style.textAlign = "center";
             }
 
         })
         .catch(error => console.error('Error:', error));
+});
+
+// Function to close the modal and reset the form and filter fields
+function closeModal() {
+    var modal = document.getElementById("editEventModal");
+    modal.style.display = "none";
+    resetForm();
+}
+
+// Function to handle edit event form submission
+document.getElementById("editEventForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get event input values
+    var eventId = document.getElementById("eventId2").value;
+    var eventDate = document.getElementById("eventDate2").value;
+    var eventTime = document.getElementById("eventTime2").value;
+    var availability = document.getElementById("availability2").value;
+    var location = document.getElementById("location2").value;
+
+    // Create event parameters object
+    var eventData = {
+        eventId: eventId,
+        date: eventDate,
+        time: eventTime,
+        availability: availability,
+        location: location
+    };
+
+    // Send event creation request to the backend
+    fetch("/editEvent", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(eventData),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            // Handle success response if needed
+            console.log("Event edited successfully:", data);
+            var modal = document.getElementById("editEventModal");
+            modal.style.display = "none";
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            // Handle error response if needed
+        });
+
+    closeModal();
+});
+
+function createEditEventButton(text) {
+
+    const button = document.createElement("button");
+    button.textContent = text;
+    button.setAttribute("type", "button");
+    button.style.display = "inline-block";
+    button.style.marginRight = "10px";
+    button.setAttribute("id", "editEventButton");
+
+    button.addEventListener('click', function () {
+        var modal = document.getElementById("editEventModal");
+        modal.style.display = "block";
     });
+    return button;
+}
 
-    function displayEvents(events) {
-        // Assuming you have a <div> with id="eventContainer" to display events
-        const eventContainer = document.getElementById('events');
-        eventContainer.innerHTML = ''; // Clear existing content before displaying new events
+// Function to close the modal and reset the form and filter fields
+function closeModal1() {
+    var modal = document.getElementById("deleteEventModal");
+    modal.style.display = "none";
+    resetForm();
+}
 
-        events.forEach(event => {
-            const eventElement = document.createElement('div');
-            eventElement.innerHTML = `
+// Function to handle delete event form submission
+document.getElementById("deleteEventForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Get event input values
+    var eventId = document.getElementById("eventId3").value;
+
+    // Send event creation request to the backend
+    fetch("/deleteEvent", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            eventId: eventId
+        }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            // Handle success response if needed
+            console.log("Event deleted successfully:", data);
+            var modal = document.getElementById("deleteEventModal");
+            modal.style.display = "none";
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            // Handle error response if needed
+        });
+
+    closeModal1();
+});
+
+
+function createDeleteEventButton(text) {
+    const button = document.createElement("button");
+    button.textContent = text;
+    button.setAttribute("type", "button");
+    button.style.display = "inline-block";
+    button.style.marginRight = "10px";
+    button.setAttribute("id", "deleteEventButton");
+
+    button.addEventListener('click', function () {
+        var modal = document.getElementById("deleteEventModal");
+        modal.style.display = "block";
+    });
+    return button;
+}
+
+
+function displayEvents(events) {
+    // Assuming you have a <div> with id="eventContainer" to display events
+    const eventContainer = document.getElementById('events');
+    eventContainer.innerHTML = ''; // Clear existing content before displaying new events
+
+    events.forEach(event => {
+        const eventElement = document.createElement('div');
+        eventElement.innerHTML = `
                 <h2>${event.date} ${event.time}</h2>
+                <p>EventID: ${event.eventID}</p>
                 <p>Location: ${event.location.location}</p>
                 <p>Owner: ${event.owner.fname} ${event.owner.lname}</p>
                 <p>Availability: ${event.availability}</p>
                 <p>Participants: ${event.participants.length}</p>
-                <hr>
+                
             `;
 
-            const editEvent = document.createElement("button");
-            editEvent.textContent = "Edit Event"; // Set the button text
-            editEvent.setAttribute("type", "button"); // Set button type
+        const editEvent = createEditEventButton("Edit Event");
 
-            const deleteEvent = document.createElement("button");
-            deleteEvent.textContent = "Delete Event"; // Set the button text
-            deleteEvent.setAttribute("type", "button"); // Set button type
-            // Append the button to a parent element (assuming eventsContainer is the parent)
+        const deleteEvent = createDeleteEventButton("Delete Event");
 
 
-            editEvent.style.display = "inline-block";
-            deleteEvent.style.display = "inline-block";
+        eventElement.appendChild(editEvent);
+        eventElement.appendChild(deleteEvent);
 
-            editEvent.style.marginRight = "10px"; // Add some spacing between buttons if needed
-            deleteEvent.style.marginRight = "10px";
+        eventContainer.appendChild(eventElement);
 
-            eventElement.appendChild(editEvent);
-            eventElement.appendChild(deleteEvent);
+        const divider = document.createElement('hr');
+        eventElement.appendChild(divider);
 
-            eventContainer.appendChild(eventElement);
-        });
+        editEvent.style.display = "inline-block";
+        deleteEvent.style.display = "inline-block";
 
-        // Show the events container
-        eventsContainer.style.display = 'block';
-    }
-});
+        editEvent.style.marginRight = "10px"; // Add some spacing between buttons if needed
+        deleteEvent.style.marginRight = "10px";
+    });
+}
+
+
+
+// // Create Event button functionality
+// document.getElementById("editEventButton").addEventListener("click", function () {
+//     var modal = document.getElementById("editEventModal");
+//     modal.style.display = "block";
+// });
+
+
+// // Function to handle edit event form submission
+// document.getElementById("editEventForm").addEventListener("submit", function (event) {
+//     event.preventDefault(); // Prevent default form submission
+
+//     // Get event input values
+//     var eventDate = document.getElementById("eventDate").value;
+//     var eventTime = document.getElementById("eventTime").value;
+//     var availability = document.getElementById("availability").value;
+//     var location = document.getElementById("location").value;
+
+//     // Create event parameters object
+//     var eventData = {
+//         id:
+//             date: eventDate,
+//         time: eventTime,
+//         availability: availability,
+//         location: location
+//     };
+
+//     // Send event creation request to the backend
+//     fetch("/editEvent", {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(eventData),
+//     })
+//         .then((response) => response.json())
+//         .then((data) => {
+//             // Handle success response if needed
+//             console.log("Event edited successfully:", data);
+//             var modal = document.getElementById("editEventModal");
+//             modal.style.display = "none";
+//         })
+//         .catch((error) => {
+//             console.error("Error:", error);
+//             // Handle error response if needed
+//         });
+
+//     closeModal();
+// });
