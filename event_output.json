@@ -1,110 +1,9 @@
 [
     {
-        "eventID": "90337",
-        "date": "2024-05-23",
-        "time": "00:41",
-        "availability": 1,
-        "owner": {
-            "username": "crone",
-            "fname": "rishi",
-            "lname": "Califf",
-            "password": "hehehehhe",
-            "email": "hellooo@ilstu.edu",
-            "skillLevel": "420"
-        },
-        "location": {
-            "location": "113"
-        },
-        "tags": [],
-        "bracket": {
-            "numOfPlayers": 0,
-            "bracketId": "96946"
-        },
-        "participants": [
-            {
-                "username": "crone",
-                "fname": "rishi",
-                "lname": "Califf",
-                "password": "hehehehhe",
-                "email": "hellooo@ilstu.edu",
-                "skillLevel": "420"
-            }
-        ],
-        "waitlist": {}
-    },
-    {
-        "eventID": "86604",
-        "date": "2024-05-08",
-        "time": "04:50",
-        "availability": 4,
-        "owner": {
-            "username": "hmess",
-            "fname": "Hogan",
-            "lname": "Messinger",
-            "password": "1234",
-            "email": "demo@demo.com",
-            "skillLevel": "mid",
-            "followingList": []
-        },
-        "location": {
-            "location": "Ironwood Park"
-        },
-        "tags": [],
-        "bracket": {
-            "numOfPlayers": 0,
-            "bracketId": "66421"
-        },
-        "participants": [
-            {
-                "username": "hmess",
-                "fname": "Hogan",
-                "lname": "Messinger",
-                "password": "1234",
-                "email": "demo@demo.com",
-                "skillLevel": "mid",
-                "followingList": []
-            }
-        ],
-        "waitlist": {}
-    },
-    {
-        "eventID": "82028",
-        "date": "2024-05-28",
-        "time": "00:53",
-        "availability": 3,
-        "owner": {
-            "username": "bye",
-            "fname": "hello",
-            "lname": "hi",
-            "password": "ahhahahah",
-            "email": "here@ilstu.edu",
-            "skillLevel": "sucks"
-        },
-        "location": {
-            "location": "Outside"
-        },
-        "tags": [],
-        "bracket": {
-            "numOfPlayers": 0,
-            "bracketId": "18762"
-        },
-        "participants": [
-            {
-                "username": "bye",
-                "fname": "hello",
-                "lname": "hi",
-                "password": "ahhahahah",
-                "email": "here@ilstu.edu",
-                "skillLevel": "sucks"
-            }
-        ],
-        "waitlist": {}
-    },
-    {
         "eventID": "31629",
         "date": "2024-05-23",
-        "time": "02:55",
-        "availability": 7,
+        "time": "16:55",
+        "availability": 8,
         "owner": {
             "username": "hmess",
             "fname": "Hogan",
@@ -139,8 +38,8 @@
     },
     {
         "eventID": "29485",
-        "date": "2024-05-16",
-        "time": "02:30",
+        "date": "2024-05-23",
+        "time": "08:00",
         "availability": 20,
         "owner": {
             "username": "aathom7",
@@ -168,140 +67,6 @@
                 "password": "12345",
                 "email": "test@test.com",
                 "skillLevel": "expert"
-            }
-        ],
-        "waitlist": {}
-    },
-    {
-        "eventID": "4378",
-        "date": "2024-05-02",
-        "time": "22:19",
-        "availability": 3,
-        "owner": {
-            "username": "bye",
-            "fname": "hello",
-            "lname": "hi",
-            "password": "ahhahahah",
-            "email": "here@ilstu.edu",
-            "skillLevel": "sucks"
-        },
-        "location": {
-            "location": "Home"
-        },
-        "tags": [],
-        "bracket": {
-            "numOfPlayers": 0,
-            "bracketId": "64312"
-        },
-        "participants": [
-            {
-                "username": "bye",
-                "fname": "hello",
-                "lname": "hi",
-                "password": "ahhahahah",
-                "email": "here@ilstu.edu",
-                "skillLevel": "sucks"
-            }
-        ],
-        "waitlist": {}
-    },
-    {
-        "eventID": "90337",
-        "date": "2024-05-23",
-        "time": "00:41",
-        "availability": 1,
-        "owner": {
-            "username": "crone",
-            "fname": "rishi",
-            "lname": "Califf",
-            "password": "hehehehhe",
-            "email": "hellooo@ilstu.edu",
-            "skillLevel": "420"
-        },
-        "location": {
-            "location": "113"
-        },
-        "tags": [],
-        "bracket": {
-            "numOfPlayers": 0,
-            "bracketId": "96946"
-        },
-        "participants": [
-            {
-                "username": "crone",
-                "fname": "rishi",
-                "lname": "Califf",
-                "password": "hehehehhe",
-                "email": "hellooo@ilstu.edu",
-                "skillLevel": "420"
-            }
-        ],
-        "waitlist": {}
-    },
-    {
-        "eventID": "86604",
-        "date": "2024-05-08",
-        "time": "04:50",
-        "availability": 4,
-        "owner": {
-            "username": "hmess",
-            "fname": "Hogan",
-            "lname": "Messinger",
-            "password": "1234",
-            "email": "demo@demo.com",
-            "skillLevel": "mid",
-            "followingList": []
-        },
-        "location": {
-            "location": "Ironwood Park"
-        },
-        "tags": [],
-        "bracket": {
-            "numOfPlayers": 0,
-            "bracketId": "66421"
-        },
-        "participants": [
-            {
-                "username": "hmess",
-                "fname": "Hogan",
-                "lname": "Messinger",
-                "password": "1234",
-                "email": "demo@demo.com",
-                "skillLevel": "mid",
-                "followingList": []
-            }
-        ],
-        "waitlist": {}
-    },
-    {
-        "eventID": "82028",
-        "date": "2024-05-28",
-        "time": "00:53",
-        "availability": 3,
-        "owner": {
-            "username": "bye",
-            "fname": "hello",
-            "lname": "hi",
-            "password": "ahhahahah",
-            "email": "here@ilstu.edu",
-            "skillLevel": "sucks"
-        },
-        "location": {
-            "location": "Outside"
-        },
-        "tags": [],
-        "bracket": {
-            "numOfPlayers": 0,
-            "bracketId": "18762"
-        },
-        "participants": [
-            {
-                "username": "bye",
-                "fname": "hello",
-                "lname": "hi",
-                "password": "ahhahahah",
-                "email": "here@ilstu.edu",
-                "skillLevel": "sucks"
             }
         ],
         "waitlist": {}
@@ -337,6 +102,206 @@
                 "password": "12345",
                 "email": "test@test.com",
                 "skillLevel": "expert"
+            }
+        ],
+        "waitlist": {}
+    },
+    {
+        "eventID": "15020",
+        "date": "2024-05-22",
+        "time": "07:40",
+        "availability": 10,
+        "owner": {
+            "username": "stailor",
+            "fname": "Suhail",
+            "lname": "Tailor",
+            "password": "st1234",
+            "email": "stailor@yahoo.com",
+            "skillLevel": "mid",
+            "followingList": []
+        },
+        "location": {
+            "location": "Underwood Park"
+        },
+        "tags": [
+            "Skill Level: beginner and up"
+        ],
+        "bracket": {
+            "numOfPlayers": 0,
+            "bracketId": "46144"
+        },
+        "participants": [
+            {
+                "username": "stailor",
+                "fname": "Suhail",
+                "lname": "Tailor",
+                "password": "st1234",
+                "email": "stailor@yahoo.com",
+                "skillLevel": "mid",
+                "followingList": []
+            }
+        ],
+        "waitlist": {}
+    },
+    {
+        "eventID": "75426",
+        "date": "",
+        "time": "17:00",
+        "availability": 6,
+        "owner": {
+            "username": "ccrone",
+            "fname": "Cameron",
+            "lname": "Crone",
+            "password": "ccrone1",
+            "email": "ccrone@gmail.com",
+            "skillLevel": "pro",
+            "followingList": []
+        },
+        "location": {
+            "location": "State Farm Park"
+        },
+        "tags": [
+            "Skill Level: Expert"
+        ],
+        "bracket": {
+            "numOfPlayers": 0,
+            "bracketId": "75473"
+        },
+        "participants": [
+            {
+                "username": "ccrone",
+                "fname": "Cameron",
+                "lname": "Crone",
+                "password": "ccrone1",
+                "email": "ccrone@gmail.com",
+                "skillLevel": "pro",
+                "followingList": []
+            }
+        ],
+        "waitlist": {}
+    },
+    {
+        "eventID": "27344",
+        "date": "2024-05-17",
+        "time": "18:00",
+        "availability": 12,
+        "owner": {
+            "username": "zacontr",
+            "fname": "Zach",
+            "lname": "Contreras",
+            "password": "zacon",
+            "email": "zachcontreras13@gmail.com",
+            "skillLevel": "expert",
+            "followingList": []
+        },
+        "location": {
+            "location": "Illinois State Rec"
+        },
+        "tags": [],
+        "bracket": {
+            "numOfPlayers": 0,
+            "bracketId": "29582"
+        },
+        "participants": [
+            {
+                "username": "zacontr",
+                "fname": "Zach",
+                "lname": "Contreras",
+                "password": "zacon",
+                "email": "zachcontreras13@gmail.com",
+                "skillLevel": "expert",
+                "followingList": []
+            }
+        ],
+        "waitlist": {}
+    },
+    {
+        "eventID": "1603",
+        "date": "2024-05-11",
+        "time": "11:15",
+        "availability": 24,
+        "owner": {
+            "username": "redbird",
+            "fname": "reggie",
+            "lname": "bird",
+            "password": "redbird",
+            "email": "red@ilstu.edu",
+            "skillLevel": "high",
+            "followingList": []
+        },
+        "location": {
+            "location": "Illinois State Rec"
+        },
+        "tags": [
+            "Redbirds only",
+            "Graduation Pickleball"
+        ],
+        "bracket": {
+            "numOfPlayers": 0,
+            "bracketId": "13506"
+        },
+        "participants": [
+            {
+                "username": "redbird",
+                "fname": "reggie",
+                "lname": "bird",
+                "password": "redbird",
+                "email": "red@ilstu.edu",
+                "skillLevel": "high",
+                "followingList": []
+            }
+        ],
+        "waitlist": {}
+    },
+    {
+        "eventID": "6865",
+        "date": "2024-05-14",
+        "time": "17:10",
+        "availability": 8,
+        "owner": {
+            "username": "hmess",
+            "fname": "Hogan",
+            "lname": "Messinger",
+            "password": "1234",
+            "email": "demo@demo.com",
+            "skillLevel": "mid",
+            "followingList": [
+                {
+                    "username": "aathom7",
+                    "fname": "Alex",
+                    "lname": "Thomas",
+                    "password": "12345",
+                    "email": "test@test.com",
+                    "skillLevel": "expert"
+                }
+            ]
+        },
+        "location": {
+            "location": "Ironwood Park"
+        },
+        "tags": [],
+        "bracket": {
+            "numOfPlayers": 0,
+            "bracketId": "81585"
+        },
+        "participants": [
+            {
+                "username": "hmess",
+                "fname": "Hogan",
+                "lname": "Messinger",
+                "password": "1234",
+                "email": "demo@demo.com",
+                "skillLevel": "mid",
+                "followingList": [
+                    {
+                        "username": "aathom7",
+                        "fname": "Alex",
+                        "lname": "Thomas",
+                        "password": "12345",
+                        "email": "test@test.com",
+                        "skillLevel": "expert"
+                    }
+                ]
             }
         ],
         "waitlist": {}

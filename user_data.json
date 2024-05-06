@@ -1,81 +1,5 @@
 [
   {
-    "username": "zacontr",
-    "fname": "Zach",
-    "lname": "Contreras",
-    "password": "zacon",
-    "email": "zachcontreras13@gmail.com",
-    "skillLevel": "mid"
-  },
-  {
-    "username": "aathom7",
-    "fname": "Alex",
-    "lname": "Thomas",
-    "password": "12345",
-    "email": "test@test.com",
-    "skillLevel": "expert"
-  },
-  {
-    "username": "bye",
-    "fname": "hello",
-    "lname": "hi",
-    "password": "ahhahahah",
-    "email": "here@ilstu.edu",
-    "skillLevel": "sucks"
-  },
-  {
-    "username": "crone",
-    "fname": "rishi",
-    "lname": "Califf",
-    "password": "hehehehhe",
-    "email": "hellooo@ilstu.edu",
-    "skillLevel": "420"
-  },
-  {
-    "username": "slydog",
-    "fname": "Marco",
-    "lname": "Baddie",
-    "password": "1234",
-    "email": "marco@marco.com",
-    "skillLevel": "expert"
-  },
-  {
-    "username": "camcrone1",
-    "fname": "Cameron",
-    "lname": "Crone",
-    "password": "123",
-    "email": "test@test.com",
-    "skillLevel": "expert",
-    "followingList": []
-  },
-  {
-    "username": "",
-    "fname": "",
-    "lname": "",
-    "password": "",
-    "email": "",
-    "skillLevel": "",
-    "followingList": []
-  },
-  {
-    "username": "Hoager",
-    "fname": "Hogan",
-    "lname": "Hoagie",
-    "password": "Hogie123",
-    "email": "Hog@Hog.Hog",
-    "skillLevel": "Hogest",
-    "followingList": [
-      {
-        "username": "aathom7",
-        "fname": "Alex",
-        "lname": "Thomas",
-        "password": "12345",
-        "email": "test@test.com",
-        "skillLevel": "expert"
-      }
-    ]
-  },
-  {
     "username": "redbird",
     "fname": "reggie",
     "lname": "bird",
@@ -93,22 +17,59 @@
     "skillLevel": "mid",
     "followingList": [
       {
+        "username": "ccrone",
+        "fname": "Cameron",
+        "lname": "Crone",
+        "password": "ccrone1",
+        "email": "ccrone@gmail.com",
+        "skillLevel": "pro",
+        "followingList": []
+      },
+      {
         "username": "aathom7",
         "fname": "Alex",
         "lname": "Thomas",
         "password": "12345",
         "email": "test@test.com",
-        "skillLevel": "expert"
+        "skillLevel": "expert",
+        "followingList": []
       }
     ]
   },
   {
-    "username": "johny",
-    "fname": "john",
-    "lname": "sku",
-    "password": "john",
-    "email": "jsku@ilstu.edu",
-    "skillLevel": "low",
+    "username": "aathom7",
+    "fname": "Alex",
+    "lname": "Thomas",
+    "password": "12345",
+    "email": "test@test.com",
+    "skillLevel": "expert",
+    "followingList": []
+  },
+  {
+    "username": "zacontr",
+    "fname": "Zach",
+    "lname": "Contreras",
+    "password": "zacon",
+    "email": "zachcontreras13@gmail.com",
+    "skillLevel": "expert",
+    "followingList": []
+  },
+  {
+    "username": "ccrone",
+    "fname": "Cameron",
+    "lname": "Crone",
+    "password": "ccrone1",
+    "email": "ccrone@gmail.com",
+    "skillLevel": "pro",
+    "followingList": []
+  },
+  {
+    "username": "stailor",
+    "fname": "Suhail",
+    "lname": "Tailor",
+    "password": "st1234",
+    "email": "stailor@yahoo.com",
+    "skillLevel": "mid",
     "followingList": []
   }
 ]
