@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
         leaveEvent.style.marginRight = "10px";
         inviteUser.style.marginRight = "10px"; // Add some spacing between buttons if needed
             });
-           // eventsContainer.style.display = 'block'; // Show the events container
+         
             
             
         }
