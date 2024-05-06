@@ -1,78 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PicklePlanner</title>
-    <link rel="stylesheet" href="styles.css" />
-    <script src="slider.js" defer></script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Luckiest+Guy&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-
-  <body>
-    <header>
-      <div class="logo-container">
-        <img src="./images/logo_no_text.png" alt="PicklePlanner Logo" />
-        <h1>PicklePlanner</h1>
-      </div>
-      <nav>
-        <ul class="nav-links">
-          <li><a href="index.html" class="link">Home</a></li>
-          <li><a href="event.html" class="link">Event</a></li>
-          <li><a href="profile.html" class="link">Profile</a></li>
-        </ul>
-      </nav>
-    </header>
-    <div id="interactions">
-      <!-- Search form -->
-      <!-- Button to trigger modal -->
-      <button
-        type="button"
-        class="btn btn-primary"
-        data-toggle="modal"
-        data-target="#searchModal"
-      >
-        Search/Filter Events
-      </button>
-
-      <!-- Modal -->
-      <div
-        class="modal fade"
-        id="searchModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="searchModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="searchModalLabel">Search Form</h5>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <form id="searchForm">
-                <!-- Initial filter input fields -->
-                <div id="filterContainer">
-                  <div class="filter">
-                    <label for="keyword">Keyword:</label>
-                    <input type="text" name="keyword" /><br />
-                  </div>
-=======
 
 <head>
   <meta charset="UTF-8" />
@@ -120,61 +47,40 @@
             </button>
           </div>
           <div class="modal-body">
-            <!-- Your form goes here -->
             <form id="searchForm">
               <!-- Initial filter input fields -->
               <div id="filterContainer">
                 <div class="filter">
                   <label for="keyword">Keyword:</label>
                   <input type="text" name="keyword" /><br />
->>>>>>> Hogan2
                 </div>
               </div>
-
-              <!-- Add filter button -->
-              <button type="button" id="addFilter">Add Filter</button>
-              <button type="submit">Search</button>
-            </form>
           </div>
+
+          <!-- Add filter button -->
+          <button type="button" id="addFilter">Add Filter</button>
+          <button type="submit">Search</button>
+          </form>
         </div>
       </div>
-<<<<<<< HEAD
-      <!-- Invite User -->
-=======
->>>>>>> Hogan2
-    </div>
-    <!-- Invite User -->
-    <div id="inviteUserContainer">
-      <label for="userEmail">Email: </label>
-      <input type="email" id="userEmail" name="userEmail" /><br />
-      <button type="button" id="inviteButton">Invite User</button>
     </div>
   </div>
+  <!-- Invite User -->
+  <div id="inviteUserContainer">
+    <label for="userEmail">Email: </label>
+    <input type="email" id="userEmail" name="userEmail" /><br />
+    <button type="button" id="inviteButton">Invite User</button>
+  </div>
+  </div>
 
-<<<<<<< HEAD
-    <button type="button" class="btn-generate-open">
-      Generate Open Events
-    </button>
+  <button type="button" class="btn-generate-open">
+    Generate Open Events
+  </button>
 
-    <input type="text" id="eventIDBracket" placeholder="Enter Event ID" />
-    <button id="generateBracketBtn">Generate Bracket</button>
-    <div id="bracketContainer"></div>
+  <input type="text" id="eventIDBracket" placeholder="Enter Event ID" />
+  <button id="generateBracketBtn">Generate Bracket</button>
+  <div id="bracketContainer"></div>
 
-    <div id="eventContainer">
-      <!-- Create Event container -->
-      <div id="createEventContainer">
-        <!-- Create Event button -->
-        <button type="button" id="createEvent">Create Event</button>
-      </div>
-      <div id="detailsButtonContainer">
-        <button id="generateEventDetailsButton">Event Details</button>
-      </div>
-      <div id="userEventsButtonContainer" class="eventsButtonContainer">
-        <label for="username1">Username: </label>
-        <input type="user" id="username1" name="username1" /><br />
-        <button id="userEventsButton" class="eventsButton">User Events</button>
-      </div>
-=======
   <div id="eventContainer">
     <!-- Create Event container -->
     <div id="createEventContainer">
@@ -183,7 +89,6 @@
     </div>
     <div id="detailsButtonContainer">
       <button id="generateEventDetailsButton">Event Details</button>
->>>>>>> Hogan2
     </div>
     <div id="userEventsButtonContainer" class="eventsButtonContainer">
       <label for="username1">Username: </label>
@@ -191,48 +96,15 @@
       <button id="userEventsButton" class="eventsButton">User Events</button>
     </div>
   </div>
+  </div>
 
-<<<<<<< HEAD
-    <div id="events" style="display: none"></div>
-
-    <div id="event" style="display: none"></div>
-
-    <div id="searchResults"></div>
-
-    <div id="openResults"></div>
-
-    <!-- Create Event modal -->
-    <div id="createEventModal" class="modal">
-      <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Create Event</h2>
-        <form id="eventForm">
-          <label for="eventDate">Date:</label>
-          <input type="date" id="eventDate" name="eventDate" /><br />
-          <label for="eventTime">Time:</label>
-          <input type="time" id="eventTime" name="eventTime" /><br />
-          <label for="availability">Availability:</label>
-          <input type="number" id="availability" name="availability" /><br />
-          <label for="username">Username:</label>
-          <input type="test" id="username" name="username" /><br />
-          <label for="location">Location:</label>
-          <input type="text" id="location" name="location" /><br />
-          <!-- Add filters for event -->
-          <div id="eventFiltersContainer">
-            <!-- Initial event filter input fields -->
-          </div>
-          <!-- Add filter button for event -->
-          <button type="button" id="addEventFilter">Add Filter</button>
-          <button type="submit">Create</button>
-        </form>
-      </div>
-=======
   <div id="events" style="display: none"></div>
 
   <div id="event" style="display: none"></div>
 
-  <!-- Search results will be displayed here -->
   <div id="searchResults"></div>
+
+  <div id="openResults"></div>
 
   <!-- Create Event modal -->
   <div id="createEventModal" class="modal">
@@ -258,8 +130,8 @@
         <button type="button" id="addEventFilter">Add Filter</button>
         <button type="submit">Create</button>
       </form>
->>>>>>> Hogan2
     </div>
+  </div>
   </div>
 
 
@@ -306,39 +178,7 @@
         A: This depends on the event or tournament. Please check the tags or
         contact the creator.
       </p>
-<<<<<<< HEAD
       <p>Phone: (708)-800-7939</p>
-    </section>
-
-    <footer>
-      <p>&copy; 2024 PicklePlanner. All rights reserved.</p>
-    </footer>
-
-    <script src="create_search_event.js"></script>
-    <script src="invite_and_cancel.js"></script>
-    <script src="display_events.js"></script>
-    <script src="display_userevents.js"></script>
-    <script src="join_Waitlist.js"></script>
-    <script src="generate_open_events.js"></script>
-    <script src="generate_bracket.js"></script>
-  </body>
-</html>
-=======
-    </div>
-    <div class="faq-item">
-      <h3>Q: Are spectators allowed?</h3>
-      <p>A: Yes, spectators are welcome to attend most events.</p>
-    </div>
-  </section>
-
-  <section class="contact">
-    <h2>Contact Information</h2>
-    <p>If you have any questions or need assistance, please contact us:</p>
-    <p>
-      Email:
-      <a href="mailto:pickleplannerinc@gmail.com">pickleplannerinc@gmail.com</a>
-    </p>
-    <p>Phone: (708)-800-7939</p>
   </section>
 
   <footer>
@@ -346,11 +186,11 @@
   </footer>
 
   <script src="create_search_event.js"></script>
-  <script src="invite_and_cancel.js"></script>
   <script src="display_events.js"></script>
   <script src="display_userevents.js"></script>
-  <script src="join_Waitlist.js"></script>
+  <script src="generate_open_events.js"></script>
+  <script src="generate_bracket.js"></script>
+  <script src="accept_and_decline.js"></script>
 </body>
 
 </html>
->>>>>>> Hogan2

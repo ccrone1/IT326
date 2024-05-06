@@ -354,7 +354,7 @@ public class UserOperations {
         }
     }
 
-    public String joinWaitlist(Event event, User user) {
+    public String joinWaitlist(String event, String user) {
 
         Type listType = new TypeToken<List<Event>>() {
         }.getType();

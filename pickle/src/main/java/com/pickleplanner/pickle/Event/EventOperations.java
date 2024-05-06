@@ -2,12 +2,9 @@
 package com.pickleplanner.pickle.Event;
 
 import com.pickleplanner.pickle.User.User;
-<<<<<<< HEAD
-=======
 import com.pickleplanner.pickle.Event.Event;
 import com.pickleplanner.pickle.Event.Waitlist;
 import com.pickleplanner.pickle.Location.Location;
->>>>>>> Hogan2
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +16,7 @@ import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
+import java.io.FileReader;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -1,6 +1,6 @@
 [
   {
-    "username":"zacontr",
+    "username": "zacontr",
     "fname": "Zach",
     "lname": "Contreras",
     "password": "zacon",
@@ -8,7 +8,7 @@
     "skillLevel": "mid"
   },
   {
-    "username":"aathom7",
+    "username": "aathom7",
     "fname": "Alex",
     "lname": "Thomas",
     "password": "12345",
@@ -64,7 +64,16 @@
     "password": "Hogie123",
     "email": "Hog@Hog.Hog",
     "skillLevel": "Hogest",
-    "followingList": []
+    "followingList": [
+      {
+        "username": "aathom7",
+        "fname": "Alex",
+        "lname": "Thomas",
+        "password": "12345",
+        "email": "test@test.com",
+        "skillLevel": "expert"
+      }
+    ]
   },
   {
     "username": "redbird",

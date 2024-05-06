@@ -231,16 +231,14 @@ public class Controller {
         return bracketText;
     }
 
-<<<<<<< HEAD
-=======
     @PostMapping("/addFollower")
-    public String addFollower(@RequestBody Map<String, Object> requestBody) {
+    public String addFollower(@RequestBody Map<String, Object> requestBody) throws IOException {
         // Send the request to handler
         return userHandler.handleRequest("addFollower", requestBody);
     }
 
     @PostMapping("/removeFollower")
-    public String removeFollower(@RequestBody Map<String, Object> requestBody) {
+    public String removeFollower(@RequestBody Map<String, Object> requestBody) throws IOException {
         // Send the request to handler
         return userHandler.handleRequest("removeFollower", requestBody);
     }
@@ -257,5 +255,4 @@ public class Controller {
      * return "events"; // This will return events.html template
      * }
      */
->>>>>>> Hogan2
 }

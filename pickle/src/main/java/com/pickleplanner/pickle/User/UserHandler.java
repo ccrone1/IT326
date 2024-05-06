@@ -69,12 +69,7 @@ public class UserHandler {
             if (username == null || username.isEmpty()) {
                 return "Failed to send invitation. User email is missing or invalid.";
             }
-<<<<<<< HEAD
-
             return userOperations.deleteProfile(requestData);
-=======
-            return userOperations.deleteProfile(username);
->>>>>>> Hogan2
         }
 
         else if (action == "createProfile") {
