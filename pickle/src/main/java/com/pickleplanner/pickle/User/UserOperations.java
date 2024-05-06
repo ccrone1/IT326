@@ -500,6 +500,26 @@ public class UserOperations {
             Gson gson = new Gson();
             String json = gson.toJson(users);
 
+            try (FileWriter writer = new FileWriter("user_data_temp.json", false)) {
+                writer.write(json);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "Failed to delete profile";
+            }
+    
+            // Rename temp file to original file
+            File tempFile = new File("user_data_temp.json");
+            File originalFile = new File("user_data.json");
+            if (tempFile.renameTo(originalFile)) {
+                return "User profile deleted successfully";
+            } else {
+                return "Failed to delete profile";
+            }
+        } else {
+            return "User profile not found";
+        }
+    }
+/* 
             try (FileWriter writer = new FileWriter("user_data.json", false)) {
                 writer.write(json);
                 return "User profile deleted successfully";
@@ -511,71 +531,138 @@ public class UserOperations {
             return "User profile not found";
         }
     }
+*/
 
-    // public String deleteProfile(String username) {
-    // need to find the user based on the username?
-    // assume you have a method in Storage class to retrieve the user by username
-    /*
-     * User userToDelete = storage.getUserByUsername(username);
-     * 
-     * if (userToDelete == null) {
-     * return "User with username " + username + " not found.";
-     * }
-     * 
-     * // Delete the user from database system
-     * storage.deleteUser(userToDelete);
-     * 
-     * return "Profile deleted successfully for user: " + username;
-     */
+   
+public class editProfile {
 
-    // }
+    private static final String FILE_PATH = "user_data.json";
 
-    public String editProfile(String username) {
-        // need to find the user based on the username
+    public String createProfile(Map<String, Object> requestData) {
+        String userName = requestData.get("userName").toString();
+        List<User> users = new ArrayList<User>();
+        try (FileReader reader = new FileReader(FILE_PATH)) {
+            Type userList = new TypeToken<List<User>>() {}.getType();
+            users = new Gson().fromJson(reader, userList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        User targetUser = users.stream()
+                .filter(u -> u.getUsername().equals(userName))
+                .findFirst()
+                .orElse(null);
 
-        // gives me List of users
-        Type listType = new TypeToken<List<User>>() {
-        }.getType();
-        List<User> users = new Gson().fromJson("user_data.json", listType);
+        if (targetUser == null) {
+            User user = new User(requestData.get("firstName").toString(), requestData.get("lastName").toString(),
+                    requestData.get("userName").toString(), requestData.get("email").toString(),
+                    requestData.get("password").toString(), requestData.get("skillLevel").toString());
 
-        User userToEdit = users.stream()
+            // Reading existing events from the JSON file and storing them into an arraylist
+            List<User> existingUsers = new ArrayList<User>();
+            try (FileReader reader = new FileReader(FILE_PATH)) {
+                Type listType = new TypeToken<List<User>>() {}.getType();
+                existingUsers = new Gson().fromJson(reader, listType);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            // If the the JSON file is empty the array will become null so we are
+            // re-intializing it so we can add an user to it
+            if (existingUsers == null)
+                existingUsers = new ArrayList<User>();
+
+            // Append new user objects to existing list
+            existingUsers.add(user);
+
+            Gson gson = new Gson();
+            String json = gson.toJson(existingUsers);
+
+            // Write JSON to file (overwrite mode)
+            try (FileWriter writer = new FileWriter(FILE_PATH, false)) {
+                writer.write(json);
+                return "New JSON data appended to user_data.json";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "Failed to create JSON";
+            }
+        }
+        return "Username already exists";
+    }
+
+    public void editProfile() {
+        Scanner scanner = new Scanner(System.in);
+        Gson gson = new Gson();
+
+        System.out.print("Enter your username: ");
+        String username = scanner.nextLine();
+
+        List<User> users = new ArrayList<User>();
+        try (FileReader reader = new FileReader(FILE_PATH)) {
+            Type userList = new TypeToken<List<User>>() {}.getType();
+            users = gson.fromJson(reader, userList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        User targetUser = users.stream()
                 .filter(u -> u.getUsername().equals(username))
                 .findFirst()
                 .orElse(null);
 
-        if (userToEdit != null) {
-            // Update user data
-            userToEdit.firstName((String) updatedData.get("firstName"));
-            userToEdit.setLastName((String) updatedData.get("lastName"));
-            userToEdit.setEmail((String) updatedData.get("email"));
-            userToEdit.setPassword((String) updatedData.get("password"));
-            userToEdit.setSkillLevel((String) updatedData.get("skillLevel"));
+        if (targetUser != null) {
+            System.out.println("Your current profile:");
+            System.out.println(gson.toJson(targetUser));
+
+            System.out.print("Enter the field you want to edit: ");
+            String fieldToEdit = scanner.nextLine();
+
+            System.out.print("Enter the new value for " + fieldToEdit + ": ");
+            String newValue = scanner.nextLine();
+
+            // Update user's data
+            switch (fieldToEdit) {
+                case "firstName":
+                    targetUser.setFirstName(newValue);
+                    break;
+                case "lastName":
+                    targetUser.setLastName(newValue);
+                    break;
+                case "email":
+                    targetUser.setEmail(newValue);
+                    break;
+                case "password":
+                    targetUser.setPassword(newValue);
+                    break;
+                case "skillLevel":
+                    targetUser.setSkillLevel(newValue);
+                    break;
+                default:
+                    System.out.println("Invalid field.");
+            }
+
+            // Write updated data back to JSON file (overwrite mode)
+            try (FileWriter writer = new FileWriter(FILE_PATH, false)) {
+                writer.write(gson.toJson(users));
+                System.out.println("Profile updated successfully!");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("User not found.");
         }
-
-        String updatedJson = new Gson().toJson(users);
-        FileWriter writer;
-        try {
-            writer = new FileWriter("user_data.json");
-            writer.write(updatedJson);
-            writer.close();
-        } catch (IOException e1) {
-
-            e1.printStackTrace();
-        }
-
     }
+}
 
     public class login {
-        boolean verifyUser(String username, String password) {
+        public boolean verifyUser(String username, String password) {
             // get user data
-            List<User> users = new ArrayList<User>();
+            List<User> users = new ArrayList<>();
             try (FileReader reader = new FileReader("user_data.json")) {
-                Type userList = new TypeToken<List<User>>() {
-                }.getType();
+                Type userList = new TypeToken<List<User>>() {}.getType();
 
                 users = new Gson().fromJson(reader, userList);
             } catch (IOException e) {
                 e.printStackTrace();
+                return false;
             }
             User targetUser = users.stream()
                     .filter(u -> u.getUsername().equals(username))
