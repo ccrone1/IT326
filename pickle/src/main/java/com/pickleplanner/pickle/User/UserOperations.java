@@ -362,7 +362,12 @@ public class UserOperations {
                     .orElse(null);
 
             if (userToRemove != null) {
+<<<<<<< HEAD
                 targetEvent.getParticipants().remove(user);
+=======
+                targetEvent.getParticipants().remove(userToRemove);
+                targetEvent.setAvailability(targetEvent.getAvailability()+1);
+>>>>>>> ce1c044 (fix buttons)
 
             }
         }

@@ -39,13 +39,19 @@ public class EventOperations {
                 .orElse(null);
 
         if (targetEvent != null) {
-            User userToRemove = targetEvent.getWaitlist().getWaitList().stream()
+            User targetUser = targetEvent.getWaitlist().getWaitList().stream()
                     .filter(u -> u.getUsername().equals(user.getUsername()))
                     .findFirst()
                     .orElse(null);
 
+<<<<<<< HEAD
             if (userToRemove != null) {
                 targetEvent.getWaitlist().getWaitList().add(user);
+=======
+            if (targetUser != null) {
+                targetEvent.getWaitlist().getWaitList().add(targetUser);
+            
+>>>>>>> ce1c044 (fix buttons)
 
             }
         }
@@ -80,7 +86,8 @@ public class EventOperations {
                     .orElse(null);
 
             if (userToRemove != null) {
-                targetEvent.getWaitlist().getWaitList().remove(user);
+                targetEvent.getWaitlist().getWaitList().remove(userToRemove);
+
 
             }
         }
@@ -97,9 +104,12 @@ public class EventOperations {
 
             e1.printStackTrace();
         }
+<<<<<<< HEAD
 
         // list.getWaitList().remove(user);
 
+=======
+>>>>>>> ce1c044 (fix buttons)
     }
 
     public String editEvent(Map<String, Object> requestData) {

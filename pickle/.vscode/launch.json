@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PickleApplication<pickle>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.pickleplanner.pickle.PickleApplication",
+            "projectName": "pickle",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
