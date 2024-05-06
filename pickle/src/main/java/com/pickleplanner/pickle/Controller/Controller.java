@@ -125,16 +125,23 @@ public class Controller {
         return userHandler.handleRequest("createProfile", requestBody);
     }
 
-    @PostMapping("/deleteProfile")
+    @PostMapping("/editProfile")
+    public String editProfile(@RequestBody Map<String, Object> requestBody) {
+        // Send request to handler
+        return userHandler.handleRequest("editProfile", requestBody);
+    }
+
+
+    @DeleteMapping("/deleteProfile")
     public String deleteProfile(@RequestBody Map<String, Object> requestBody) {
         // Send request to handler
         return userHandler.handleRequest("deleteProfile", requestBody);
     }
 
-    @PostMapping("/loginProfile")
-    public String loginProfile(@RequestBody Map<String, Object> requestBody) {
+    @PostMapping("/login")
+    public String login(@RequestBody Map<String, Object> requestBody) {
         // Send request to handler
-        return userHandler.handleRequest("loginProfile", requestBody);
+        return userHandler.handleRequest("login", requestBody);
     }
 
     @PostMapping("/find-users")
