@@ -1,1 +1,138 @@
-[{"eventID":"90337","date":"2024-05-23","time":"00:41","availability":1,"owner":{"username":"crone","fname":"rishi","lname":"Califf","password":"hehehehhe","email":"hellooo@ilstu.edu","skillLevel":"420"},"location":{"location":"113"},"tags":[],"bracket":{"numOfPlayers":0,"bracketId":"96946"},"participants":[{"username":"crone","fname":"rishi","lname":"Califf","password":"hehehehhe","email":"hellooo@ilstu.edu","skillLevel":"420"}],"waitlist":{}},{"eventID":"86604","date":"2024-05-08","time":"04:50","availability":4,"owner":{"username":"hmess","fname":"Hogan","lname":"Messinger","password":"1234","email":"demo@demo.com","skillLevel":"mid","followingList":[]},"location":{"location":"Ironwood Park"},"tags":[],"bracket":{"numOfPlayers":0,"bracketId":"66421"},"participants":[{"username":"hmess","fname":"Hogan","lname":"Messinger","password":"1234","email":"demo@demo.com","skillLevel":"mid","followingList":[]}],"waitlist":{}},{"eventID":"82028","date":"2024-05-28","time":"00:53","availability":3,"owner":{"username":"bye","fname":"hello","lname":"hi","password":"ahhahahah","email":"here@ilstu.edu","skillLevel":"sucks"},"location":{"location":"Outside"},"tags":[],"bracket":{"numOfPlayers":0,"bracketId":"18762"},"participants":[{"username":"bye","fname":"hello","lname":"hi","password":"ahhahahah","email":"here@ilstu.edu","skillLevel":"sucks"}],"waitlist":{}},{"eventID":"77827","date":"2024-05-21","time":"09:10","availability":9,"owner":{"username":"aathom7","fname":"Alex","lname":"Thomas","password":"12345","email":"test@test.com","skillLevel":"expert"},"location":{"location":"Ironwood Park"},"tags":["hype"],"bracket":{"numOfPlayers":0,"bracketId":"75602"},"participants":[{"username":"aathom7","fname":"Alex","lname":"Thomas","password":"12345","email":"test@test.com","skillLevel":"expert"}],"waitlist":{}}]
+[
+    {
+        "eventID": "90337",
+        "date": "2024-05-23",
+        "time": "00:41",
+        "availability": 1,
+        "owner": {
+            "username": "crone",
+            "fname": "rishi",
+            "lname": "Califf",
+            "password": "hehehehhe",
+            "email": "hellooo@ilstu.edu",
+            "skillLevel": "420"
+        },
+        "location": {
+            "location": "113"
+        },
+        "tags": [],
+        "bracket": {
+            "numOfPlayers": 0,
+            "bracketId": "96946"
+        },
+        "participants": [
+            {
+                "username": "crone",
+                "fname": "rishi",
+                "lname": "Califf",
+                "password": "hehehehhe",
+                "email": "hellooo@ilstu.edu",
+                "skillLevel": "420"
+            }
+        ],
+        "waitlist": {}
+    },
+    {
+        "eventID": "86604",
+        "date": "2024-05-08",
+        "time": "04:50",
+        "availability": 4,
+        "owner": {
+            "username": "hmess",
+            "fname": "Hogan",
+            "lname": "Messinger",
+            "password": "1234",
+            "email": "demo@demo.com",
+            "skillLevel": "mid",
+            "followingList": []
+        },
+        "location": {
+            "location": "Ironwood Park"
+        },
+        "tags": [],
+        "bracket": {
+            "numOfPlayers": 0,
+            "bracketId": "66421"
+        },
+        "participants": [
+            {
+                "username": "hmess",
+                "fname": "Hogan",
+                "lname": "Messinger",
+                "password": "1234",
+                "email": "demo@demo.com",
+                "skillLevel": "mid",
+                "followingList": []
+            }
+        ],
+        "waitlist": {}
+    },
+    {
+        "eventID": "82028",
+        "date": "2024-05-28",
+        "time": "00:53",
+        "availability": 3,
+        "owner": {
+            "username": "bye",
+            "fname": "hello",
+            "lname": "hi",
+            "password": "ahhahahah",
+            "email": "here@ilstu.edu",
+            "skillLevel": "sucks"
+        },
+        "location": {
+            "location": "Outside"
+        },
+        "tags": [],
+        "bracket": {
+            "numOfPlayers": 0,
+            "bracketId": "18762"
+        },
+        "participants": [
+            {
+                "username": "bye",
+                "fname": "hello",
+                "lname": "hi",
+                "password": "ahhahahah",
+                "email": "here@ilstu.edu",
+                "skillLevel": "sucks"
+            }
+        ],
+        "waitlist": {}
+    },
+    {
+        "eventID": "77827",
+        "date": "2024-05-21",
+        "time": "09:10",
+        "availability": 9,
+        "owner": {
+            "username": "aathom7",
+            "fname": "Alex",
+            "lname": "Thomas",
+            "password": "12345",
+            "email": "test@test.com",
+            "skillLevel": "expert"
+        },
+        "location": {
+            "location": "Ironwood Park"
+        },
+        "tags": [
+            "hype"
+        ],
+        "bracket": {
+            "numOfPlayers": 0,
+            "bracketId": "75602"
+        },
+        "participants": [
+            {
+                "username": "aathom7",
+                "fname": "Alex",
+                "lname": "Thomas",
+                "password": "12345",
+                "email": "test@test.com",
+                "skillLevel": "expert"
+            }
+        ],
+        "waitlist": {}
+    }
+]

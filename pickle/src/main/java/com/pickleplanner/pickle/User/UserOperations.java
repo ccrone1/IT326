@@ -307,7 +307,7 @@ public class UserOperations {
                 .findFirst()
                 .orElse(null);
 
-        int followerIndex = users.indexOf(followerUser);
+        int followerIndex = targetUser.getFollowingList().indexOf(followerUser);
 
         targetUser.getFollowingList().remove(followerIndex);
 
