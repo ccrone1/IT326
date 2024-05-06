@@ -8,10 +8,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.pickleplanner.pickle.Event.Event;
+import com.pickleplanner.pickle.Event.EventOperations;
 
 @Component
 public class BracketHandler {
-    private BracketOperations bracketOperations;
+
+    private final BracketOperations bracketOperations;
 
     public BracketHandler() {
         bracketOperations = new BracketOperations();
@@ -21,7 +23,7 @@ public class BracketHandler {
         return bracketOperations;
     }
 
-    public List<Event> handleRequest(@RequestBody Map<String, String> searchRequest) throws IOException {
-        return BracketOperations.createBracket(searchRequest);
+    public String handleRequest(@RequestBody Map<String, String> requestBody) throws IOException {
+        return bracketOperations.createBracket(requestBody);
     }
 }
