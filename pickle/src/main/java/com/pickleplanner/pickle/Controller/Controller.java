@@ -11,10 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.servlet.http.HttpServletResponse;
 import com.pickleplanner.pickle.Event.Event;
 import com.pickleplanner.pickle.Event.EventHandler;
 import com.pickleplanner.pickle.Persistence.Database;
@@ -37,6 +39,16 @@ public class Controller {
     @Autowired
     private EventHandler eventHandler;
 
+    @GetMapping("/accept")
+    public String acceptInvitation(@RequestParam("eventId") Integer eventId, HttpServletResponse response) {
+        return eventHandler.handleRequest(eventId, response, "accept");
+    }
+
+    @GetMapping("/decline")
+    public String declineInvitation(@RequestParam("eventId") Integer eventId, HttpServletResponse response) {
+        return eventHandler.handleRequest(eventId, response, "decline");
+    }
+
     @PostMapping("/inviteUser")
     public String inviteUser(@RequestBody Map<String, Object> requestBody) {
         // Send the request to the handler
@@ -47,27 +59,6 @@ public class Controller {
     public String cancelInvite(@RequestBody Map<String, Object> requestBody) {
         // Send the request to the handler
         return userHandler.handleRequest("cancelInvite", requestBody);
-    }
-
-    @PostMapping("/acceptInvite/{token}")
-    public String acceptInvite(@PathVariable String token, Model model) {
-        // Use the token to identify the user and the event
-        // Perform the action to join the user to the event
-
-        // For example, you can render a page confirming the join
-        return "join_confirmation";
-    }
-
-    @PostMapping("/declineInvite")
-    public String declineInvite(Model model) {
-        // You can add any necessary logic here, such as retrieving event details or
-        // user information
-
-        // For example, you can add a message to be displayed in the events.html page
-        model.addAttribute("message", "Sorry, this event wasn't for you. Try some others.");
-
-        // Redirect to events.html
-        return "redirect:/events.html";
     }
 
     @PostMapping("/events")
