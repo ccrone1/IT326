@@ -318,6 +318,7 @@ public class UserOperations {
         }
     }
 
+    // Code for removing a follower from your following list
     public String removeFollower(Map<String, Object> requestData) {
         String user_username = requestData.get("user_username").toString();
         String follower_username = requestData.get("follower_username").toString();
@@ -353,6 +354,27 @@ public class UserOperations {
             e.printStackTrace();
             return "Failed to create JSON";
         }
+    }
+
+    // Code for displaying your following list
+    public List<User> displayFollower(Map<String, Object> requestData) {
+        String user_username = requestData.get("user_username").toString();
+        List<User> users = new ArrayList<User>();
+        try (FileReader reader = new FileReader("user_data.json")) {
+            Type userList = new TypeToken<List<User>>() {
+            }.getType();
+
+            users = new Gson().fromJson(reader, userList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        User targetUser = users.stream()
+                .filter(u -> u.getUsername().equals(user_username))
+                .findFirst()
+                .orElse(null);
+        List<User> followingList = new ArrayList<User>();
+        followingList = targetUser.getFollowingList();
+        return followingList;
     }
 
     public String joinWaitlist(String event, String user) {

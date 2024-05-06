@@ -243,6 +243,12 @@ public class Controller {
         return userHandler.handleRequest("removeFollower", requestBody);
     }
 
+    @PostMapping("/displayFollower")
+    public List<User> displayFollower(@RequestBody Map<String, Object> requestBody) throws IOException {
+        // Send the request to handler
+        return userHandler.handleRequest2(requestBody);
+    }
+
     @Autowired
     private Database storage;
 

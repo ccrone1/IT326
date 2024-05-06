@@ -46,6 +46,9 @@
   <div class="removeFollower-container">
     <button id="removeFollowerButton" class="removeFollowerButton">Remove Follower</button>
   </div>
+  <div class="displayFollower-container">
+    <button id="displayFollowerButton" class="displayFollowerButton">Display Following List</button>
+  </div>
 
   <div class="user-details">
     <!-- User details will be displayed here -->
@@ -105,6 +108,19 @@
         <label for="follower_username">Person you want to follow username:</label>
         <input type="text" id="follower_username2" name="follower_username2" /><br />
         <button type="submit">Remove Follower</button>
+    </div>
+    </form>
+  </div>
+
+  <!-- Display following list modal -->
+  <div id="displayFollowerModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Display Following List</h2>
+      <form id="displayFollowerForm">
+        <label for="user_username">Your Username:</label>
+        <input type="text" id="user_username3" name="user_username2" /><br />
+        <button type="submit">Display Follow List</button>
     </div>
     </form>
   </div>

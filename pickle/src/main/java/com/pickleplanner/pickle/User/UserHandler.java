@@ -1,6 +1,7 @@
 package com.pickleplanner.pickle.User;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
@@ -73,10 +74,10 @@ public class UserHandler {
         }
 
         else if (action == "createProfile") {
-
             return userOperations.createProfile(requestData);
+        }
 
-        } else if (action == "joinWaitlist") {// Join waitlist
+        else if (action == "joinWaitlist") {// Join waitlist
             String username = (String) requestData.get("username");
             if (username == null || username.isEmpty()) {
                 return "Invalid userName";
@@ -86,7 +87,9 @@ public class UserHandler {
                 return "Invalid event ID";
             }
             return userOperations.joinWaitlist(eventId, username);
-        } else if (action == "leaveWaitlist") {// leave waitlist
+        }
+
+        else if (action == "leaveWaitlist") {// leave waitlist
             String username = (String) requestData.get("username");
             if (username == null || username.isEmpty()) {
                 return "Invalid userName";
@@ -96,7 +99,9 @@ public class UserHandler {
                 return "Invalid event ID";
             }
             return userOperations.leaveWaitlist(eventId, username);
-        } else if (action == "joinEvent") {// joinEvent
+        }
+
+        else if (action == "joinEvent") {// joinEvent
             String username = (String) requestData.get("username");
             if (username == null || username.isEmpty()) {
                 return "Invalid userName";
@@ -106,7 +111,9 @@ public class UserHandler {
                 return "Invalid event ID";
             }
             return userOperations.joinEvent(requestData);
-        } else if (action == "leaveEvent") {// LeaveEvent
+        }
+
+        else if (action == "leaveEvent") {// LeaveEvent
             String username = (String) requestData.get("username");
             if (username == null || username.isEmpty()) {
                 return "Invalid userName";
@@ -116,7 +123,9 @@ public class UserHandler {
                 return "Invalid event ID";
             }
             return userOperations.LeaveEvent(username, eventId);
-        } else if (action == "kickUser") {// LeaveEvent
+        }
+
+        else if (action == "kickUser") {// LeaveEvent
             String username = (String) requestData.get("username");
             if (username == null || username.isEmpty()) {
                 return "Invalid userName";
@@ -139,6 +148,10 @@ public class UserHandler {
         else {
             return "Invalid Request";
         }
+    }
+
+    public List<User> handleRequest2(@RequestBody Map<String, Object> requestData) throws IOException {
+        return userOperations.displayFollower(requestData);
     }
 
     public User handleRequest(@RequestBody Map<String, Object> searchRequest) throws IOException {
