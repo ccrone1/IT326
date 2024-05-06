@@ -1,15 +1,11 @@
 package com.pickleplanner.pickle.Event;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.*;
 
 import com.pickleplanner.pickle.Bracket.Bracket;
 import com.pickleplanner.pickle.Location.Location;
 import com.pickleplanner.pickle.User.User;
 import com.pickleplanner.pickle.Search_Filter.Search;
-import com.pickleplanner.pickle.Tag.Tag;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;

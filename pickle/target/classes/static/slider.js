@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (currentSlide >= slides.length) {
       currentSlide = 0;
     }
-    setTimeout(showSlide, 3000); // Change slide every 3 seconds (adjust as needed)
+    setTimeout(showSlide, 3000);
   }
 
   showSlide();

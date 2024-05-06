@@ -64,7 +64,6 @@
               </button>
             </div>
             <div class="modal-body">
-              <!-- Your form goes here -->
               <form id="searchForm">
                 <!-- Initial filter input fields -->
                 <div id="filterContainer">
@@ -83,16 +82,15 @@
         </div>
       </div>
       <!-- Invite User -->
-      <div id="inviteUserContainer">
-        <label for="userEmail">Email: </label>
-        <input type="email" id="userEmail" name="userEmail" /><br />
-        <button type="button" id="inviteButton">Invite User</button>
-      </div>
     </div>
 
     <button type="button" class="btn-generate-open">
       Generate Open Events
     </button>
+
+    <input type="text" id="eventIDBracket" placeholder="Enter Event ID" />
+    <button id="generateBracketBtn">Generate Bracket</button>
+    <div id="bracketContainer"></div>
 
     <div id="eventContainer">
       <!-- Create Event container -->
@@ -114,7 +112,6 @@
 
     <div id="event" style="display: none"></div>
 
-    <!-- Search results will be displayed here -->
     <div id="searchResults"></div>
 
     <div id="openResults"></div>
@@ -183,5 +180,6 @@
     <script src="display_userevents.js"></script>
     <script src="join_Waitlist.js"></script>
     <script src="generate_open_events.js"></script>
+    <script src="generate_bracket.js"></script>
   </body>
 </html>

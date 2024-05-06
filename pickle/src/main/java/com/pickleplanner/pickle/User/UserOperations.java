@@ -1,16 +1,14 @@
 package com.pickleplanner.pickle.User;
 
-import java.util.Map;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.ArrayList;
-import java.util.List;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.*;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -22,15 +20,10 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
-import org.springframework.core.io.Resource;
-
 import com.pickleplanner.pickle.Bracket.Bracket;
 import com.pickleplanner.pickle.Event.Event;
 import com.pickleplanner.pickle.Event.Waitlist;
 import com.pickleplanner.pickle.Location.Location;
-import com.pickleplanner.pickle.Persistence.Database;
-import com.pickleplanner.pickle.Tag.Tag;
-import com.pickleplanner.pickle.User.User;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
@@ -38,22 +31,27 @@ import jakarta.mail.internet.MimeMessage;
 @Component
 public class UserOperations {
 
+    @Autowired
     private final JavaMailSender emailSender;
 
-    @Autowired
     public UserOperations(JavaMailSender emailSender) {
         this.emailSender = emailSender;
     }
 
-    private Database storage;
-
-    public String sendInvitation(String userEmail) {
+    // Send the invitation to a user's email
+    public String sendInvitation(String userEmail, Integer eventID, String username) {
         // Check if user email is null
         if (userEmail == null || !isValidEmail(userEmail)) {
             return "Failed to send invitation. User email is missing or invalid.";
         }
+        if (username == null) {
+            return "Failed to send invitation. Username is missing or invalid.";
+        }
+        if (eventID == null) {
+            return "Failed to send invitation. Event ID is missing or invalid.";
+        }
 
-        // Create a SimpleMailMessage object
+        // Create a MimeMessage object
         MimeMessage message = emailSender.createMimeMessage();
 
         try {
@@ -64,20 +62,21 @@ public class UserOperations {
             helper.setSubject("Invitation to Pickleball Event");
 
             // Include accept and decline links in the email body
-            String acceptLink = "http://localhost:8080/accept";
-            String declineLink = "http://localhost:8080/decline";
+            String acceptLink = "http://localhost:8080/accept?eventId=" + eventID;
+            String declineLink = "http://localhost:8080/decline?eventId=" + eventID + "&action=decline";
 
             // Create email body with image
             String emailBody = "<html><body>"
-                    + "<p>You have been invited to join a pickleball event!</p>"
+                    + "<p>You have been invited to join a pickleball event by " + username + " with the Event ID "
+                    + eventID + "!</p>"
                     + "<p><a style='display: inline-block; background-color: #4CAF50; color: white; padding: 10px 20px; text-align: center; text-decoration: none; border-radius: 5px;' href='"
                     + acceptLink + "'>Accept</a>"
                     + "<a style='display: inline-block; background-color: #f44336; color: white; padding: 10px 20px; text-align: center; text-decoration: none; border-radius: 5px; margin-left: 10px;' href='"
                     + declineLink + "'>Decline</a></p>"
                     + "<p><img src='cid:image' /></p>"
-                    + "<p>Address: 123 Main Street, Manhattan, NY</p>"
-                    + "<p>Phone: 555-555-5555</p>"
-                    + "<p>Website: <a href='http://www.pickleplanner.com'>www.pickleplanner.com</a></p>"
+                    + "<p>Address: 1471 Broadway, New York, NY</p>"
+                    + "<p>Phone: +1-800-588-2300</p>"
+                    + "<p>Website: <a href='http://localhost:8080'>Pickle Planner</a></p>"
                     + "</body></html>";
 
             // Set email body
@@ -85,7 +84,6 @@ public class UserOperations {
 
             // Set the image attachment
             ClassPathResource image = new ClassPathResource("IMG_0444.png");
-
             helper.addInline("image", image);
 
             // Send the email
@@ -98,10 +96,17 @@ public class UserOperations {
         }
     }
 
-    public String cancelInvitation(String userEmail) {
+    // Send a cancellation email to a user's email
+    public String cancelInvitation(String userEmail, Integer eventID, String username) {
         // Check if user email is null
         if (userEmail == null || !isValidEmail(userEmail)) {
             return "Failed to cancel invitation. User email is missing or invalid.";
+        }
+        if (username == null) {
+            return "Failed to cancel invitation. Username is missing or invalid.";
+        }
+        if (eventID == null) {
+            return "Failed to cancel invitation. Event ID is missing or invalid.";
         }
 
         // Create a MimeMessage object
@@ -116,12 +121,13 @@ public class UserOperations {
 
             // Create email body
             String emailBody = "<html><body>"
-                    + "<p>Your invitation to the pickleball event has been canceled.</p>"
+                    + "<p>Your invitation to the pickleball event from " + username + " with Event ID: " + eventID
+                    + " has been canceled.</p>"
                     + "<p>We apologize for any inconvenience.</p>"
                     + "<p><img src='cid:image' /></p>"
-                    + "<p>Address: 123 Main Street, Manhattan, NY</p>"
-                    + "<p>Phone: 555-555-5555</p>"
-                    + "<p>Website: <a href='http://www.pickleplanner.com'>www.pickleplanner.com</a></p>"
+                    + "<p>Address: 1471 Broadway, New York, NY</p>"
+                    + "<p>Phone: +1-800-588-2300</p>"
+                    + "<p>Website: <a href='http://localhost:8080'>Pickle Planner</a></p>"
                     + "</body></html>";
             ;
 
@@ -142,6 +148,7 @@ public class UserOperations {
         }
     }
 
+    // Utilize regular expressions to see if the email is valid
     public static boolean isValidEmail(String email) {
         String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
 
@@ -172,6 +179,7 @@ public class UserOperations {
             Waitlist waitlist = new Waitlist();
             List<User> participants = new ArrayList<User>();
             Location loc = new Location(requestData.get("location").toString());
+            @SuppressWarnings("unchecked")
             List<String> tags = (List<String>) requestData.get("tags");
             Bracket bracket = new Bracket();
             participants.add(targetUser);
@@ -215,159 +223,220 @@ public class UserOperations {
             }
         }
         return "Username invalid.";
+
     }
 
-    // // Store in storage
-    // Gson gson = new Gson();
-    // // Convert object to JSON string
-    // String json = gson.toJson(event);
+    public User searchUser(String username) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        File file = new File("user_data.json");
 
-    // // Write JSON string to a file
-    // try (FileWriter writer = new FileWriter("event_output.json", true)) {
-    // writer.write(json);
-    // return "Successfully created JSON";
-    // } catch (IOException e) {
-    // e.printStackTrace();
-    // return "Failed to create JSON";
-    // }
-    // }
+        if (!file.exists()) {
+            // Handle the case where the file does not exist
+            return null;
+        }
+
+        // Read user data from the JSON file
+        User[] users = objectMapper.readValue(file, User[].class);
+
+        // Find user by username
+        for (User user : users) {
+            if (user.getUsername().equals(username)) {
+                return user; // Return the matching user
+            }
+        }
+        return null; // No matching user found
+    }
+
+    public String joinWaitlist(String event, String user) {
+
+        Type listType = new TypeToken<List<Event>>() {
+        }.getType();
+        List<Event> events = new Gson().fromJson("event_output.json", listType);
+
+        Event targetEvent = events.stream()
+                .filter(e -> e.getEventID().equals(event))
+                .findFirst()
+                .orElse(null);
+
+        User targetUser = targetEvent.getWaitlist().getWaitList().stream()
+                .filter(u -> u.getUsername().equals(user))
+                .findFirst()
+                .orElse(null);
+
+        if (targetUser != null) {
+            targetEvent.getWaitlist().getWaitList().add(targetUser);
+
+        }
+        String updatedJson = new Gson().toJson(events);
+        FileWriter writer;
+        try {
+            writer = new FileWriter("event_output.json");
+            writer.write(updatedJson);
+            writer.close();
+            return "Successfully added to waitlist";
+        } catch (IOException e1) {
+
+            e1.printStackTrace();
+            return "Failed to add to waitlist";
+        }
+
+    }
+
+    public String leaveWaitlist(String eventID, String username) {
+        try {
+            // Read JSON from file
+            Type listType = new TypeToken<List<Event>>() {
+            }.getType();
+            List<Event> events;
+            try (FileReader reader = new FileReader("event_output.json")) {
+                events = new Gson().fromJson(reader, listType);
+            }
+
+            // Find the target event
+            for (Event event : events) {
+                if (event.getEventID().equals(eventID)) {
+                    // Remove the user from the waitlist
+                    event.getWaitlist().getWaitList().removeIf(user -> user.getUsername().equals(username));
+                    // Write the updated JSON back to the file
+                    try (FileWriter writer = new FileWriter("event_output.json")) {
+                        new Gson().toJson(events, writer);
+                        return "Successfully left waitlist";
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return "Failed leaving waitlist: Unable to write to file";
+                    }
+                }
+            }
+            return "Failed leaving waitlist: Event not found";
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return "Failed leaving waitlist: File not found";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed leaving waitlist: Error reading file";
+        }
+    }
+
+    public String joinEvent(Map<String, Object> requestData) {
+        String user_username = requestData.get("username").toString();
+        String eventId = requestData.get("eventId").toString();
+        List<User> users = new ArrayList<User>();
+        try (FileReader reader = new FileReader("user_data.json")) {
+            Type eventList = new TypeToken<List<User>>() {
+            }.getType();
+
+            users = new Gson().fromJson(reader, eventList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        User targetUser = users.stream()
+                .filter(u -> u.getUsername().equals(user_username))
+                .findFirst()
+                .orElse(null);
+
+        List<Event> existingEvents = new ArrayList<Event>();
+        try (FileReader reader = new FileReader("event_output.json")) {
+            Type listType2 = new TypeToken<List<Event>>() {
+            }.getType();
+
+            existingEvents = new Gson().fromJson(reader, listType2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // If the the JSON file is empty the array will become null so we are
+        // re-intializing it so we can add an event to it
+        if (existingEvents == null)
+            existingEvents = new ArrayList<Event>();
+
+        // Append new Event objects to existing list
+        Event targetEvent = existingEvents.stream()
+                .filter(u -> u.getEventID().equals(eventId))
+                .findFirst()
+                .orElse(null);
+
+        targetEvent.getParticipants().add(targetUser);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
+
+        // Write JSON to file (append mode)
+        try (FileWriter writer = new FileWriter("event_output.json", false)) {
+            writer.write(json);
+            return "New JSON data appended to json";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to create JSON";
+        }
+    }
 
     /*
-     * public String deleteEvent(Map<String, Object> requestData) {
-     * // When they click the button it sends the EventID
-     * // Or when we display the event the ID is displayed and theyneed to type in
-     * the
-     * // ID to delete it
+     * public String joinEvent(String userName, String event) throws IOException {
+     * 
+     * // Reading existing events from the JSON file and storing them into an
+     * arraylist
+     * List<Event> existingEvents = new ArrayList<Event>();
+     * try (FileReader reader = new FileReader("event_output.json")) {
+     * Type listType2 = new TypeToken<List<Event>>() {
+     * }.getType();
+     * 
+     * existingEvents = new Gson().fromJson(reader, listType2);
+     * } catch (IOException e) {
+     * e.printStackTrace();
+     * }
+     * // If the the JSON file is empty the array will become null so we are
+     * // re-intializing it so we can add an event to it
+     * if (existingEvents == null)
+     * existingEvents = new ArrayList<Event>();
+     * 
+     * // Append new Event objects to existing list
+     * Event targetEvent = existingEvents.stream()
+     * .filter(u -> u.getEventID().equals(event))
+     * .findFirst()
+     * .orElse(null);
+     * 
+     * if (targetEvent != null) {
+     * User userToAdd = searchUser(userName);
+     * 
+     * targetEvent.getParticipants().add(userToAdd);
+     * targetEvent.setAvailability(targetEvent.getAvailability() - 1);
+     * 
+     * }
+     * // }
+     * Gson gson = new Gson();
+     * String json = gson.toJson(existingEvents);
+     * 
+     * // Write JSON to file (append mode)
+     * try (FileWriter writer = new FileWriter("event_output.json", false)) {
+     * writer.write(json);
+     * return "New JSON data appended to event_output.json";
+     * } catch (IOException e) {
+     * e.printStackTrace();
+     * return "Failed to create JSON";
+     * }
+     * 
      * }
      */
-
-    public void joinWaitlist(Event event, User user) {
-
-        Type listType = new TypeToken<List<Event>>() {
-        }.getType();
-        List<Event> events = new Gson().fromJson("event_output.json", listType);
-
-        // Assuming you know which event and user to remove
-        Event targetEvent = events.stream()
-                .filter(e -> e.getEventID().equals(event.getEventID()))
-                .findFirst()
-                .orElse(null);
-
-        if (targetEvent != null) {
-
-            targetEvent.getWaitlist().getWaitList().add(user);
-
-        }
-        String updatedJson = new Gson().toJson(events);
-        FileWriter writer;
-        try {
-            writer = new FileWriter("event_output.json");
-            writer.write(updatedJson);
-            writer.close();
-        } catch (IOException e1) {
-
-            e1.printStackTrace();
-        }
-
-    }
-
-    public void leaveWaitlist(Event event, User user) {
+    public String LeaveEvent(String user, String event) {
 
         Type listType = new TypeToken<List<Event>>() {
         }.getType();
         List<Event> events = new Gson().fromJson("event_output.json", listType);
 
-        // Assuming you know which event and user to remove
         Event targetEvent = events.stream()
-                .filter(e -> e.getEventID().equals(event.getEventID()))
-                .findFirst()
-                .orElse(null);
-
-        if (targetEvent != null) {
-            User userToRemove = targetEvent.getWaitlist().getWaitList().stream()
-                    .filter(u -> u.getUsername().equals(user.getUsername()))
-                    .findFirst()
-                    .orElse(null);
-
-            if (userToRemove != null) {
-                targetEvent.getWaitlist().getWaitList().remove(user);
-
-            }
-        }
-
-        // Convert back to JSON if needed
-        String updatedJson = new Gson().toJson(events);
-        // need to push
-        FileWriter writer;
-        try {
-            writer = new FileWriter("event_output.json");
-            writer.write(updatedJson);
-            writer.close();
-        } catch (IOException e1) {
-
-            e1.printStackTrace();
-        }
-
-        // list.getWaitList().remove(user);
-
-    }
-
-    public void joinEvent(User user, Event event) {
-
-        Type listType = new TypeToken<List<Event>>() {
-        }.getType();
-        List<Event> events = new Gson().fromJson("event_output.json", listType);
-
-        // Assuming you know which event and user to remove
-        Event targetEvent = events.stream()
-                .filter(e -> e.getEventID().equals(event.getEventID()))
-                .findFirst()
-                .orElse(null);
-
-        if (targetEvent != null) {
-
-            targetEvent.getParticipants().add(user);
-            targetEvent.setAvailability(targetEvent.getAvailability() - 1);
-
-        }
-        String updatedJson = new Gson().toJson(events);
-        FileWriter writer;
-        try {
-            writer = new FileWriter("event_output.json");
-            writer.write(updatedJson);
-            writer.close();
-        } catch (IOException e1) {
-
-            e1.printStackTrace();
-        }
-
-    }
-
-    public void LeaveEvent(User user, Event event) {
-
-        Type listType = new TypeToken<List<Event>>() {
-        }.getType();
-        List<Event> events = new Gson().fromJson("event_output.json", listType);
-
-        // Assuming you know which event and user to remove
-        Event targetEvent = events.stream()
-                .filter(e -> e.getEventID().equals(event.getEventID()))
+                .filter(e -> e.getEventID().equals(event))
                 .findFirst()
                 .orElse(null);
 
         if (targetEvent != null) {
             User userToRemove = targetEvent.getParticipants().stream()
-                    .filter(u -> u.getUsername().equals(user.getUsername()))
+                    .filter(u -> u.getUsername().equals(user))
                     .findFirst()
                     .orElse(null);
 
             if (userToRemove != null) {
-<<<<<<< HEAD
-                targetEvent.getParticipants().remove(user);
-=======
+
                 targetEvent.getParticipants().remove(userToRemove);
-                targetEvent.setAvailability(targetEvent.getAvailability()+1);
->>>>>>> ce1c044 (fix buttons)
+                targetEvent.setAvailability(targetEvent.getAvailability() + 1);
 
             }
         }
@@ -377,32 +446,35 @@ public class UserOperations {
             writer = new FileWriter("event_output.json");
             writer.write(updatedJson);
             writer.close();
+            return "Successfullyleft Event";
         } catch (IOException e1) {
 
             e1.printStackTrace();
+            return "Failed to leave event";
         }
-        event.getParticipants().remove(user);
+
     }
 
-    public void kickFromEvent(User user, Event event) {
+    public String kickFromEvent(String user, String event) {
         Type listType = new TypeToken<List<Event>>() {
         }.getType();
         List<Event> events = new Gson().fromJson("event_output.json", listType);
 
-        // Assuming you know which event and user to remove
         Event targetEvent = events.stream()
-                .filter(e -> e.getEventID().equals(event.getEventID()))
+                .filter(e -> e.getEventID().equals(event))
                 .findFirst()
                 .orElse(null);
 
         if (targetEvent != null) {
             User userToRemove = targetEvent.getParticipants().stream()
-                    .filter(u -> u.getUsername().equals(user.getUsername()))
+                    .filter(u -> u.getUsername().equals(user))
                     .findFirst()
                     .orElse(null);
 
             if (userToRemove != null) {
-                targetEvent.getParticipants().remove(user);
+
+                targetEvent.getParticipants().remove(userToRemove);
+                targetEvent.setAvailability(targetEvent.getAvailability() + 1);
 
             }
         }
@@ -412,11 +484,12 @@ public class UserOperations {
             writer = new FileWriter("event_output.json");
             writer.write(updatedJson);
             writer.close();
+            return "Successfully Kicked from Event";
         } catch (IOException e1) {
 
             e1.printStackTrace();
+            return "Failed to kick from Event";
         }
-        event.getParticipants().remove(user);
 
     }
 
@@ -477,7 +550,8 @@ public class UserOperations {
     }
 
     // Delete Profile
-    public String deleteProfile(String userName) {
+    public String deleteProfile(Map<String, Object> requestData) {
+        String userName = requestData.get("username").toString();
         List<User> users = new ArrayList<User>();
         try (FileReader reader = new FileReader("user_data.json")) {
             Type userList = new TypeToken<List<User>>() {
@@ -486,7 +560,7 @@ public class UserOperations {
             users = new Gson().fromJson(reader, userList);
         } catch (IOException e) {
             e.printStackTrace();
-            return "Failed to delete profile";
+            return "failed to read JSON file";
         }
 
         User targetUser = users.stream()
@@ -496,53 +570,36 @@ public class UserOperations {
 
         if (targetUser != null) {
             users.remove(targetUser);
-
-            Gson gson = new Gson();
-            String json = gson.toJson(users);
-
-            try (FileWriter writer = new FileWriter("user_data_temp.json", false)) {
-                writer.write(json);
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "Failed to delete profile";
-            }
-    
-            // Rename temp file to original file
-            File tempFile = new File("user_data_temp.json");
-            File originalFile = new File("user_data.json");
-            if (tempFile.renameTo(originalFile)) {
-                return "User profile deleted successfully";
-            } else {
-                return "Failed to delete profile";
-            }
         } else {
-            return "User profile not found";
+            return "Profile " + userName + " not found.";
+        }
+
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
+
+        // Write JSON to file (append mode)
+        try (FileWriter writer = new FileWriter("user_data.json", false)) {
+            writer.write(json);
+            return "profile " + userName + " deleted successfully";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to delete profile";
         }
     }
-/* 
-            try (FileWriter writer = new FileWriter("user_data.json", false)) {
-                writer.write(json);
-                return "User profile deleted successfully";
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "Failed to delete profile";
-            }
-        } else {
-            return "User profile not found";
-        }
-    }
-*/
 
-   
-public class editProfile {
-
-    private static final String FILE_PATH = "user_data.json";
-
-    public String createProfile(Map<String, Object> requestData) {
+    public String editProfile(Map<String, Object> requestData) {
+        String fname = requestData.get("firstName").toString();
+        String lname = requestData.get("lastName").toString();
         String userName = requestData.get("userName").toString();
+        String skillLevel = requestData.get("skillLevel").toString();
+        String email = requestData.get("email").toString();
+        String password = requestData.get("password").toString();
+
         List<User> users = new ArrayList<User>();
-        try (FileReader reader = new FileReader(FILE_PATH)) {
-            Type userList = new TypeToken<List<User>>() {}.getType();
+        try (FileReader reader = new FileReader("user_data.json")) {
+            Type userList = new TypeToken<List<User>>() {
+            }.getType();
+
             users = new Gson().fromJson(reader, userList);
         } catch (IOException e) {
             e.printStackTrace();
@@ -552,112 +609,32 @@ public class editProfile {
                 .findFirst()
                 .orElse(null);
 
-        if (targetUser == null) {
-            User user = new User(requestData.get("firstName").toString(), requestData.get("lastName").toString(),
-                    requestData.get("userName").toString(), requestData.get("email").toString(),
-                    requestData.get("password").toString(), requestData.get("skillLevel").toString());
+        targetUser.setLastName(lname);
+        targetUser.setFirstName(fname);
+        targetUser.setEmail(email);
+        targetUser.setSkillLevel(skillLevel);
+        targetUser.setPassword(password);
 
-            // Reading existing events from the JSON file and storing them into an arraylist
-            List<User> existingUsers = new ArrayList<User>();
-            try (FileReader reader = new FileReader(FILE_PATH)) {
-                Type listType = new TypeToken<List<User>>() {}.getType();
-                existingUsers = new Gson().fromJson(reader, listType);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            // If the the JSON file is empty the array will become null so we are
-            // re-intializing it so we can add an user to it
-            if (existingUsers == null)
-                existingUsers = new ArrayList<User>();
-
-            // Append new user objects to existing list
-            existingUsers.add(user);
-
-            Gson gson = new Gson();
-            String json = gson.toJson(existingUsers);
-
-            // Write JSON to file (overwrite mode)
-            try (FileWriter writer = new FileWriter(FILE_PATH, false)) {
-                writer.write(json);
-                return "New JSON data appended to user_data.json";
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "Failed to create JSON";
-            }
-        }
-        return "Username already exists";
-    }
-
-    public void editProfile() {
-        Scanner scanner = new Scanner(System.in);
         Gson gson = new Gson();
+        String json = gson.toJson(users);
 
-        System.out.print("Enter your username: ");
-        String username = scanner.nextLine();
-
-        List<User> users = new ArrayList<User>();
-        try (FileReader reader = new FileReader(FILE_PATH)) {
-            Type userList = new TypeToken<List<User>>() {}.getType();
-            users = gson.fromJson(reader, userList);
+        // Write JSON to file (append mode)
+        try (FileWriter writer = new FileWriter("user_data.json", false)) {
+            writer.write(json);
+            return "New JSON data appended to user_data.json";
         } catch (IOException e) {
             e.printStackTrace();
-        }
-
-        User targetUser = users.stream()
-                .filter(u -> u.getUsername().equals(username))
-                .findFirst()
-                .orElse(null);
-
-        if (targetUser != null) {
-            System.out.println("Your current profile:");
-            System.out.println(gson.toJson(targetUser));
-
-            System.out.print("Enter the field you want to edit: ");
-            String fieldToEdit = scanner.nextLine();
-
-            System.out.print("Enter the new value for " + fieldToEdit + ": ");
-            String newValue = scanner.nextLine();
-
-            // Update user's data
-            switch (fieldToEdit) {
-                case "firstName":
-                    targetUser.setFirstName(newValue);
-                    break;
-                case "lastName":
-                    targetUser.setLastName(newValue);
-                    break;
-                case "email":
-                    targetUser.setEmail(newValue);
-                    break;
-                case "password":
-                    targetUser.setPassword(newValue);
-                    break;
-                case "skillLevel":
-                    targetUser.setSkillLevel(newValue);
-                    break;
-                default:
-                    System.out.println("Invalid field.");
-            }
-
-            // Write updated data back to JSON file (overwrite mode)
-            try (FileWriter writer = new FileWriter(FILE_PATH, false)) {
-                writer.write(gson.toJson(users));
-                System.out.println("Profile updated successfully!");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            System.out.println("User not found.");
+            return "Failed to create JSON";
         }
     }
-}
 
     public class login {
         public boolean verifyUser(String username, String password) {
             // get user data
             List<User> users = new ArrayList<>();
             try (FileReader reader = new FileReader("user_data.json")) {
-                Type userList = new TypeToken<List<User>>() {}.getType();
+                Type userList = new TypeToken<List<User>>() {
+                }.getType();
 
                 users = new Gson().fromJson(reader, userList);
             } catch (IOException e) {

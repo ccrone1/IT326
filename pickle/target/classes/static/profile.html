@@ -40,8 +40,18 @@
         <button class="btn-find-users">Search Users</button>
       </div>
 
+      <div id="inputContainer2">
+        <div class="search-container">
+          <input
+            type="text"
+            class="user-bar"
+            name="profile-search"
+            placeholder="Enter Username"
+          />
+          <button class="btn-find-users">Update Profile</button>
+        </div>
+
       <div class="user-details">
-        <!-- User details will be displayed here -->
       </div>
 
     <div class="login-container">
@@ -64,9 +74,9 @@
       <div class="input-group">
         <input type="password" name="password" placeholder="Password" />
       </div>
-      <button class="btn" type="button">Log In</button>
+      <button class="btn-login" type="button">Log In</button>
       <button class="btn-register" type="button">Register</button>
-      <button class="btn-delete" type="button">Delete</button>
+      <button id="btn-delete" type="button">Delete</button>
       <p class="message">Don't have an account? <a href="#">Register now</a></p>
     </div>
 
@@ -77,5 +87,7 @@
     <script src="create_profile.js"></script>
     <script src="search_user.js"></script>
     <script src="delete_profile.js"></script>
+    <script src="login.js"></script>
+    <script src="editProfile.js"></script>
   </body>
 </html>

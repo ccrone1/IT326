@@ -2,14 +2,12 @@ package com.pickleplanner.pickle.Tag;
 
 import java.util.ArrayList;
 
-import org.w3c.dom.events.Event;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Tag {
 
     private ArrayList<String> tags;
-    // private String recommendedSkillLevel;
-    // private boolean availableEquipment;
-    // private String otherComments;
 
     // Constructor
     public Tag() {
@@ -21,12 +19,7 @@ public class Tag {
     }
 
     // Method to add tags to an Event
-    public void addTags(Event event) {
-
-    }
-
-    // Method to remove tags from an Event
-    public void deleteTags(Event event) {
-
+    public ArrayList<String> getTags() {
+        return tags;
     }
 }

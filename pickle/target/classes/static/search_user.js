@@ -26,9 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function displayUser(user) {
-        // Assuming you have a <div> with class="user-details" to display user details
         const userDetailsContainer = document.querySelector('.user-details');
-        userDetailsContainer.innerHTML = ''; // Clear existing content before displaying new user details
+        userDetailsContainer.innerHTML = '';
 
         if (user) {
             const userElement = document.createElement('div');

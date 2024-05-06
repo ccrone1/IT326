@@ -8,27 +8,30 @@ function clearForm() {
     document.querySelector('input[name="password"]').value = "";
 }
 
-document.getElement("btn-delete").addEventListener("click", function (event) {
+document.getElementById("btn-delete").addEventListener("click", function (event) {
     event.preventDefault(); // Prevent default form submission
-    if (confirm("Are you sure you want to delete your profile?")) {
+    var userName = document.querySelector('input[name="userName"]').value;
+    console.log("Username: "+ userName);//log the username to verify 
+    if (confirm("Are you sure you want to delete your profile "+userName +"?")) {
         // Get user input values
-        var userName = document.querySelector('input[name="userName"]').value;
-
-
+        //var userName = document.querySelector('input[name="userName"]').value;
+      
         // Send user registration request to the backend
         fetch("/deleteProfile", {
-            method: "POST",
+            method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(userName),
+            body: JSON.stringify({
+                username:userName}
+            ),
         })
             .then((response) => response.json())
             .then((data) => {
                 // Handle success response if needed
                 console.log("User deleted successfully:", data);
                 // For example, redirect to profile page, show success message, etc.
-                alert("Your profile has been deleted successfully.");
+                alert("Your profile "+ userName +" has been deleted successfully.");
             })
             .catch((error) => {
                 console.error("Error deleting user:", error);

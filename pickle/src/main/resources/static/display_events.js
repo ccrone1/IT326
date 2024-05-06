@@ -8,183 +8,198 @@ document.addEventListener('DOMContentLoaded', function () {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({}) // You can pass any necessary data here
+            body: JSON.stringify({})
         })
-        .then(response => response.json())
-        .then(data => {
-            // Process data and display on your HTML page
-            displayEvents(data);
-            if (eventsContainer.style.display ==="block") {
-                eventsContainer.style.display = "none";
-            } else {
-                eventsContainer.style.display = "block";
-                eventsContainer.style.padding="20px";
-                eventsContainer.style.textAlign="center";
-            }
+            .then(response => response.json())
+            .then(data => {
+                displayEvents(data);
+                if (eventsContainer.style.display === "block") {
+                    eventsContainer.style.display = "none";
+                } else {
+                    eventsContainer.style.display = "block";
+                    eventsContainer.style.padding = "20px";
+                    eventsContainer.style.textAlign = "center";
+                }
 
 
 
 
 
 
-        })
-        .catch(error => console.error('Error:', error));
+            })
+            .catch(error => console.error('Error:', error));
     });
 
-    function joinListCalled(eventId){
+    function joinListCalled(eventId) {
 
         console.log("Joining list");
-          // var userEmail = document.getElementById('userEmail').value;
-   
-          ///reached here
-         
-                   // Prompt user for username 
-                   const username = prompt("Enter your username:");
-                   if (username !== null) {
-                       const eventIdInput = eventId;//prompt("Enter the event ID:", eventId);
-                       console.log("got username: "+username+ "   ID"+eventIdInput);
-   
-                       fetch('/joinWaitlist', {
-                           method: 'POST',
-                           headers: {
-                               'Content-Type': 'application/json'
-                           },
-                           body: JSON.stringify({ eventId: eventId, username: username })
-                       })
-                       .then(response => {
-                           if (response.ok) {
-                               alert("Joined waitlist successfully.");
-                           } else {
-                               alert("Failed to join waitlist.");
-                           }
-                       })
-                       .catch(error => {
-                           console.error('Error:', error);
-                           alert("An error occurred while joining waitlist.");
-                       });
-                  
-               }
-            else {
-               alert("Please enter a valid UserName.");
-           }}
-     
-function leaveListCalled(eventId){
+        const username = prompt("Enter your username:");
+        if (username !== null) {
+            const eventIdInput = eventId;
+            console.log("got username: " + username + "   ID" + eventIdInput);
 
-    console.log("Leaving list");
-      // var userEmail = document.getElementById('userEmail').value;
+            fetch('/joinWaitlist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ eventId: eventId, username: username })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Joined waitlist successfully.");
+                    } else {
+                        alert("Failed to join waitlist.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("An error occurred while joining waitlist.");
+                });
 
-      ///reached here
-     
-               // Prompt user for username 
-               const username = prompt("Enter your username:");
-               if (username !== null) {
-                   const eventIdInput = eventId;//prompt("Enter the event ID:", eventId);
-                   console.log("got username: "+username+ "   ID"+eventIdInput);
-
-                   fetch('/leaveWaitlist', {
-                       method: 'POST',
-                       headers: {
-                           'Content-Type': 'application/json'
-                       },
-                       body: JSON.stringify({ eventId: eventId, username: username })
-                   })
-                   .then(response => {
-                       if (response.ok) {
-                           alert("Left waitlist successfully.");
-                       } else {
-                           alert("Failed to leave waitlist.");
-                       }
-                   })
-                   .catch(error => {
-                       console.error('Error:', error);
-                       alert("An error occurred while leaving waitlist.");
-                   });
-              
-           }
+        }
         else {
-           alert("Please enter a valid UserName.");
-       }}
+            alert("Please enter a valid UserName.");
+        }
+    }
 
-         
-function joinEventCalled(eventId){
-    console.log("Joining Event");
-   
-      // var userEmail = document.getElementById('userEmail').value;
+    function leaveListCalled(eventId) {
 
-      ///reached here
-     
-               // Prompt user for username 
-               const username = prompt("Enter your username:");
-               if (username !== null) {
-                   const eventIdInput = eventId;//prompt("Enter the event ID:", eventId);
-                   console.log("got username: "+username+ " .  ID"+eventIdInput);
+        console.log("Leaving list");
+        const username = prompt("Enter your username:");
+        if (username !== null) {
+            const eventIdInput = eventId;
+            console.log("got username: " + username + "   ID" + eventIdInput);
 
-                   fetch('/joinEvent', {
-                       method: 'POST',
-                       headers: {
-                           'Content-Type': 'application/json'
-                       },
-                       body: JSON.stringify({ eventID: eventId, username: username })
-                   })
-                   .then(response => {
-                       if (response.ok) {
-                           alert("Joined Event successfully.");
-                       } else {
-                           alert("Failed to join Event.");
-                       }
-                   })
-                   .catch(error => {
-                       console.error('Error:', error);
-                       alert("An error occurred while joining Event.");
-                   });
-              
-           }
+            fetch('/leaveWaitlist', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ eventId: eventId, username: username })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Left waitlist successfully.");
+                    } else {
+                        alert("Failed to leave waitlist.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("An error occurred while leaving waitlist.");
+                });
+
+        }
         else {
-           alert("Please enter a valid UserName.");
-       }}
+            alert("Please enter a valid UserName.");
+        }
+    }
 
-function leaveEventCalled(eventId){
 
-    console.log("Leaving event");
-      // var userEmail = document.getElementById('userEmail').value;
+    function joinEventCalled(eventId) {
+        console.log("Joining Event");
+        const username = prompt("Enter your username:");
+        if (username !== null) {
+            const eventIdInput = eventId;
+            console.log("got username: " + username + " .  ID" + eventIdInput);
 
-      ///reached here
-     
-               // Prompt user for username 
-               const username = prompt("Enter your username:");
-               if (username !== null) {
-                   const eventIdInput =eventId//prompt("Enter the event ID:", eventId);
-                   console.log("got username: "+username+ " .    ID"+eventIdInput);
+            fetch('/joinEvent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ eventID: eventId, username: username })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Joined Event successfully.");
+                    } else {
+                        alert("Failed to join Event.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("An error occurred while joining Event.");
+                });
 
-                   fetch('/leaveEvent', {
-                       method: 'POST',
-                       headers: {
-                           'Content-Type': 'application/json'
-                       },
-                       body: JSON.stringify({ eventID: eventId, username: username })
-                   })
-                   .then(response => {
-                       if (response.ok) {
-                           alert("Left event successfully.");
-                       } else {
-                           alert("Failed to leave event.");
-                       }
-                   })
-                   .catch(error => {
-                       console.error('Error:', error);
-                       alert("An error occurred while leaving event.");
-                   });
-              
-           }
+        }
         else {
-           alert("Please enter a valid UserName.");
-       }}
+            alert("Please enter a valid UserName.");
+        }
+    }
+
+    function leaveEventCalled(eventId) {
+
+        console.log("Leaving event");
+        const username = prompt("Enter your username:");
+        if (username !== null) {
+            const eventIdInput = eventId;
+            console.log("got username: " + username + " .    ID" + eventIdInput);
+
+            fetch('/leaveEvent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ eventID: eventId, username: username })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Left event successfully.");
+                    } else {
+                        alert("Failed to leave event.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("An error occurred while leaving event.");
+                });
+
+        }
+        else {
+            alert("Please enter a valid UserName.");
+        }
+    }
+
+    function kickEventCalled(eventId) {
+
+        console.log("Kicking user");
+        const username = prompt("Enter username:");
+        if (username !== null) {
+            const eventIdInput = eventId;
+            console.log("got username: " + username + " .    ID" + eventIdInput);
+
+            fetch('/leaveEvent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ eventID: eventId, username: username })
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Left event successfully.");
+                    } else {
+                        alert("Failed to leave event.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert("An error occurred while leaving event.");
+                });
+
+        }
+        else {
+            alert("Please enter a valid UserName.");
+        }
+    }
 
 
 
-    
+
     function createJoinListButton(text, eventId) {
-       
+
 
         const button = document.createElement("button");
         button.textContent = text;
@@ -193,15 +208,15 @@ function leaveEventCalled(eventId){
         button.style.marginRight = "10px";
 
         function handleClick() {
-            console.log("The id used is : "+eventId);
-            const target=eventId;
+            console.log("The id used is : " + eventId);
+            const target = eventId;
 
 
-            joinListCalled(target); // Pass the eventId to the joinListCalled function
+            joinListCalled(target);
         }
-    
+
         button.addEventListener('click', handleClick);
-    
+
         return button;
     }
 
@@ -212,16 +227,16 @@ function leaveEventCalled(eventId){
         button.style.display = "inline-block";
         button.style.marginRight = "10px";
         function handleClick() {
-            console.log("The id used is : "+eventId);
-            const target=eventId;
+            console.log("The id used is : " + eventId);
+            const target = eventId;
 
             leaveListCalled(target);
-           
+
         }
-    
+
         button.addEventListener('click', handleClick);
-       
-    
+
+
         return button;
     }
     function createJoinEventButton(text, eventId) {
@@ -231,15 +246,15 @@ function leaveEventCalled(eventId){
         button.style.display = "inline-block";
         button.style.marginRight = "10px";
         function handleClick() {
-            console.log("The id used is : "+eventId);
-            const target=eventId;
+            console.log("The id used is : " + eventId);
+            const target = eventId;
 
 
-            joinEventCalled(target); // Pass the eventId to the joinListCalled function
+            joinEventCalled(target);
         }
-    
+
         button.addEventListener('click', handleClick);
-    
+
         return button;
     }
     function createLeaveEventButton(text, eventId) {
@@ -248,24 +263,44 @@ function leaveEventCalled(eventId){
         button.setAttribute("type", "button");
         button.style.display = "inline-block";
         button.style.marginRight = "10px";
-       
+
         function handleClick() {
-            console.log("The id used is : "+eventId);
-            const target=eventId;
+            console.log("The id used is : " + eventId);
+            const target = eventId;
 
 
-            leaveEventCalled(target); // Pass the eventId to the joinListCalled function
+            leaveEventCalled(target);
         }
-    
+
         button.addEventListener('click', handleClick);
-    
+
+        return button;
+    }
+    function createKickButton(text, eventId) {
+
+
+        const button = document.createElement("button");
+        button.textContent = text;
+        button.setAttribute("type", "button");
+        button.style.display = "inline-block";
+        button.style.marginRight = "10px";
+
+        function handleClick() {
+            console.log("The id used is : " + eventId);
+            const target = eventId;
+
+
+            joinListCalled(target);
+        }
+
+        button.addEventListener('click', handleClick);
+
         return button;
     }
 
     function displayEvents(events) {
-        // Assuming you have a <div> with id="eventContainer" to display events
         const eventContainer = document.getElementById('events');
-        eventContainer.innerHTML = ''; // Clear existing content before displaying new events
+        eventContainer.innerHTML = '';
 
         events.forEach(event => {
             const eventElement = document.createElement('div');
@@ -280,22 +315,25 @@ function leaveEventCalled(eventId){
                 
             `;
 
-            const joinlist = createJoinListButton("Join Waitlist",event.eventID)
-            joinlist.setAttribute("id","joinWaitlistButton")
-            
+            const joinlist = createJoinListButton("Join Waitlist", event.eventID)
+            joinlist.setAttribute("id", "joinWaitlistButton")
 
-            const leaveList = createLeaveListButton("Leave Waitlist",event.eventID)
-            leaveList.setAttribute("id","leaveWaitlistButton")
-         
 
-            const joinEvent = createJoinEventButton( "Join Event" ,event.eventID);
-            joinEvent.setAttribute("id","joinEventButton")
-           
+            const leaveList = createLeaveListButton("Leave Waitlist", event.eventID)
+            leaveList.setAttribute("id", "leaveWaitlistButton")
+
+
+            const joinEvent = createJoinEventButton("Join Event", event.eventID);
+            joinEvent.setAttribute("id", "joinEventButton")
+
 
 
             const leaveEvent = createLeaveEventButton("Leave Event", event.eventID);
-            leaveEvent.setAttribute("id","leaveEventButton")
-          
+            leaveEvent.setAttribute("id", "leaveEventButton")
+
+            const kickEvent=createKickButton("Kick from Event",event.eventID);
+            kickEvent.setAttribute("id","kickButton");
+
 
             const inviteUser = document.createElement("button");
             inviteUser.textContent = "Invite User";
@@ -323,7 +361,6 @@ function leaveEventCalled(eventId){
                         sendInvitation(userEmail, eventID, username);
                         updateButtonForCancellation(userEmail);
                     } else if (button.innerHTML === 'Cancel Invitation' && confirm("Are you sure you want to cancel the invitation to " + userEmail + "?")) {
-                        cancelInvitation(userEmail, eventID, username);
                     } else {
                     }
                 } else {
@@ -380,7 +417,6 @@ function leaveEventCalled(eventId){
                 button.addEventListener('click', () => cancelInvitation(userEmail));
             }
 
-            // Append the buttons to the eventElement
             eventElement.appendChild(joinlist);
             eventElement.appendChild(leaveList);
             eventElement.appendChild(joinEvent);
@@ -390,37 +426,36 @@ function leaveEventCalled(eventId){
             eventElement.appendChild(emailInput);
 
             eventContainer.appendChild(eventElement);
-            
+
 
             const divider = document.createElement('hr');
             eventElement.appendChild(divider);
 
             joinlist.style.display = "inline-block";
-        leaveList.style.display = "inline-block";
-        joinEvent.style.display = "inline-block";
-        leaveEvent.style.display = "inline-block";
-        inviteUser.style.display = "inline-block"
+            leaveList.style.display = "inline-block";
+            joinEvent.style.display = "inline-block";
+            leaveEvent.style.display = "inline-block";
+            inviteUser.style.display = "inline-block"
 
-        joinlist.style.marginRight = "10px"; // Add some spacing between buttons if needed
-        leaveList.style.marginRight = "10px";
-        joinEvent.style.marginRight = "10px";
-        leaveEvent.style.marginRight = "10px";
-        usernameInput.style.marginRight = "10px";
-        inviteUser.style.marginRight = "10px"; // Add some spacing between buttons if needed
-            });
-           // eventsContainer.style.display = 'block'; // Show the events container
-            
-            
-        }
+            joinlist.style.marginRight = "10px";
+            leaveList.style.marginRight = "10px";
+            joinEvent.style.marginRight = "10px";
+            leaveEvent.style.marginRight = "10px";
+            usernameInput.style.marginRight = "10px";
+            inviteUser.style.marginRight = "10px";
+        });
 
-    });
 
+    }
+
+});
 
 
 
 
-      
 
- 
-         
-            
+
+
+
+
+

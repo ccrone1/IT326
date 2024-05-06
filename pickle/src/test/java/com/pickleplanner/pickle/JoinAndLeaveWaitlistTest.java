@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -28,19 +27,23 @@ public class JoinAndLeaveWaitlistTest {
 
     @Test
     public void testJoinWaitlist() {
-        userOperations.joinWaitlist(event, user);
+        int prev = event.getWaitlist().getWaitList().size();
+
+        userOperations.joinWaitlist((event.getEventID()).toString(), user.getUsername());
+
         int num = event.getWaitlist().getWaitList().size();
-        assertEquals(1, num);
+        assertEquals(prev + 1, num);
     }
 
     @Test
     public void testleaveWaitlist() {
-        userOperations.joinWaitlist(event, user);
-        int num = event.getWaitlist().getWaitList().size();
 
-        userOperations.leaveWaitlist(event, user);
-        int num2 = event.getWaitlist().getWaitList().size();
-        assertEquals(num2, num);
+        int prev = event.getWaitlist().getWaitList().size();
+
+        userOperations.leaveWaitlist((event.getEventID()).toString(), user.getUsername());
+
+        int num = event.getWaitlist().getWaitList().size();
+        assertEquals(prev - 1, num);
     }
 
 }

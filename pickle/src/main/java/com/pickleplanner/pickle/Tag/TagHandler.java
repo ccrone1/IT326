@@ -1,7 +1,8 @@
-import TagOperations;
-
 package com.pickleplanner.pickle.Tag;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TagHandler {
     private TagOperations tagOperations;
 
@@ -9,5 +10,8 @@ public class TagHandler {
         tagOperations = new TagOperations();
     }
 
-    // Methods to handle tag-related requests and interact with TagOperations
+    public TagOperations getTagOperations() {
+        return tagOperations;
+    }
+
 }

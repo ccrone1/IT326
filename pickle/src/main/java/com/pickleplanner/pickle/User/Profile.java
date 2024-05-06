@@ -8,7 +8,7 @@ public class Profile {
     private String firstName;
     private String lastName;
     private String email;
-    private String skillLevel; // String for now, may switch to int as it might go by number
+    private String skillLevel;
 
     public void Profile(String firstName, String lastName, String email, String skillLevel) {
         this.firstName = firstName;

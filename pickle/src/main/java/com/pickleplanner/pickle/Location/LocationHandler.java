@@ -1,7 +1,8 @@
-import LocationOperations;
-
 package com.pickleplanner.pickle.Location;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class LocationHandler {
     private LocationOperations locationOperations;
 
@@ -9,6 +10,7 @@ public class LocationHandler {
         locationOperations = new LocationOperations();
     }
 
-    // Methods to handle location-related requests and interact with
-    // LocationOperations
+    public LocationOperations getLocationOperations() {
+        return locationOperations;
+    }
 }

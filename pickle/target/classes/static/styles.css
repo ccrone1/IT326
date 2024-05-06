@@ -95,12 +95,10 @@ header h1 {
   /* Adjust color to match header text */
   text-decoration: none;
   /* Remove underline */
-  /* Add any other styles you want to mimic from h1 */
 }
 
 .link:hover {
   color: #d8a36e;
-  /* Adjust hover color if desired */
 }
 
 .inviteUserContainer {
@@ -321,10 +319,6 @@ footer {
   justify-content: center;
 }
 
-#eventContainer div {
-
-}
-
 
 #interactions {
   display: flex;
@@ -450,7 +444,6 @@ footer {
   padding: 20px;
   border: 1px solid #888;
   width: 80%;
-  /* Could be more or less, depending on screen size */
 }
 
 /* Close button */
@@ -557,4 +550,39 @@ label {
 
 .message a:hover {
   text-decoration: underline;
+}
+
+.btn-generate-open {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 10px; /* Adjust padding to make the button smaller */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px; /* Adjust font size to make the button text smaller */
+  margin: 12px 11px; /* Adjust margin to reduce space around the button */
+  cursor: pointer;
+  border-radius: 13%;
+  width: 120px; /* Set a specific width for the button */
+}
+
+#eventIDBracket {
+  display: inline-block;
+  width: 200px; /* Adjust the width as needed */
+}
+
+#generateBracketBtn {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 10px; /* Adjust padding to make the button smaller */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px; /* Adjust font size to make the button text smaller */
+  margin: 12px 11px; /* Adjust margin to reduce space around the button */
+  cursor: pointer;
+  border-radius: 13%;
+  width: 120px; /* Set a specific width for the button */
 }

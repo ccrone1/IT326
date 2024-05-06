@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,7 +17,6 @@ public class EventHandler {
 
     String userEmail;
 
-    @Autowired
     public EventHandler(EventOperations eventOperations) {
         this.eventOperations = eventOperations;
     }
@@ -45,6 +44,10 @@ public class EventHandler {
         } else {
             return "Invalid Request";
         }
+    }
+
+    public List<Event> handleRequest(@RequestBody Map<String, Object> searchRequest) throws IOException {
+        return eventOperations.generateOpenEvents(searchRequest);
     }
 
     // Methods to handle event-related requests and interact with EventOperations
