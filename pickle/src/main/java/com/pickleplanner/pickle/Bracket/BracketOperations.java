@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -14,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pickleplanner.pickle.Event.Event;
 import com.pickleplanner.pickle.User.User;
 
+@Component
 public class BracketOperations {
     public String createBracket(@RequestBody Map<String, String> requestBody) throws IOException {
         String eventID = requestBody.get("eventID");
