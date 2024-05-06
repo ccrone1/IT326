@@ -87,44 +87,8 @@ public class InviteAndCancelTest {
 
         // Verify that the result indicates failure
         assertNotNull(result);
-        assertEquals("Failed to send invitation cancellation message. Reason: Failed to send email.", result);
+        assertEquals(
+                "Failed to cancel invitation. User email is missing or invalid.",
+                result);
     }
-
-    /*
-     * @Test
-     * public void testCancelInviteUser() {
-     * // Test canceling an invitation
-     * EventOperations eventOperations = new EventOperations();
-     * String result = eventOperations.cancelInvitation("test@example.com");
-     * assertEquals("Invitation canceled for test@example.com", result);
-     * }
-     * 
-     * @Test
-     * public void testAcceptInvite() {
-     * // Test accepting an invitation
-     * EventOperations eventOperations = new EventOperations();
-     * String result = eventOperations.acceptInvitation("test@example.com");
-     * assertEquals("Invitation accepted for test@example.com", result);
-     * }
-     * 
-     * @Test
-     * public void testDeclineInvite() {
-     * // Test declining an invitation
-     * EventOperations eventOperations = new EventOperations();
-     * String result = eventOperations.declineInvitation("test@example.com");
-     * assertEquals("Invitation declined for test@example.com", result);
-     * }
-     * 
-     * @Test
-     * public void testRetrieveEventDetails() {
-     * // Test retrieving event details
-     * EventOperations eventOperations = new EventOperations();
-     * EventOperations eventDetails =
-     * eventOperations.retrieveEventDetails("EventID123");
-     * assertNotNull(eventDetails);
-     * assertEquals("Pickleball Tournament", eventDetails.getTitle());
-     * assertEquals("2024-06-15", eventDetails.getDate());
-     * assertEquals("Manhattan, NY", eventDetails.getLocation());
-     * }
-     */
 }
