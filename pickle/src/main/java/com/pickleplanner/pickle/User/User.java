@@ -62,7 +62,7 @@ public class User {
     }
 
     public List<User> getFollowingList() {
-        return followingList;
+        return this.followingList;
     }
 
     public String getFname() {

@@ -44,16 +44,27 @@ public class UserHandler {
         }
 
         else if (action == "deleteEvent") {
+            return userOperations.deleteEvent(requestData);
+        }
+
+        else if (action == "deleteProfile") {
             String username = (String) requestData.get("username");
             if (username == null || username.isEmpty()) {
                 return "Failed to send invitation. User email is missing or invalid.";
             }
-
             return userOperations.deleteProfile(username);
         }
 
         else if (action == "createProfile") {
             return userOperations.createProfile(requestData);
+        }
+
+        else if (action == "addFollower") {
+            return userOperations.addFollower(requestData);
+        }
+
+        else if (action == "removeFollower") {
+            return userOperations.removeFollower(requestData);
         }
 
         else {

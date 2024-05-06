@@ -215,6 +215,18 @@ public class Controller {
         return filteredEvents;
     }
 
+    @PostMapping("/addFollower")
+    public String addFollower(@RequestBody Map<String, Object> requestBody) {
+        // Send the request to handler
+        return userHandler.handleRequest("addFollower", requestBody);
+    }
+
+    @PostMapping("/removeFollower")
+    public String removeFollower(@RequestBody Map<String, Object> requestBody) {
+        // Send the request to handler
+        return userHandler.handleRequest("removeFollower", requestBody);
+    }
+
     @Autowired
     private Database storage;
 

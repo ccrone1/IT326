@@ -59,8 +59,16 @@ public class Event {
         return this.date;
     }
 
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public String getTime() {
         return this.time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public int getAvailability() {
@@ -77,6 +85,10 @@ public class Event {
 
     public Location getLocation() {
         return this.location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public List<String> getTags() {
