@@ -224,7 +224,6 @@ public class UserOperations {
             }
         }
         return "Username invalid.";
-
     }
 
     public User searchUser(String username) throws IOException {
@@ -264,20 +263,23 @@ public class UserOperations {
                 .filter(u -> u.getEventID().equals(eventId))
                 .findFirst()
                 .orElse(null);
-        int eventIndex = events.indexOf(targetEvent);
-        events.remove(eventIndex);
+        if (targetEvent != null) {
+            int eventIndex = events.indexOf(targetEvent);
+            events.remove(eventIndex);
 
-        Gson gson = new Gson();
-        String json = gson.toJson(events);
+            Gson gson = new Gson();
+            String json = gson.toJson(events);
 
-        // Write JSON to file (append mode)
-        try (FileWriter writer = new FileWriter("event_output.json", false)) {
-            writer.write(json);
-            return "New JSON data appended to event_output.json";
-        } catch (IOException e) {
-            e.printStackTrace();
-            return "Failed to create JSON";
+            // Write JSON to file (append mode)
+            try (FileWriter writer = new FileWriter("event_output.json", false)) {
+                writer.write(json);
+                return "JSON data deleted from event_output.json";
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "Failed to create JSON";
+            }
         }
+        return "EventID invalid.";
     }
 
     // Code for adding a user to your following list
