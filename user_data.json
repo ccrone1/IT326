@@ -17,20 +17,20 @@
     "skillLevel": "mid",
     "followingList": [
       {
-        "username": "ccrone",
-        "fname": "Cameron",
-        "lname": "Crone",
-        "password": "ccrone1",
-        "email": "ccrone@gmail.com",
-        "skillLevel": "pro",
-        "followingList": []
-      },
-      {
         "username": "aathom7",
         "fname": "Alex",
         "lname": "Thomas",
         "password": "12345",
         "email": "test@test.com",
+        "skillLevel": "expert",
+        "followingList": []
+      },
+      {
+        "username": "zacontr",
+        "fname": "Zach",
+        "lname": "Contreras",
+        "password": "zacon",
+        "email": "zachcontreras13@gmail.com",
         "skillLevel": "expert",
         "followingList": []
       }

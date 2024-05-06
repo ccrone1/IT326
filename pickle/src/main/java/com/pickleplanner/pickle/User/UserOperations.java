@@ -158,6 +158,7 @@ public class UserOperations {
         return pattern.matcher(email).matches();
     }
 
+    // Code for creating an event
     public String createEvent(Map<String, Object> requestData) {
         String userName = requestData.get("userName").toString();
         List<User> users = new ArrayList<User>();
@@ -247,6 +248,7 @@ public class UserOperations {
         return null; // No matching user found
     }
 
+    // Code for deleting an event
     public String deleteEvent(Map<String, Object> requestData) {
         String eventId = requestData.get("eventId").toString();
         List<Event> events = new ArrayList<Event>();
@@ -278,15 +280,16 @@ public class UserOperations {
         }
     }
 
+    // Code for adding a user to your following list
     public String addFollower(Map<String, Object> requestData) {
         String user_username = requestData.get("user_username").toString();
         String follower_username = requestData.get("follower_username").toString();
         List<User> users = new ArrayList<User>();
         try (FileReader reader = new FileReader("user_data.json")) {
-            Type eventList = new TypeToken<List<User>>() {
+            Type userList = new TypeToken<List<User>>() {
             }.getType();
 
-            users = new Gson().fromJson(reader, eventList);
+            users = new Gson().fromJson(reader, userList);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -320,10 +323,10 @@ public class UserOperations {
         String follower_username = requestData.get("follower_username").toString();
         List<User> users = new ArrayList<User>();
         try (FileReader reader = new FileReader("user_data.json")) {
-            Type eventList = new TypeToken<List<User>>() {
+            Type userList = new TypeToken<List<User>>() {
             }.getType();
 
-            users = new Gson().fromJson(reader, eventList);
+            users = new Gson().fromJson(reader, userList);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -332,14 +335,12 @@ public class UserOperations {
                 .findFirst()
                 .orElse(null);
 
-        User followerUser = users.stream()
-                .filter(u -> u.getUsername().equals(follower_username))
-                .findFirst()
-                .orElse(null);
-
-        int followerIndex = targetUser.getFollowingList().indexOf(followerUser);
-
-        targetUser.getFollowingList().remove(followerIndex);
+        for (int i = 0; i < targetUser.getFollowingList().size(); i++) {
+            if (targetUser.getFollowingList().get(i).getUsername().equals(follower_username)) {
+                targetUser.getFollowingList().remove(i);
+                break;
+            }
+        }
 
         Gson gson = new Gson();
         String json = gson.toJson(users);

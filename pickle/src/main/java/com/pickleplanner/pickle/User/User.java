@@ -29,7 +29,7 @@ public class User {
         this.followingList = new ArrayList<User>();
     }
 
-     public void setFirstName(String fname) {
+    public void setFirstName(String fname) {
         this.fname = fname;
     }
 
@@ -51,6 +51,10 @@ public class User {
 
     public void setSkillLevel(String skillLevel) {
         this.skillLevel = skillLevel;
+    }
+
+    public void setFollowingList(List<User> followingList) {
+        this.followingList = followingList;
     }
 
     public String getUsername() {
