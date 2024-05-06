@@ -298,13 +298,87 @@ function leaveEventCalled(eventId){
           
 
             const inviteUser = document.createElement("button");
-            inviteUser.textContent = "Invite User"; // Set the button text
+            inviteUser.textContent = "Invite User";
+            inviteUser.setAttribute("type", "button");
+            inviteUser.setAttribute("id", "inviteUserButton");
 
-            //inviteUser.setAttribute("type", "button"); // Set button type
-            
+            const usernameInput = document.createElement("input");
+            usernameInput.setAttribute("type", "text");
+            usernameInput.setAttribute("placeholder", "Enter your username");
+            usernameInput.setAttribute("id", "usernameInput");
+
+
             const emailInput = document.createElement("input");
-    emailInput.setAttribute("type", "text");
-    emailInput.setAttribute("placeholder", "Enter email")
+            emailInput.setAttribute("type", "text");
+            emailInput.setAttribute("placeholder", "Enter their email");
+            emailInput.setAttribute("id", "userEmailInput");
+
+            inviteUser.addEventListener('click', function () {
+                var userEmail = emailInput.value;
+                var eventID = event.eventID;
+                var username = usernameInput.value;
+                if (userEmail.trim() !== '') {
+                    const button = document.getElementById('inviteUserButton');
+                    if (button.innerHTML !== 'Cancel Invitation' && confirm("Are you sure you want to invite " + userEmail + "?")) {
+                        sendInvitation(userEmail, eventID, username);
+                        updateButtonForCancellation(userEmail);
+                    } else if (button.innerHTML === 'Cancel Invitation' && confirm("Are you sure you want to cancel the invitation to " + userEmail + "?")) {
+                        cancelInvitation(userEmail, eventID, username);
+                    } else {
+                    }
+                } else {
+                    alert("Please enter a valid email address.");
+                }
+            });
+
+            function sendInvitation(userEmail, eventID, username) {
+                fetch('/inviteUser', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userEmail: userEmail,
+                        eventID: eventID,
+                        username: username
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+
+            function cancelInvitation(userEmail, eventID, username) {
+                fetch('/cancelInvite', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        userEmail: userEmail,
+                        eventID: eventID,
+                        username: username
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(data.message);
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+            }
+
+            function updateButtonForCancellation(userEmail) {
+                const button = document.getElementById('inviteUserButton');
+                button.innerHTML = 'Cancel Invitation';
+                button.removeEventListener('click', sendInvitation);
+                button.addEventListener('click', () => cancelInvitation(userEmail));
+            }
 
             // Append the buttons to the eventElement
             eventElement.appendChild(joinlist);
@@ -312,6 +386,7 @@ function leaveEventCalled(eventId){
             eventElement.appendChild(joinEvent);
             eventElement.appendChild(leaveEvent);
             eventElement.appendChild(inviteUser);
+            eventElement.appendChild(usernameInput);
             eventElement.appendChild(emailInput);
 
             eventContainer.appendChild(eventElement);
@@ -330,6 +405,7 @@ function leaveEventCalled(eventId){
         leaveList.style.marginRight = "10px";
         joinEvent.style.marginRight = "10px";
         leaveEvent.style.marginRight = "10px";
+        usernameInput.style.marginRight = "10px";
         inviteUser.style.marginRight = "10px"; // Add some spacing between buttons if needed
             });
            // eventsContainer.style.display = 'block'; // Show the events container
