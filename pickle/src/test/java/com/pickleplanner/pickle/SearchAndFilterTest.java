@@ -13,44 +13,36 @@
 
 // @RunWith(SpringRunner.class)
 // @SpringBootTest
-// public class SearchAndFilterTest {
 
-// @Autowired
+// @autowired
 // private Event eventService;
 
 // @Test
 // public void testSearchEventsByLocation() {
-// String location = "New York";
-// List<Event> events = eventService.getLocation();
+//     String location = "New York";
+//     List<Event> events = eventService.searchEventsByLocation(location);
 
-// // Verify that the list of events is not null and contains events
-// assertNotNull(events);
-// assertEquals(2, events.size()); // Assuming there are 2 events with the given
-// location
+//     assertNotNull(events);
+//     // Update the expected size based on your actual data
+//     assertEquals(2, events.size());
 // }
 
 // @Test
 // public void testSearchEventsByKeyword() {
-// String keyword = "birthday";
-// List<Event> events = eventService.searchEventsByKeyword(keyword);
+//     String keyword = "birthday";
+//     List<Event> events = eventService.searchEventsByKeyword(keyword);
 
-// // Verify that the list of events is not null and contains events
-// assertNotNull(events);
-// assertEquals(3, events.size()); // Assuming there are 3 events with the given
-// keyword
+//     assertNotNull(events);
+//     // Update the expected size based on your actual data
+//     assertEquals(3, events.size());
 // }
 
 // @Test
 // public void testFilterEventsByDate() {
-// String date = "2024-05-10";
-// List<Event> events = eventService.filterEventsByDate(date);
+//     String date = "2024-05-10";
+//     List<Event> events = eventService.filterEventsByDate(date);
 
-// // Verify that the list of events is not null and contains events
-// assertNotNull(events);
-// assertEquals(1, events.size()); // Assuming there is 1 event on the given
-// date
-// }
-
-// // Additional test methods for other search and filter criteria can be added
-// // here
+//     assertNotNull(events);
+//     // Update the expected size based on your actu
+//     assertEquals(1, events.size());
 // }
