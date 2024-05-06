@@ -138,5 +138,14 @@
         "email": "stailor@yahoo.com",
         "skillLevel": "mid",
         "followingList": []
+    },
+    {
+        "username": "dogcanbark",
+        "fname": "Marco",
+        "lname": "Hernandez",
+        "password": "password123",
+        "email": "marky@example.com",
+        "skillLevel": "expert",
+        "followingList": []
     }
 ]
