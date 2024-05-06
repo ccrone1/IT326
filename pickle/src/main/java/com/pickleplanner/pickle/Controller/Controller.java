@@ -216,6 +216,31 @@ public class Controller {
         return filteredEvents;
     }
 
+    @PostMapping("/generate_open")
+    public List<Event> getOpenEvents(@RequestBody Map<String, Object> searchRequest) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        File file = new File("event_output.json");
+        List<Event> openEvents = new ArrayList<>();
+
+        if (!file.exists()) {
+            // Handle the case where the file does not exist
+            return openEvents;
+        }
+
+        // Read events data from the JSON file
+        List<Event> events = objectMapper.readValue(file, new TypeReference<List<Event>>() {
+        });
+
+        for (Event event : events) {
+            // Check if the keyword exists in the event location
+            if (event.getAvailability() > event.getParticipants().size()) {
+                openEvents.add(event);
+            }
+        }
+
+        return openEvents;
+    }
+
     @Autowired
     private Database storage;
 
