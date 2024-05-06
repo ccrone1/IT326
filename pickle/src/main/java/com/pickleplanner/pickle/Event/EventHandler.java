@@ -1,9 +1,14 @@
 package com.pickleplanner.pickle.Event;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 public class EventHandler {
@@ -23,6 +28,21 @@ public class EventHandler {
         }
 
         else {
+            return "Invalid Request";
+        }
+    }
+
+    public List<Event> handleRequest() throws IOException {
+        return eventOperations.retrieveEvents();
+    }
+
+    public String handleRequest(@RequestParam("eventId") Integer eventId,
+            HttpServletResponse response, String operation) {
+        if (operation == "accept") {
+            return eventOperations.acceptInvitation(eventId, response);
+        } else if (operation == "decline") {
+            return eventOperations.declineInvitation(eventId, response);
+        } else {
             return "Invalid Request";
         }
     }
