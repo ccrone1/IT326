@@ -169,6 +169,29 @@ public class Controller {
         }
         return null; // No matching user found
     }
+    @PostMapping("/joinEvent")
+    public String joinEvent(@RequestBody Map<String, Object> requestBody) {
+        // Send request to handler
+        return userHandler.handleRequest("joinEvent", requestBody);
+    }
+    @PostMapping("/leaveEvent")
+    public String leaveEvent(@RequestBody Map<String, Object> requestBody) {
+        // Send request to handler
+        return userHandler.handleRequest("leaveEvent", requestBody);
+    }
+
+    @PostMapping("/joinWaitlist")
+    public String joinWaitlist(@RequestBody Map<String, Object> requestBody) {
+        // Send request to handler
+        return userHandler.handleRequest("joinWaitlist", requestBody);
+    }
+    @PostMapping("/leaveWaitlist")
+    public String leaveWaitlist(@RequestBody Map<String, Object> requestBody) {
+        // Send request to handler
+        return userHandler.handleRequest("leaveWaitlist", requestBody);
+    }
+
+    
 
     @PostMapping("/search")
     public List<Event> getFilteredEvents(@RequestBody Map<String, Object> searchRequest) throws IOException {
