@@ -2,6 +2,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const generateDetailsButton = document.getElementById('generateEventDetailsButton');
     const eventsContainer = document.getElementById('events');
 
+    // Function to smoothly scroll to events section
+    function scrollToEventsSection() {
+        const eventsSection = document.querySelector('.events-display-section');
+        if (eventsSection) {
+            eventsSection.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    }
+
     generateDetailsButton.addEventListener('click', function () {
         fetch('/events', {
             method: 'POST',
@@ -13,13 +24,9 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(data => {
                 displayEvents(data);
-                if (eventsContainer.style.display === "block") {
-                    eventsContainer.style.display = "none";
-                } else {
-                    eventsContainer.style.display = "block";
-                    eventsContainer.style.padding = "20px";
-                    eventsContainer.style.textAlign = "center";
-                }
+                // Always show the events container and scroll to it
+                eventsContainer.style.display = "block";
+                scrollToEventsSection();
 
 
 
@@ -302,17 +309,58 @@ document.addEventListener('DOMContentLoaded', function () {
         const eventContainer = document.getElementById('events');
         eventContainer.innerHTML = '';
 
+        if (events.length === 0) {
+            eventContainer.innerHTML = `
+                <div class="events-empty">
+                    <div class="events-empty-icon">📅</div>
+                    <h3 class="events-empty-title">No Events Found</h3>
+                    <p class="events-empty-subtitle">There are no events to display at this time.</p>
+                </div>
+            `;
+            return;
+        }
+
         events.forEach(event => {
             const eventElement = document.createElement('div');
+            eventElement.className = 'event-card';
+            
+            const isFullCapacity = event.participants.length >= event.availability;
+            
             eventElement.innerHTML = `
-                <h2>${event.date} ${event.time}</h2>
-                <p>EventID: ${event.eventID}</p>
-                <p>Location: ${event.location.location}</p>
-                <p>Owner: ${event.owner.fname} ${event.owner.lname}</p>
-                <p>Availability: ${event.availability}</p>
-                <p>Participants: ${event.participants.length}</p>
-
-                
+                <div class="event-card-header">
+                    <div class="event-date-time">${event.date} ${event.time}</div>
+                    <div class="event-id">Event ID: ${event.eventID}</div>
+                </div>
+                <div class="event-card-body">
+                    <div class="event-info">
+                        <div class="event-info-row">
+                            <div class="event-info-icon">📍</div>
+                            <div class="event-info-label">Location:</div>
+                            <div class="event-info-value">${event.location.location}</div>
+                        </div>
+                        <div class="event-info-row">
+                            <div class="event-info-icon">👥</div>
+                            <div class="event-info-label">Capacity:</div>
+                            <div class="event-info-value">${event.participants.length}/${event.availability}</div>
+                        </div>
+                    </div>
+                    
+                    <div class="event-owner">
+                        <div class="event-owner-title">Event Owner</div>
+                        <div class="event-owner-name">${event.owner.fname} ${event.owner.lname}</div>
+                    </div>
+                    
+                    <div class="event-availability ${isFullCapacity ? 'full' : ''}">
+                        <div class="event-availability-icon">${isFullCapacity ? '🔴' : '🟢'}</div>
+                        <div class="event-availability-text">
+                            ${isFullCapacity ? 'Event Full' : 'Spots Available'}
+                        </div>
+                    </div>
+                    
+                    <div class="event-actions">
+                        <!-- Action buttons will be appended here -->
+                    </div>
+                </div>
             `;
 
             const joinlist = createJoinListButton("Join Waitlist", event.eventID)
@@ -417,32 +465,45 @@ document.addEventListener('DOMContentLoaded', function () {
                 button.addEventListener('click', () => cancelInvitation(userEmail));
             }
 
-            eventElement.appendChild(joinlist);
-            eventElement.appendChild(leaveList);
-            eventElement.appendChild(joinEvent);
-            eventElement.appendChild(leaveEvent);
-            eventElement.appendChild(inviteUser);
-            eventElement.appendChild(usernameInput);
-            eventElement.appendChild(emailInput);
-
+            // Get the event actions container
+            const actionsContainer = eventElement.querySelector('.event-actions');
+            
+            // Style the buttons with professional appearance
+            [joinlist, leaveList, joinEvent, leaveEvent, inviteUser].forEach(button => {
+                button.className = 'event-action-btn';
+            });
+            
+            // Style the input fields
+            [usernameInput, emailInput].forEach(input => {
+                input.className = 'event-input';
+            });
+            
+            // Create a grid layout for the actions
+            const buttonGrid = document.createElement('div');
+            buttonGrid.className = 'event-button-grid';
+            
+            const inviteGrid = document.createElement('div');
+            inviteGrid.className = 'event-invite-section';
+            
+            // Add buttons to grid
+            buttonGrid.appendChild(joinlist);
+            buttonGrid.appendChild(leaveList);
+            buttonGrid.appendChild(joinEvent);
+            buttonGrid.appendChild(leaveEvent);
+            
+            // Add invite section
+            const inviteTitle = document.createElement('h4');
+            inviteTitle.textContent = 'Invite User';
+            inviteTitle.className = 'invite-title';
+            
+            inviteGrid.appendChild(inviteTitle);
+            inviteGrid.appendChild(usernameInput);
+            inviteGrid.appendChild(emailInput);
+            inviteGrid.appendChild(inviteUser);
+            
+            actionsContainer.appendChild(buttonGrid);
+            actionsContainer.appendChild(inviteGrid);
             eventContainer.appendChild(eventElement);
-
-
-            const divider = document.createElement('hr');
-            eventElement.appendChild(divider);
-
-            joinlist.style.display = "inline-block";
-            leaveList.style.display = "inline-block";
-            joinEvent.style.display = "inline-block";
-            leaveEvent.style.display = "inline-block";
-            inviteUser.style.display = "inline-block"
-
-            joinlist.style.marginRight = "10px";
-            leaveList.style.marginRight = "10px";
-            joinEvent.style.marginRight = "10px";
-            leaveEvent.style.marginRight = "10px";
-            usernameInput.style.marginRight = "10px";
-            inviteUser.style.marginRight = "10px";
         });
 
 

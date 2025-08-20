@@ -1,3 +1,14 @@
+// Function to smoothly scroll to events section
+function scrollToEventsSection() {
+    const eventsSection = document.querySelector('.events-display-section');
+    if (eventsSection) {
+        eventsSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
+
 // Code for the user events button
 document.getElementById('userEventsButton').addEventListener('click', function () {
     const userEventsButton = document.getElementById('userEventsButton');
@@ -16,19 +27,159 @@ document.getElementById('userEventsButton').addEventListener('click', function (
         .then(response => response.json())
         .then(data => {
             // Process data and display on your HTML page
-            displayEvents(data);
-            // eventsContainer.style.display = 'block';
-            if (eventsContainer.style.display === "block") {
-                eventsContainer.style.display = "none";
-            } else {
-                eventsContainer.style.display = "block";
-                eventsContainer.style.padding = "20px";
-                eventsContainer.style.textAlign = "center";
-            }
-
+            displayUserEvents(data);
+            // Always show the events container and scroll to it
+            eventsContainer.style.display = "block";
+            scrollToEventsSection();
         })
         .catch(error => console.error('Error:', error));
 });
+
+// Function to display user events with professional card layout
+function displayUserEvents(events) {
+    const eventContainer = document.getElementById('events');
+    eventContainer.innerHTML = '';
+
+    if (events.length === 0) {
+        eventContainer.innerHTML = `
+            <div class="events-empty">
+                <div class="events-empty-icon">👤</div>
+                <h3 class="events-empty-title">No User Events Found</h3>
+                <p class="events-empty-subtitle">This user has no events associated with their account.</p>
+            </div>
+        `;
+        return;
+    }
+
+    events.forEach(event => {
+        const eventElement = document.createElement('div');
+        eventElement.className = 'event-card';
+        
+        const isFullCapacity = event.participants.length >= event.availability;
+        
+        eventElement.innerHTML = `
+            <div class="event-card-header">
+                <div class="event-date-time">${event.date} ${event.time}</div>
+                <div class="event-id">Event ID: ${event.eventID}</div>
+            </div>
+            <div class="event-card-body">
+                <div class="event-info">
+                    <div class="event-info-row">
+                        <div class="event-info-icon">📍</div>
+                        <div class="event-info-label">Location:</div>
+                        <div class="event-info-value">${event.location.location}</div>
+                    </div>
+                    <div class="event-info-row">
+                        <div class="event-info-icon">👥</div>
+                        <div class="event-info-label">Capacity:</div>
+                        <div class="event-info-value">${event.participants.length}/${event.availability}</div>
+                    </div>
+                </div>
+                
+                <div class="event-owner">
+                    <div class="event-owner-title">Event Owner</div>
+                    <div class="event-owner-name">${event.owner.fname} ${event.owner.lname}</div>
+                </div>
+                
+                <div class="event-availability ${isFullCapacity ? 'full' : ''}">
+                    <div class="event-availability-icon">${isFullCapacity ? '🔴' : '🟢'}</div>
+                    <div class="event-availability-text">
+                        ${isFullCapacity ? 'Event Full' : 'Spots Available'}
+                    </div>
+                </div>
+                
+                <div class="event-actions">
+                    <div class="event-button-grid">
+                        <button class="event-action-btn" onclick="joinWaitlist('${event.eventID}')">Join Waitlist</button>
+                        <button class="event-action-btn" onclick="leaveWaitlist('${event.eventID}')">Leave Waitlist</button>
+                        <button class="event-action-btn" onclick="joinEvent('${event.eventID}')">Join Event</button>
+                        <button class="event-action-btn" onclick="leaveEvent('${event.eventID}')">Leave Event</button>
+                    </div>
+                    
+                    <div class="event-invite-section">
+                        <h4 class="invite-title">Invite User</h4>
+                        <input type="text" class="event-input" placeholder="Enter your username" id="username-${event.eventID}">
+                        <input type="email" class="event-input" placeholder="Enter their email" id="email-${event.eventID}">
+                        <button class="event-action-btn" onclick="inviteUserToEvent('${event.eventID}')">Send Invitation</button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        eventContainer.appendChild(eventElement);
+    });
+}
+
+// Helper functions for event actions
+function joinWaitlist(eventId) {
+    const username = prompt("Enter your username:");
+    if (username) {
+        fetch('/joinWaitlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ eventId: eventId, username: username })
+        })
+        .then(response => response.ok ? alert("Joined waitlist successfully.") : alert("Failed to join waitlist."))
+        .catch(error => alert("An error occurred while joining waitlist."));
+    }
+}
+
+function leaveWaitlist(eventId) {
+    const username = prompt("Enter your username:");
+    if (username) {
+        fetch('/leaveWaitlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ eventId: eventId, username: username })
+        })
+        .then(response => response.ok ? alert("Left waitlist successfully.") : alert("Failed to leave waitlist."))
+        .catch(error => alert("An error occurred while leaving waitlist."));
+    }
+}
+
+function joinEvent(eventId) {
+    const username = prompt("Enter your username:");
+    if (username) {
+        fetch('/joinEvent', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ eventID: eventId, username: username })
+        })
+        .then(response => response.ok ? alert("Joined event successfully.") : alert("Failed to join event."))
+        .catch(error => alert("An error occurred while joining event."));
+    }
+}
+
+function leaveEvent(eventId) {
+    const username = prompt("Enter your username:");
+    if (username) {
+        fetch('/leaveEvent', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ eventID: eventId, username: username })
+        })
+        .then(response => response.ok ? alert("Left event successfully.") : alert("Failed to leave event."))
+        .catch(error => alert("An error occurred while leaving event."));
+    }
+}
+
+function inviteUserToEvent(eventId) {
+    const username = document.getElementById(`username-${eventId}`).value;
+    const email = document.getElementById(`email-${eventId}`).value;
+    
+    if (username && email) {
+        fetch('/inviteUser', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userEmail: email, eventID: eventId, username: username })
+        })
+        .then(response => response.json())
+        .then(data => alert(data.message))
+        .catch(error => console.error('Error:', error));
+    } else {
+        alert("Please enter both username and email.");
+    }
+}
 
 // Function to close the modal and reset the form and filter fields
 function closeModal() {

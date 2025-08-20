@@ -4,10 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -19,7 +17,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.pickleplanner.pickle.Location.Location;
 import com.pickleplanner.pickle.Persistence.Database;
-import com.pickleplanner.pickle.User.User;
 import com.pickleplanner.pickle.User.UserOperations;
 
 @RunWith(SpringRunner.class)

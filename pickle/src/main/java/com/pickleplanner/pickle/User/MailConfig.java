@@ -1,3 +1,10 @@
+package com.pickleplanner.pickle.User;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+
 // I was running into a bunch of errors with attempting to email and this helped resolve them somehow
 
 @Configuration
