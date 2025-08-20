@@ -2,8 +2,6 @@
 package com.pickleplanner.pickle.Event;
 
 import com.pickleplanner.pickle.User.User;
-import com.pickleplanner.pickle.Event.Event;
-import com.pickleplanner.pickle.Event.Waitlist;
 import com.pickleplanner.pickle.Location.Location;
 
 import org.springframework.stereotype.Component;

@@ -10,7 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Luckiest+Guy&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Luckiest+Guy&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
 </head>
 
@@ -28,145 +28,303 @@
       </ul>
     </nav>
   </header>
-  <div id="interactions">
-    <!-- Search form -->
-    <!-- Button to trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#searchModal">
-      Search/Filter Events
-    </button>
+  <!-- Main Content Section -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Event Management Hub</h1>
+        <p class="hero-subtitle">Organize, manage, and track your pickleball events with ease</p>
+      </div>
+    </section>
 
-    <!-- Modal -->
+    <!-- Quick Actions Section -->
+    <section class="quick-actions">
+      <div class="container">
+        <h2 class="section-title">Quick Actions</h2>
+        <div class="action-grid">
+          <button type="button" class="action-btn primary" data-toggle="modal" data-target="#searchModal">
+            <div class="btn-icon">🔍</div>
+            <div class="btn-content">
+              <span class="btn-title">Search Events</span>
+              <span class="btn-subtitle">Find and filter events</span>
+            </div>
+          </button>
+          <button type="button" class="action-btn secondary btn-generate-open">
+            <div class="btn-icon">📅</div>
+            <div class="btn-content">
+              <span class="btn-title">Open Events</span>
+              <span class="btn-subtitle">View available events</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search Modal -->
     <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel"
       aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="searchModalLabel">Search Form</h5>
+            <h5 class="modal-title" id="searchModalLabel">Search Events</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
             <form id="searchForm">
-              <!-- Initial filter input fields -->
               <div id="filterContainer">
                 <div class="filter">
                   <label for="keyword">Keyword:</label>
-                  <input type="text" name="keyword" /><br />
+                  <input type="text" name="keyword" class="form-input" />
                 </div>
               </div>
+              <div class="modal-actions">
+                <button type="button" id="addFilter" class="btn btn-secondary">Add Filter</button>
+                <button type="submit" class="btn btn-primary">Search</button>
+              </div>
+            </form>
           </div>
-
-          <!-- Add filter button -->
-          <button type="button" id="addFilter">Add Filter</button>
-          <button type="submit">Search</button>
-          </form>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Invite User -->
-  <div id="inviteUserContainer">
-    <label for="userEmail">Email: </label>
-    <input type="email" id="userEmail" name="userEmail" /><br />
-    <button type="button" id="inviteButton">Invite User</button>
-  </div>
-  </div>
 
-  <button type="button" class="btn-generate-open">
-    Generate Open Events
-  </button>
+    <!-- Event Management Section -->
+    <section class="event-management">
+      <div class="container">
+        <h2 class="section-title">Event Management</h2>
+        <div class="management-grid">
+          <div class="management-card">
+            <div class="card-header">
+              <div class="card-icon">➕</div>
+              <h3 class="card-title">Create Event</h3>
+            </div>
+            <div class="card-body">
+              <p class="card-description">Set up a new pickleball event with all necessary details</p>
+              <button type="button" id="createEvent" class="card-action-btn">Create New Event</button>
+            </div>
+          </div>
+          
+          <div class="management-card">
+            <div class="card-header">
+              <div class="card-icon">📋</div>
+              <h3 class="card-title">Event Details</h3>
+            </div>
+            <div class="card-body">
+              <p class="card-description">View comprehensive details for existing events</p>
+              <button id="generateEventDetailsButton" class="card-action-btn">View Event Details</button>
+            </div>
+          </div>
+          
+          <div class="management-card">
+            <div class="card-header">
+              <div class="card-icon">👤</div>
+              <h3 class="card-title">User Events</h3>
+            </div>
+            <div class="card-body">
+              <p class="card-description">Browse events associated with specific users</p>
+              <div class="input-group">
+                <input type="text" id="username1" name="username1" class="modern-input" placeholder="Enter username" />
+              </div>
+              <button id="userEventsButton" class="eventsButton card-action-btn">View User Events</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <input type="text" id="eventIDBracket" placeholder="Enter Event ID" />
-  <button id="generateBracketBtn">Generate Bracket</button>
-  <div id="bracketContainer"></div>
+    <!-- Events Display Section -->
+    <section class="events-display-section">
+      <div class="container">
+        <h2 class="section-title">Events</h2>
+        
+        <!-- Search Results -->
+        <div class="events-container">
+          <div class="events-header">
+            <h3 class="events-subtitle">Search Results</h3>
+          </div>
+          <div id="searchResults" class="events-grid">
+            <!-- Search results will be displayed here -->
+          </div>
+        </div>
 
-  <div id="eventContainer">
-    <!-- Create Event container -->
-    <div id="createEventContainer">
-      <!-- Create Event button -->
-      <button type="button" id="createEvent">Create Event</button>
-    </div>
-    <div id="detailsButtonContainer">
-      <button id="generateEventDetailsButton">Event Details</button>
-    </div>
-    <div id="userEventsButtonContainer" class="eventsButtonContainer">
-      <label for="username1">Username: </label>
-      <input type="user" id="username1" name="username1" /><br />
-      <button id="userEventsButton" class="eventsButton">User Events</button>
-    </div>
-  </div>
-  </div>
+        <!-- Open Events -->
+        <div class="events-container">
+          <div class="events-header">
+            <h3 class="events-subtitle">Open Events</h3>
+          </div>
+          <div id="openResults" class="events-grid">
+            <!-- Open events will be displayed here -->
+          </div>
+        </div>
 
-  <div id="events" style="display: none"></div>
+        <!-- User Events -->
+        <div class="events-container">
+          <div class="events-header">
+            <h3 class="events-subtitle">User Events</h3>
+          </div>
+          <div id="events" class="events-grid">
+            <!-- User events will be displayed here -->
+          </div>
+        </div>
 
-  <div id="event" style="display: none"></div>
+        <!-- Individual Event Details -->
+        <div class="events-container">
+          <div class="events-header">
+            <h3 class="events-subtitle">Event Details</h3>
+          </div>
+          <div id="event" class="event-detail-container">
+            <!-- Individual event details will be displayed here -->
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <div id="searchResults"></div>
+    <!-- Advanced Features Section -->
+    <section class="advanced-features">
+      <div class="container">
+        <h2 class="section-title">Advanced Features</h2>
+        <div class="features-grid">
+          
+          <!-- Tournament Bracket -->
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">🏆</div>
+              <h3 class="feature-title">Tournament Bracket</h3>
+            </div>
+            <div class="feature-content">
+              <p class="feature-description">Generate tournament brackets for competitive events</p>
+              <div class="feature-input-group">
+                <input type="text" id="eventIDBracket" placeholder="Enter Event ID" class="modern-input" />
+                <button id="generateBracketBtn" class="feature-btn">Generate Bracket</button>
+              </div>
+              <div id="bracketContainer" class="bracket-display"></div>
+            </div>
+          </div>
 
-  <div id="openResults"></div>
+          <!-- User Invitation -->
+          <div class="feature-card">
+            <div class="feature-header">
+              <div class="feature-icon">✉️</div>
+              <h3 class="feature-title">Invite Users</h3>
+            </div>
+            <div class="feature-content">
+              <p class="feature-description">Send invitations to new participants</p>
+              <div class="feature-input-group">
+                <input type="email" id="userEmail" name="userEmail" class="modern-input" placeholder="Enter email address" />
+                <button type="button" id="inviteButton" class="feature-btn secondary">Send Invitation</button>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <!-- Create Event modal -->
+  <!-- Create Event Modal -->
   <div id="createEventModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Create Event</h2>
-      <form id="eventForm">
-        <label for="eventDate">Date:</label>
-        <input type="date" id="eventDate" name="eventDate" /><br />
-        <label for="eventTime">Time:</label>
-        <input type="time" id="eventTime" name="eventTime" /><br />
-        <label for="availability">Availability:</label>
-        <input type="number" id="availability" name="availability" /><br />
-        <label for="username">Username:</label>
-        <input type="test" id="username" name="username" /><br />
-        <label for="location">Location:</label>
-        <input type="text" id="location" name="location" /><br />
-        <!-- Add filters for event -->
-        <div id="eventFiltersContainer">
-          <!-- Initial event filter input fields -->
-        </div>
-        <!-- Add filter button for event -->
-        <button type="button" id="addEventFilter">Add Filter</button>
-        <button type="submit">Create</button>
-      </form>
+      <div class="modal-header">
+        <h2>Create Event</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="eventForm" class="event-form">
+          <div class="form-group">
+            <label for="eventDate">Date:</label>
+            <input type="date" id="eventDate" name="eventDate" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label for="eventTime">Time:</label>
+            <input type="time" id="eventTime" name="eventTime" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label for="availability">Availability:</label>
+            <input type="number" id="availability" name="availability" class="form-input" min="1" required />
+          </div>
+          <div class="form-group">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" class="form-input" required />
+            <small class="form-note">Must be a registered username from the Profile page</small>
+          </div>
+          <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" class="form-input" required />
+          </div>
+          <div id="eventFiltersContainer">
+            <!-- Initial event filter input field -->
+            <div class="eventFilter">
+              <label>Filter:</label>
+              <input type="text" name="eventFilter" class="form-input" />
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" id="addEventFilter" class="btn btn-secondary">Add Filter</button>
+            <button type="submit" class="btn btn-primary">Create Event</button>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-  </div>
 
-
-  <!-- Edit Event modal -->
+  <!-- Edit Event Modal -->
   <div id="editEventModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Edit Event</h2>
-      <form id="editEventForm">
-        <label for="eventDate">Date:</label>
-        <input type="date" id="eventDate2" name="eventDate" /><br />
-        <label for="eventTime">Time:</label>
-        <input type="time" id="eventTime2" name="eventTime" /><br />
-        <label for="availability">Availability:</label>
-        <input type="number" id="availability2" name="availability" /><br />
-        <label for="location">Location:</label>
-        <input type="text" id="location2" name="location" /><br />
-        <label for="eventId">EventID:</label>
-        <input type="text" id="eventId2" name="eventId" /><br />
-        <button type="submit">Submit Edit</button>
+      <div class="modal-header">
+        <h2>Edit Event</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="editEventForm" class="event-form">
+          <div class="form-group">
+            <label for="eventDate2">Date:</label>
+            <input type="date" id="eventDate2" name="eventDate" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label for="eventTime2">Time:</label>
+            <input type="time" id="eventTime2" name="eventTime" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label for="availability2">Availability:</label>
+            <input type="number" id="availability2" name="availability" class="form-input" min="1" required />
+          </div>
+          <div class="form-group">
+            <label for="location2">Location:</label>
+            <input type="text" id="location2" name="location" class="form-input" required />
+          </div>
+          <div class="form-group">
+            <label for="eventId2">Event ID:</label>
+            <input type="text" id="eventId2" name="eventId" class="form-input" required />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Update Event</button>
+          </div>
+        </form>
+      </div>
     </div>
-    </form>
   </div>
 
-  <!-- Delete Event modal -->
+  <!-- Delete Event Modal -->
   <div id="deleteEventModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Delete Event</h2>
-      <form id="deleteEventForm">
-        <label for="eventId">EventID:</label>
-        <input type="text" id="eventId3" name="eventId" /><br />
-        <button type="submit">Delete</button>
+      <div class="modal-header">
+        <h2>Delete Event</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="deleteEventForm" class="event-form">
+          <div class="form-group">
+            <label for="eventId3">Event ID:</label>
+            <input type="text" id="eventId3" name="eventId" class="form-input" required />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-danger">Delete Event</button>
+          </div>
+        </form>
+      </div>
     </div>
-    </form>
   </div>
 
 
@@ -188,9 +346,9 @@
   <script src="create_search_event.js"></script>
   <script src="display_events.js"></script>
   <script src="display_userevents.js"></script>
-  <script src="generate_open_events.js"></script>
-  <script src="generate_bracket.js"></script>
   <script src="accept_and_decline.js"></script>
+  <script src="generate_bracket.js"></script>
+  <script src="generate_open_events.js"></script>
 </body>
 
 </html>

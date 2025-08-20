@@ -10,7 +10,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Luckiest+Guy&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Luckiest+Guy&family=Inter:wght@300;400;500;600;700&display=swap"
     rel="stylesheet" />
 </head>
 
@@ -28,101 +28,197 @@
       </ul>
     </nav>
   </header>
-  <div id="inputContainer">
-    <div class="search-container">
-      <input type="text" class="search-bar" name="user-search" placeholder="Search user..." />
-      <button class="btn-find-users">Search Users</button>
-    </div>
-  </div>
+  <!-- Main Content Section -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Profile Management</h1>
+        <p class="hero-subtitle">Manage your account, connect with players, and customize your pickleball experience</p>
+      </div>
+    </section>
 
-  <div class="editProfile-container">
-    <input type="text" class="search-bar" name="user-search" placeholder="Enter username..." />
-    <button class="btn-find-users">Update Profile</button>
-  </div>
+    <!-- Quick Actions Section -->
+    <section class="quick-actions">
+      <div class="container">
+        <h2 class="section-title">Quick Actions</h2>
+        <div class="action-grid">
+          <div class="action-card">
+            <div class="action-header">
+              <div class="action-icon">🔍</div>
+              <h3 class="action-title">Search Users</h3>
+            </div>
+            <div class="action-content">
+              <input type="text" class="modern-input search-bar" name="user-search" placeholder="Search user..." />
+              <button class="action-btn-primary btn-find-users">Search Users</button>
+            </div>
+          </div>
+          
+          <div class="action-card">
+            <div class="action-header">
+              <div class="action-icon">✏️</div>
+              <h3 class="action-title">Update Profile</h3>
+            </div>
+            <div class="action-content">
+              <input type="text" class="modern-input search-bar" name="user-search" placeholder="Enter username..." />
+              <button class="action-btn-primary btn-find-users">Update Profile</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <div class="addFollower-container">
-    <button id="addFollowerButton" class="addFollowerButton">Add Follower</button>
-  </div>
-  <div class="removeFollower-container">
-    <button id="removeFollowerButton" class="removeFollowerButton">Remove Follower</button>
-  </div>
-  <div class="displayFollower-container">
-    <button id="displayFollowerButton" class="displayFollowerButton">Display Following List</button>
-  </div>
+    <!-- Social Features Section -->
+    <section class="social-features">
+      <div class="container">
+        <h2 class="section-title">Social Features</h2>
+        <div class="social-grid">
+          <div class="social-card">
+            <div class="social-icon">➕</div>
+            <h3 class="social-title">Add Follower</h3>
+            <p class="social-description">Connect with other pickleball players</p>
+            <button id="addFollowerButton" class="social-btn">Add Follower</button>
+          </div>
+          
+          <div class="social-card">
+            <div class="social-icon">➖</div>
+            <h3 class="social-title">Remove Follower</h3>
+            <p class="social-description">Manage your connections</p>
+            <button id="removeFollowerButton" class="social-btn">Remove Follower</button>
+          </div>
+          
+          <div class="social-card">
+            <div class="social-icon">👥</div>
+            <h3 class="social-title">Following List</h3>
+            <p class="social-description">View your network of players</p>
+            <button id="displayFollowerButton" class="social-btn">Display Following List</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <div class="user-details">
-    <!-- User details will be displayed here -->
-  </div>
+    <!-- User Details Section -->
+    <section class="user-details-section">
+      <div class="container">
+        <div class="user-details">
+          <!-- User details will be displayed here -->
+        </div>
+      </div>
+    </section>
 
-  <div class="login-container">
-    <h2>Log In or Register</h2>
-    <div class="input-group">
-      <input type="text" name="firstName" placeholder="First Name" />
-    </div>
-    <div class="input-group">
-      <input type="text" name="lastName" placeholder="Last Name" />
-    </div>
-    <div class="input-group">
-      <input type="text" name="userName" placeholder="Username" />
-    </div>
-    <div class="input-group">
-      <input type="text" name="skillLevel" placeholder="Skill" />
-    </div>
-    <div class="input-group">
-      <input type="email" name="email" placeholder="Email" />
-    </div>
-    <div class="input-group">
-      <input type="password" name="password" placeholder="Password" />
-    </div>
-    <button class="btn-login" type="button">Log In</button>
-    <button class="btn-register" type="button">Register</button>
-    <button id="btn-delete" type="button">Delete</button>
-    <p class="message">Don't have an account? <a href="#">Register now</a></p>
-  </div>
+    <!-- Authentication Section -->
+    <section class="auth-section">
+      <div class="container">
+        <div class="auth-card">
+          <div class="auth-header">
+            <h2 class="auth-title">Account Access</h2>
+            <p class="auth-subtitle">Log in to your account or create a new one</p>
+          </div>
+          <div class="auth-form">
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" name="firstName" placeholder="First Name" class="modern-input" />
+              </div>
+              <div class="form-group">
+                <input type="text" name="lastName" placeholder="Last Name" class="modern-input" />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <input type="text" name="userName" placeholder="Username" class="modern-input" />
+              </div>
+              <div class="form-group">
+                <input type="text" name="skillLevel" placeholder="Skill Level" class="modern-input" />
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Email Address" class="modern-input" />
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Password" class="modern-input" />
+            </div>
+            <div class="auth-buttons">
+              <button class="btn-auth login" type="button">Log In</button>
+              <button class="btn-auth register" type="button">Register</button>
+              <button class="btn-auth delete" id="btn-delete" type="button">Delete Account</button>
+            </div>
+            <p class="auth-message">Don't have an account? <a href="#" class="auth-link">Register now</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
 
-  <!-- Add to following modal -->
+  <!-- Add Follower Modal -->
   <div id="addFollowerModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Add Follower</h2>
-      <form id="addFollowerForm">
-        <label for="user_username">Your Username:</label>
-        <input type="text" id="user_username" name="user_username" /><br />
-        <label for="follower_username">Person you want to follow username:</label>
-        <input type="text" id="follower_username" name="follower_username" /><br />
-        <button type="submit">Add Follower</button>
+      <div class="modal-header">
+        <h2>Add Follower</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="addFollowerForm" class="profile-form">
+          <div class="form-group">
+            <label for="user_username">Your Username:</label>
+            <input type="text" id="user_username" name="user_username" class="modern-input" required />
+          </div>
+          <div class="form-group">
+            <label for="follower_username">Person you want to follow:</label>
+            <input type="text" id="follower_username" name="follower_username" class="modern-input" required />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-modal-primary">Add Follower</button>
+          </div>
+        </form>
+      </div>
     </div>
-    </form>
   </div>
 
-
-  <!-- Remove from following modal -->
+  <!-- Remove Follower Modal -->
   <div id="removeFollowerModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Remove Follower</h2>
-      <form id="removeFollowerForm">
-        <label for="user_username">Your Username:</label>
-        <input type="text" id="user_username2" name="user_username2" /><br />
-        <label for="follower_username">Person you want to follow username:</label>
-        <input type="text" id="follower_username2" name="follower_username2" /><br />
-        <button type="submit">Remove Follower</button>
+      <div class="modal-header">
+        <h2>Remove Follower</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="removeFollowerForm" class="profile-form">
+          <div class="form-group">
+            <label for="user_username2">Your Username:</label>
+            <input type="text" id="user_username2" name="user_username2" class="modern-input" required />
+          </div>
+          <div class="form-group">
+            <label for="follower_username2">Person you want to unfollow:</label>
+            <input type="text" id="follower_username2" name="follower_username2" class="modern-input" required />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-modal-danger">Remove Follower</button>
+          </div>
+        </form>
+      </div>
     </div>
-    </form>
   </div>
 
-  <!-- Display following list modal -->
+  <!-- Display Following List Modal -->
   <div id="displayFollowerModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>Display Following List</h2>
-      <form id="displayFollowerForm">
-        <label for="user_username">Your Username:</label>
-        <input type="text" id="user_username3" name="user_username2" /><br />
-        <button type="submit">Display Follow List</button>
+      <div class="modal-header">
+        <h2>Following List</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <form id="displayFollowerForm" class="profile-form">
+          <div class="form-group">
+            <label for="user_username3">Your Username:</label>
+            <input type="text" id="user_username3" name="user_username3" class="modern-input" required />
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-modal-primary">Display Following List</button>
+          </div>
+        </form>
+      </div>
     </div>
-    </form>
   </div>
 
 

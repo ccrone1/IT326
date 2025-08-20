@@ -4,10 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -17,9 +14,7 @@ import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.pickleplanner.pickle.Location.Location;
 import com.pickleplanner.pickle.Persistence.Database;
-import com.pickleplanner.pickle.User.User;
 import com.pickleplanner.pickle.User.UserOperations;
 
 @RunWith(SpringRunner.class)
@@ -40,35 +35,52 @@ public class createAndExistingUserTest {
 
     @Test
     public void testRegisterExistingUser() {
-        UserProfileManager manager = new UserProfileManager();
         // Existing user details
         String existingUsername = "existingUser";
         String existingEmail = "existing@example.com";
         String existingPassword = "existingPassword";
         
+        // Create a user first to simulate existing user
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("firstName", "Existing");
+        userData.put("lastName", "User");
+        userData.put("userName", existingUsername);
+        userData.put("email", existingEmail);
+        userData.put("password", existingPassword);
+        userData.put("skillLevel", "Beginner");
+        
+        userOperations.createProfile(userData);
+        
         // Attempt to register the existing user again
-        boolean registrationResult = manager.registerNewUser(existingUsername, existingEmail, existingPassword);
+        String registrationResult = userOperations.createProfile(userData);
         
         // show that registration failed due to existing user
-        assertFalse("User registration should return false for existing user", registrationResult);
+        assertEquals("Username already exists", registrationResult);
         
         
     }
 
     @Test
     public void testRegisterNewUser() throws Exception {
-       
-        UserProfileManager manager = new UserProfileManager();
         // User details
-       String username = "testUser";
-       String email = "test@example.com";
-       String password = "password123";
-       
-       // Attempt to register the user
-       boolean registrationResult = manager.registerNewUser(username, email, password);
-       
-       // show that registration was successful
-       assertTrue("User registration should return true for success", registrationResult);
+        String username = "testUser";
+        String email = "test@example.com";
+        String password = "password123";
+        
+        // Create user data map
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("firstName", "Test");
+        userData.put("lastName", "User");
+        userData.put("userName", username);
+        userData.put("email", email);
+        userData.put("password", password);
+        userData.put("skillLevel", "Intermediate");
+        
+        // Attempt to register the user
+        String registrationResult = userOperations.createProfile(userData);
+        
+        // show that registration was successful
+        assertEquals("New JSON data appended to user_data.json", registrationResult);
     }
 
 }

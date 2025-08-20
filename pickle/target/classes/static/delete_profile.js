@@ -22,9 +22,7 @@ document.getElementById("btn-delete").addEventListener("click", function (event)
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-                username:userName}
-            ),
+            body: JSON.stringify({username:userName}),
         })
             .then((response) => response.json())
             .then((data) => {
